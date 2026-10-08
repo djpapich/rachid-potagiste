@@ -3,6 +3,7 @@ import { Search, Package, Clock, CheckCircle2, Truck, Mail, MapPin } from 'lucid
 import { Order, Language, OrderStatus } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
 import { storeService } from '../services/storeService.ts';
+import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
 
 interface OrderTrackingViewProps {
   currentLang: Language;
@@ -249,10 +250,11 @@ export const OrderTrackingView: React.FC<OrderTrackingViewProps> = ({
                 {currentOrder.items.map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <img
-                      src={item.imageUrl}
+                      src={resolveImageUrl(item.imageUrl)}
                       alt={item.name}
                       className="w-12 h-12 rounded-lg object-cover bg-stone-100 shrink-0"
                       referrerPolicy="no-referrer"
+                      onError={handleImageError}
                     />
                     <div className="flex-1 min-w-0">
                       <h4 className="text-xs font-semibold text-stone-900 truncate">

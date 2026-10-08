@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, Leaf, Shield, Award, Youtube } from 'lucide-react';
 import { Language } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
+import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
 
 interface HeroProps {
   currentLang: Language;
@@ -87,16 +88,23 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onExplore, onViewBlog }
           <div className="lg:col-span-5">
             <div className="relative rounded-2xl overflow-hidden shadow-xl border border-stone-200/90 aspect-square group">
               <img
-                src="/src/assets/images/rachid_portrait_potagiste_1791482658073.jpg"
+                src={resolveImageUrl('/images/rachid_portrait_potagiste_1791482658073.jpg')}
                 alt="Rachid Le Potagiste avec sa récolte de légumes bio"
                 className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                 referrerPolicy="no-referrer"
+                onError={handleImageError}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent flex flex-col justify-end p-5 text-white">
-                <p className="text-xs font-semibold tracking-wider uppercase text-emerald-300">
-                  Rachid Le Potagiste · Maître Jardinier
-                </p>
-                <p className="text-sm font-serif font-medium text-stone-100 mt-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xs font-semibold tracking-wider uppercase text-emerald-300">
+                    Rachid Le Potagiste · Maître Jardinier
+                  </span>
+                  <span className="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-1 font-semibold">
+                    <Youtube className="w-3 h-3" />
+                    <span>59K+</span>
+                  </span>
+                </div>
+                <p className="text-sm font-serif font-medium text-stone-100">
                   « Pour que chaque foyer au Maroc puisse récolter ses propres légumes sains et savoureux. »
                 </p>
               </div>

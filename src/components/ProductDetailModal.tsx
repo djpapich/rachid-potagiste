@@ -4,6 +4,7 @@ import { Product, Language } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
 import { storeService } from '../services/storeService.ts';
 import { ProductReviewsSection } from './ProductReviewsSection.tsx';
+import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -63,10 +64,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             {/* Left Column: Visual Asset */}
             <div className="relative bg-[#F7F7F5] rounded-xl overflow-hidden aspect-4/3 flex items-center justify-center border border-stone-200">
               <img
-                src={product.imageUrl}
+                src={resolveImageUrl(product.imageUrl)}
                 alt={product.name}
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
+                onError={handleImageError}
               />
               <div className="absolute bottom-3 left-3 bg-white/95 px-3 py-1 rounded-md text-xs font-medium text-stone-800 shadow-xs flex items-center gap-1.5">
                 <Leaf className="w-3.5 h-3.5 text-emerald-700" />
@@ -224,10 +226,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   >
                     <div className="flex items-center gap-2.5">
                       <img
-                        src={rec.product.imageUrl}
+                        src={resolveImageUrl(rec.product.imageUrl)}
                         alt={rec.product.name}
                         className="w-12 h-12 rounded object-cover bg-stone-100 shrink-0"
                         referrerPolicy="no-referrer"
+                        onError={handleImageError}
                       />
                       <div className="min-w-0">
                         <h4 className="text-xs font-semibold text-stone-900 truncate">

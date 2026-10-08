@@ -3,6 +3,7 @@ import { BookOpen, Clock, ArrowRight, X, Sparkles, ShoppingBag, Youtube } from '
 import { BlogPost, Language, Product } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
 import { storeService } from '../services/storeService.ts';
+import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
 
 interface BlogSectionProps {
   currentLang: Language;
@@ -53,10 +54,11 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ currentLang, onAddToCa
           >
             <div className="relative aspect-16/10 overflow-hidden bg-stone-100">
               <img
-                src={post.imageUrl}
+                src={resolveImageUrl(post.imageUrl)}
                 alt={post.title}
                 className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500 ease-out"
                 referrerPolicy="no-referrer"
+                onError={handleImageError}
               />
               <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-xs px-2.5 py-0.5 rounded-sm text-[11px] font-medium text-stone-800">
                 {post.category}
@@ -112,10 +114,11 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ currentLang, onAddToCa
             {/* Visual Cover */}
             <div className="relative aspect-16/9 bg-stone-100 overflow-hidden">
               <img
-                src={activePost.imageUrl}
+                src={resolveImageUrl(activePost.imageUrl)}
                 alt={activePost.title}
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
+                onError={handleImageError}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
                 <div className="text-xs font-semibold uppercase tracking-wider text-emerald-300">
@@ -154,10 +157,11 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ currentLang, onAddToCa
                   <div className="flex items-center justify-between gap-3 bg-white p-3 rounded-lg border border-emerald-200/80">
                     <div className="flex items-center gap-2.5 min-w-0">
                       <img
-                        src={products[0].imageUrl}
+                        src={resolveImageUrl(products[0].imageUrl)}
                         alt={products[0].name}
                         className="w-12 h-12 rounded object-cover shrink-0"
                         referrerPolicy="no-referrer"
+                        onError={handleImageError}
                       />
                       <div className="min-w-0">
                         <div className="text-xs font-semibold text-stone-900 truncate">

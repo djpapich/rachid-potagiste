@@ -2,6 +2,7 @@ import React from 'react';
 import { Plus, Check, Star } from 'lucide-react';
 import { Product, Language } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
+import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
 
 interface ProductCardProps {
   product: Product;
@@ -30,11 +31,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         className="relative bg-[#F7F7F5] aspect-4/3 overflow-hidden cursor-pointer"
       >
         <img
-          src={product.imageUrl}
+          src={resolveImageUrl(product.imageUrl)}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500 ease-out"
           referrerPolicy="no-referrer"
           loading="lazy"
+          onError={handleImageError}
         />
 
         {/* Quiet top corner badges */}

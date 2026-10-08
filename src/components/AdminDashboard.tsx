@@ -21,6 +21,7 @@ import {
 import { storeService } from '../services/storeService.ts';
 import { Product, Order, OrderStatus, Language, Review } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
+import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
 
 interface AdminDashboardProps {
   currentLang: Language;
@@ -82,7 +83,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentLang }) =
       certification: 'Semences Paysannes Reproductibles',
       rating: '5.0',
       reviewCount: 1,
-      imageUrl: '/src/assets/images/rachid_graines_paysannes_1791482677509.jpg',
+      imageUrl: '/images/rachid_graines_paysannes_1791482677509.jpg',
       isFeatured: 0,
     });
     setShowAddModal(false);
@@ -245,10 +246,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentLang }) =
                       <td className="p-3.5 pl-5">
                         <div className="flex items-center gap-3">
                           <img
-                            src={p.imageUrl}
+                            src={resolveImageUrl(p.imageUrl)}
                             alt={p.name}
                             className="w-10 h-10 rounded-lg object-cover bg-stone-100 shrink-0"
                             referrerPolicy="no-referrer"
+                            onError={handleImageError}
                           />
                           <div>
                             <div className="font-semibold text-stone-900 line-clamp-1">{p.name}</div>

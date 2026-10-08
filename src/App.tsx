@@ -16,9 +16,11 @@ import { BlogSection } from './components/BlogSection.tsx';
 import { AdminDashboard } from './components/AdminDashboard.tsx';
 import { NotificationPanel } from './components/NotificationToast.tsx';
 import { Footer } from './components/Footer.tsx';
+import { RachidMediaSection } from './components/RachidMediaSection.tsx';
 import { storeService } from './services/storeService.ts';
 import { Product, CartItem, Language, Order } from './types/index.ts';
 import { translations } from './lib/translations.ts';
+import { resolveImageUrl, handleImageError } from './lib/imageHelper.ts';
 import { Filter, Sparkles, ShieldCheck, Truck, Leaf, Youtube } from 'lucide-react';
 
 export default function App() {
@@ -257,11 +259,12 @@ export default function App() {
                       >
                         <div className="flex items-center gap-3">
                           <img
-                            src={rec.product.imageUrl}
+                            src={resolveImageUrl(rec.product.imageUrl)}
                             alt={rec.product.name}
                             className="w-16 h-16 object-cover rounded-lg bg-stone-100 shrink-0 cursor-pointer"
                             onClick={() => setSelectedProduct(rec.product)}
                             referrerPolicy="no-referrer"
+                            onError={handleImageError}
                           />
                           <div className="min-w-0 flex-1">
                             <h4 
@@ -294,6 +297,9 @@ export default function App() {
                   </div>
                 </div>
               )}
+
+              {/* Real Extracted Rachid Media, YouTube Videos & Verified Community Reviews */}
+              <RachidMediaSection currentLang={currentLang} />
 
               {/* YouTube Community Callout Banner */}
               <div className="bg-[#1F3A2B] rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">

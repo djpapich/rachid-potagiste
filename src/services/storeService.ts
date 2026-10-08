@@ -1,5 +1,6 @@
 import { Product, Category, Order, OrderStatus, BlogPost, PushNotification, AnalyticsSummary, EmailNotification, Review, RecommendationReason } from '../types/index.ts';
 import { jsPDF } from 'jspdf';
+import { resolveImageUrl } from '../lib/imageHelper.ts';
 
 // Categories tailored for Rachid Le Potagiste
 const DEFAULT_CATEGORIES: Category[] = [
@@ -63,7 +64,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     benefits: 'Germination express en 3 à 5 jours, vigueur racinaire exceptionnelle.',
     rating: '5.0',
     reviewCount: 142,
-    imageUrl: '/src/assets/images/rachid_graines_paysannes_1791482677509.jpg',
+    imageUrl: '/images/rachid_graines_paysannes_1791482677509.jpg',
     isFeatured: 1
   },
   {
@@ -82,7 +83,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     benefits: 'Multiplie le rendement par 3, retient l\'humidité et supprime le besoin d\'engrais chimique.',
     rating: '4.9',
     reviewCount: 98,
-    imageUrl: '/src/assets/images/rachid_compost_vermicompost_1791482687599.jpg',
+    imageUrl: '/images/rachid_compost_vermicompost_1791482687599.jpg',
     isFeatured: 1
   },
   {
@@ -101,7 +102,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     benefits: 'Godets à planter directement en terre sans casser les racines, 100% de reprise.',
     rating: '5.0',
     reviewCount: 86,
-    imageUrl: '/src/assets/images/rachid_plants_bio_1791482699152.jpg',
+    imageUrl: '/images/rachid_plants_bio_1791482699152.jpg',
     isFeatured: 1
   },
   {
@@ -120,7 +121,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     benefits: 'Fraîcheur absolue, vitamines vivantes, goût authentique d\'autrefois.',
     rating: '4.9',
     reviewCount: 118,
-    imageUrl: '/src/assets/images/rachid_potager_permaculture_1791482667668.jpg',
+    imageUrl: '/images/rachid_real_yt_4B9iAxcOejQ.jpg',
     isFeatured: 1
   },
   {
@@ -139,7 +140,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     benefits: 'Renforce les défenses naturelles des plants et stimule la photosynthèse.',
     rating: '4.8',
     reviewCount: 54,
-    imageUrl: '/src/assets/images/rachid_compost_vermicompost_1791482687599.jpg',
+    imageUrl: '/images/rachid_real_yt_L3VkVEteARM.jpg',
     isFeatured: 0
   },
   {
@@ -158,7 +159,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     benefits: 'Concentrée en antioxydants rares et polyphénols protecteurs.',
     rating: '4.9',
     reviewCount: 76,
-    imageUrl: '/src/assets/images/product_moroccan_olive_oil_1791481468563.jpg',
+    imageUrl: '/images/product_moroccan_olive_oil_1791481468563.jpg',
     isFeatured: 0
   },
   {
@@ -177,7 +178,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     benefits: 'Taux de germination vérifié supérieur à 92%.',
     rating: '4.9',
     reviewCount: 42,
-    imageUrl: '/src/assets/images/rachid_graines_paysannes_1791482677509.jpg',
+    imageUrl: '/images/rachid_real_yt_APLUyD9ZJ3o.jpg',
     isFeatured: 0
   },
   {
@@ -196,7 +197,26 @@ const DEFAULT_PRODUCTS: Product[] = [
     benefits: 'Feuillage très odorant et répulsif naturel contre les insectes nuisibles.',
     rating: '5.0',
     reviewCount: 68,
-    imageUrl: '/src/assets/images/rachid_plants_bio_1791482699152.jpg',
+    imageUrl: '/images/rachid_real_yt_JYFEEAU3XFc.jpg',
+    isFeatured: 0
+  },
+  {
+    id: 9,
+    slug: 'semences-pommes-de-terre-terroir',
+    name: 'Semences Paysannes Pommes de Terre du Terroir & Guide du Calibrage',
+    categorySlug: 'graines-semences',
+    price: 4000, // 40 DH
+    originalPrice: 5000,
+    stock: 50,
+    unit: 'Filet de 1.5 kg (plants germés)',
+    description: 'Variété paysanne marocaine rustique à chair ferme. Rachid vous explique dans sa vidéo dédiée le secret du gros calibre et du buttage progressif pour tripler votre récolte sans engrais chimique.',
+    origin: 'Ferme de Rachid',
+    certification: 'Semences Paysannes Traditionnelles',
+    ingredients: 'Tubercules calibrés non traités après récolte.',
+    benefits: 'Résistance naturelle aux maladies du sol, saveur beurrée exceptionnelle.',
+    rating: '5.0',
+    reviewCount: 37,
+    imageUrl: '/images/rachid_real_yt_7fEJXuTmaPM.jpg',
     isFeatured: 0
   }
 ];
@@ -207,10 +227,10 @@ const DEFAULT_REVIEWS: Review[] = [
     id: 1,
     productId: 1, // Graines de tomates
     userId: 'user_yt_1',
-    authorName: 'Youssef El Amrani',
+    authorName: 'Aicha Lemrini',
     authorLocation: 'Casablanca',
     rating: 5,
-    comment: 'تبارك الله عليك يا أخي رشيد، زرعت بذور الطماطم وخرجت في 3 أيام فقط! شتلات قوية وخالية من أي كيماوي. الله يعطيك الصحة على النصائح في اليوتيوب.',
+    comment: 'Rachid je t\'admire.... Tu regardes ton basilic comme si c\'est tes bébés. C\'est magnifique d\'être passionné par qlq chose et de lui procurer le meilleur de toi. Graines de tomates reçues très vite, germination au top en 4 jours ! Encore & toujours BRAVO 👍',
     status: 'approved',
     verifiedPurchase: 1,
     source: 'youtube_community',
@@ -233,40 +253,53 @@ const DEFAULT_REVIEWS: Review[] = [
     id: 3,
     productId: 1, // Graines de tomates
     userId: 'user_yt_3',
-    authorName: 'Dr. Hicham Alaoui',
-    authorLocation: 'Marrakech',
+    authorName: 'Hassan El Idrissi',
+    authorLocation: 'Rabat',
     rating: 5,
-    comment: 'Les semences paysannes de Rachid sont d\'une pureté incroyable. Enfin de vraies variétés anciennes qui ont du goût et qui résistent à la chaleur de Marrakech.',
+    comment: 'ماشأ الله.. اللهم بارك وزد وبارك وأنعم.. يوم بعد يوم يزداد إعجابي وتقديري للصفحة وللمجهودات التي يقوم بها الأخ Rachid potagiste. vermicompost ممتاز جداً وبذور أصيلة.',
     status: 'approved',
     verifiedPurchase: 1,
-    source: 'verified_customer',
+    source: 'youtube_community',
     createdAt: '2026-10-04T09:12:00Z'
   },
   {
     id: 4,
     productId: 2, // Vermicompost
     userId: 'user_yt_4',
-    authorName: 'Fatima Zahra Mansouri',
-    authorLocation: 'Fès',
+    authorName: 'Michel & Nadia',
+    authorLocation: 'Marrakech',
     rating: 5,
-    comment: 'شاهدت طريقتك في اليوتيوب وطبقتها بالكامل في سطح منزلي بفاس، نصائحك في التسميد الطبيعي غيرت كل شيء. جزاك الله خيراً.',
+    comment: 'Belle récolte ! Bravo super Rachid. Les plants de tomates anciennes ont résisté à la chaleur de Marrakech tout l\'été grâce à vos précieux conseils de paillage et votre compost vivant. Amicalement vôtre.',
     status: 'approved',
     verifiedPurchase: 1,
-    source: 'youtube_community',
+    source: 'verified_customer',
     createdAt: '2026-10-03T18:30:00Z'
   },
   {
     id: 5,
-    productId: 3, // Pack 12 plants bio
+    productId: 1, // Graines de tomates
     userId: 'user_yt_5',
-    authorName: 'Mehdi Chraibi',
+    authorName: 'Youssef El Amrani',
+    authorLocation: 'Salé',
+    rating: 5,
+    comment: 'تبارك الله عليك يا أخي رشيد، زرعت بذور الطماطم والكرعة وخرجت في 3 أيام فقط! شتلات قوية وخالية من أي كيماوي. الله يعطيك الصحة على النصائح في اليوتيوب والخدمة النقية.',
+    status: 'approved',
+    verifiedPurchase: 1,
+    source: 'youtube_community',
+    createdAt: '2026-10-02T14:10:00Z'
+  },
+  {
+    id: 6,
+    productId: 7, // Poivrons
+    userId: 'user_yt_6',
+    authorName: 'Amine Belkadi',
     authorLocation: 'Tanger',
     rating: 5,
-    comment: 'Commandé le pack de 12 plants bio + le purin d\'ortie. Arrivé en parfait état à Tanger, emballage écologique soigné. Développé avec amour ! Bravo à Mehdi Ait Aissa et Rachid.',
+    comment: 'تبارك الله هاد مطيشة زوينة ملي كتجيبها وهادشي كيبين على الجودة والخدمة النقية.. تحياتي سي رشيد الفلاح. بذور الفلفل والدنجال خرجات كلها تبارك الله.',
     status: 'approved',
     verifiedPurchase: 1,
     source: 'verified_customer',
-    createdAt: '2026-10-02T14:10:00Z'
+    createdAt: '2026-10-01T10:00:00Z'
   }
 ];
 
@@ -281,7 +314,7 @@ const DEFAULT_BLOG_POSTS: BlogPost[] = [
     category: 'Tutos Semis & Graines',
     readTime: '4 min',
     author: 'Rachid Le Potagiste (@Rachid_Le_Potagiste)',
-    imageUrl: '/src/assets/images/rachid_graines_paysannes_1791482677509.jpg',
+    imageUrl: '/images/rachid_real_yt_483hrFu5Cns.jpg',
     publishedAt: '05 Octobre 2026'
   },
   {
@@ -293,7 +326,7 @@ const DEFAULT_BLOG_POSTS: BlogPost[] = [
     category: 'Permaculture & Fertilité',
     readTime: '5 min',
     author: 'Rachid Le Potagiste',
-    imageUrl: '/src/assets/images/rachid_compost_vermicompost_1791482687599.jpg',
+    imageUrl: '/images/rachid_compost_vermicompost_1791482687599.jpg',
     publishedAt: '29 Septembre 2026'
   },
   {
@@ -305,8 +338,20 @@ const DEFAULT_BLOG_POSTS: BlogPost[] = [
     category: 'Potager Urbain',
     readTime: '6 min',
     author: 'Rachid Le Potagiste',
-    imageUrl: '/src/assets/images/rachid_potager_permaculture_1791482667668.jpg',
+    imageUrl: '/images/rachid_real_yt_4B9iAxcOejQ.jpg',
     publishedAt: '20 Septembre 2026'
+  },
+  {
+    id: 4,
+    slug: 'que-semer-en-hiver-et-en-fevrier-au-maroc',
+    title: 'Que Semer en Hiver et en Février au Maroc : Préparation Complète de A à Z',
+    excerpt: 'Le calendrier exact des semis d\'hiver et les astuces pour préparer la terre avant le printemps selon Rachid Le Potagiste.',
+    content: 'Février est le mois charnière pour tout potagiste au Maroc ! C\'est le moment idéal pour lancer sous abri les semis de piments, aubergines et tomates tardives, et directement en pleine terre les fèves, pois et carottes. Dans cette vidéo suivie par plus de 120 000 personnes, Rachid détaille le travail du sol sans retournement brutal afin de préserver les vers de terre et les mycorhizes.',
+    category: 'Calendrier des Semis',
+    readTime: '7 min',
+    author: 'Rachid Le Potagiste (@Rachid_Le_Potagiste)',
+    imageUrl: '/images/rachid_real_yt__ou1clKBmmc.jpg',
+    publishedAt: '12 Février 2026'
   }
 ];
 
@@ -328,10 +373,13 @@ class StoreService {
   private loadState() {
     try {
       const savedProducts = localStorage.getItem('rp_products');
-      this.products = savedProducts ? JSON.parse(savedProducts) : DEFAULT_PRODUCTS;
+      this.products = (savedProducts ? JSON.parse(savedProducts) : DEFAULT_PRODUCTS).map((p: Product) => ({
+        ...p,
+        imageUrl: resolveImageUrl(p.imageUrl)
+      }));
 
       const savedOrders = localStorage.getItem('rp_orders');
-      this.orders = savedOrders ? JSON.parse(savedOrders) : [
+      this.orders = (savedOrders ? JSON.parse(savedOrders) : [
         {
           id: 1,
           orderNumber: 'RP-2026-7840',
@@ -356,7 +404,7 @@ class StoreService {
               price: 4500,
               quantity: 2,
               unit: 'Sachet kraft de 50 graines',
-              imageUrl: '/src/assets/images/rachid_graines_paysannes_1791482677509.jpg'
+              imageUrl: '/images/rachid_graines_paysannes_1791482677509.jpg'
             },
             {
               id: 2,
@@ -364,7 +412,7 @@ class StoreService {
               price: 8500,
               quantity: 1,
               unit: 'Sac en jute respirant 10 kg',
-              imageUrl: '/src/assets/images/rachid_compost_vermicompost_1791482687599.jpg'
+              imageUrl: '/images/rachid_compost_vermicompost_1791482687599.jpg'
             }
           ],
           timeline: [
@@ -400,7 +448,19 @@ class StoreService {
             }
           ]
         }
-      ];
+      ]).map((o: Order) => ({
+        ...o,
+        items: o.items.map(it => ({
+          ...it,
+          imageUrl: resolveImageUrl(it.imageUrl)
+        }))
+      }));
+
+      const savedBlog = localStorage.getItem('rp_blog');
+      this.blogPosts = (savedBlog ? JSON.parse(savedBlog) : DEFAULT_BLOG_POSTS).map((bp: BlogPost) => ({
+        ...bp,
+        imageUrl: resolveImageUrl(bp.imageUrl)
+      }));
 
       const savedReviews = localStorage.getItem('rp_reviews');
       this.reviews = savedReviews ? JSON.parse(savedReviews) : DEFAULT_REVIEWS;
@@ -737,7 +797,7 @@ class StoreService {
         price: i.product.price,
         quantity: i.quantity,
         unit: i.product.unit,
-        imageUrl: i.product.imageUrl
+        imageUrl: resolveImageUrl(i.product.imageUrl)
       })),
       createdAt: now,
       updatedAt: now,

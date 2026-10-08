@@ -1,6 +1,37 @@
 <!doctype html>
 <html lang="fr">
   <head>
+    <script>
+      (function() {
+        try {
+          var _origFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _origFetch;
+            },
+            set: function(fn) {
+              _origFetch = fn;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (err) {
+          try {
+            var _protoFetch = Window.prototype.fetch;
+            Object.defineProperty(Window.prototype, 'fetch', {
+              get: function() {
+                return _protoFetch;
+              },
+              set: function(fn) {
+                _protoFetch = fn;
+              },
+              configurable: true,
+              enumerable: true
+            });
+          } catch (err2) {}
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RACHID POTAGISTE - Semences Paysannes, Plants Bio & Permaculture</title>

@@ -1,0 +1,6 @@
+{
+  "name": "The Green Souk - Épicerie Bio & Produits Naturels",
+  "description": "Marché e-commerce éco-responsable de produits bio d'exception : huiles de terroir, miels sauvages, épicerie fine, cosmétiques purs, gestion des stocks en temps réel et paiement sécurisé.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

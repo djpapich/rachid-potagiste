@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Check, Star, ShieldCheck, Truck, Sparkles, Leaf, Plus } from 'lucide-react';
+import { X, Check, Star, ShieldCheck, Truck, Sparkles, Leaf, Plus, Video, ExternalLink } from 'lucide-react';
 import { Product, Language } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
 import { storeService } from '../services/storeService.ts';
@@ -89,6 +89,26 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   {product.name}
                 </h1>
 
+                {product.moroccanNameAr && (
+                  <div className="text-base font-serif font-bold text-emerald-800">
+                    {product.moroccanNameAr}
+                  </div>
+                )}
+
+                {/* Video Tutorial Link if provided */}
+                {product.videoTutorialUrl && (
+                  <a
+                    href={product.videoTutorialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 rounded-lg text-xs font-semibold transition-colors cursor-pointer w-fit"
+                  >
+                    <Video className="w-4 h-4 text-red-600" />
+                    <span>Voir le tutoriel vidéo officiel de Rachid</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-red-500" />
+                  </a>
+                )}
+
                 <div className="flex items-center gap-2 text-xs">
                   <div className="flex items-center text-amber-500">
                     <Star className="w-4 h-4 fill-amber-500" />
@@ -136,6 +156,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <div className="bg-emerald-50/70 p-3.5 rounded-lg border border-emerald-100 text-xs text-emerald-900 space-y-1">
                     <span className="font-semibold">{t.benefits} :</span>
                     <p className="text-emerald-800">{product.benefits}</p>
+                  </div>
+                )}
+
+                {/* Usage Guide */}
+                {product.usageGuide && (
+                  <div className="bg-amber-50/70 p-3.5 rounded-lg border border-amber-200/80 text-xs text-amber-950 space-y-1">
+                    <span className="font-semibold flex items-center gap-1">
+                      <span>🌿 Conseils d'utilisation de Rachid :</span>
+                    </span>
+                    <p className="text-stone-700 leading-relaxed">{product.usageGuide}</p>
                   </div>
                 )}
               </div>

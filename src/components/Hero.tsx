@@ -8,6 +8,7 @@ interface HeroProps {
   currentLang: Language;
   onExplore: () => void;
   onViewBlog: () => void;
+  theme?: 'white' | 'black';
 }
 
 export const Hero: React.FC<HeroProps> = ({ currentLang, onExplore, onViewBlog }) => {
@@ -84,12 +85,12 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onExplore, onViewBlog }
             </div>
           </div>
 
-          {/* Right Column: Hero Visual Asset (Rachid Portrait & Harvest) */}
+          {/* Right Column: Hero Visual Asset (Rachid Portrait & Real Harvest Generated from his Real Photo) */}
           <div className="lg:col-span-5">
             <div className="relative rounded-2xl overflow-hidden shadow-xl border border-stone-200/90 aspect-square group">
               <img
-                src={resolveImageUrl('/images/rachid_portrait_potagiste_1791482658073.jpg')}
-                alt="Rachid Le Potagiste avec sa récolte de légumes bio"
+                src={resolveImageUrl('/images/rachid_potagiste_hero_real.jpg')}
+                alt="Rachid Potagiste avec sa récolte et macérats artisanaux au Maroc"
                 className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                 referrerPolicy="no-referrer"
                 onError={handleImageError}
@@ -97,7 +98,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onExplore, onViewBlog }
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent flex flex-col justify-end p-5 text-white">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs font-semibold tracking-wider uppercase text-emerald-300">
-                    Rachid Le Potagiste · Maître Jardinier
+                    Rachid Potagiste · Maître Jardinier & Botaniste
                   </span>
                   <span className="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-1 font-semibold">
                     <Youtube className="w-3 h-3" />
@@ -105,7 +106,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onExplore, onViewBlog }
                   </span>
                 </div>
                 <p className="text-sm font-serif font-medium text-stone-100">
-                  « Pour que chaque foyer au Maroc puisse récolter ses propres légumes sains et savoureux. »
+                  « Pour que chaque foyer au Maroc puisse récolter ses propres légumes sains et bénéficier des remèdes naturels du potager. »
                 </p>
               </div>
             </div>

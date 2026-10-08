@@ -6,6 +6,30 @@ import { resolveImageUrl } from '../lib/imageHelper.ts';
 const DEFAULT_CATEGORIES: Category[] = [
   {
     id: 1,
+    slug: 'macerats-huiles-artisanales',
+    nameFr: 'Huiles & Macérats Botaniques',
+    nameEn: 'Artisan Herbal Macerates',
+    nameAr: 'زيوت ومستخلصات عشبية (الحريقة، المريوت...)',
+    description: 'Préparations naturelles et macérats faits maison présentés en tutoriels vidéo par Rachid.'
+  },
+  {
+    id: 2,
+    slug: 'soins-cosmetique-naturelle',
+    nameFr: 'Cosmétique & Soins Naturels',
+    nameEn: 'Natural Potager Care',
+    nameAr: 'عناية ومستحضرات طبيعية (واقي شمس، صابون)',
+    description: 'Écran solaire minéral artisanal SPF50+ et savons saponifiés aux plantes du potager.'
+  },
+  {
+    id: 3,
+    slug: 'traitements-ecologiques',
+    nameFr: 'Purins & Traitements Écologiques',
+    nameEn: 'Eco Potager Treatments',
+    nameAr: 'أسمدة ومبيدات حيوية (سماد الحريقة)',
+    description: 'Traitements écologiques pour potager, purins d\'ortie et répulsifs naturels.'
+  },
+  {
+    id: 4,
     slug: 'graines-semences',
     nameFr: 'Semences Paysannes',
     nameEn: 'Heirloom Seeds',
@@ -13,7 +37,7 @@ const DEFAULT_CATEGORIES: Category[] = [
     description: 'Variétés traditionnelles 100% reproductibles non-hybrides, sans traitement chimique.'
   },
   {
-    id: 2,
+    id: 5,
     slug: 'amendements-engrais',
     nameFr: 'Compost & Engrais Naturels',
     nameEn: 'Living Vermicompost & Fertilizers',
@@ -21,7 +45,7 @@ const DEFAULT_CATEGORIES: Category[] = [
     description: 'Lombricompost artisanal, purin d\'ortie frais et terreau vivant pour potager.'
   },
   {
-    id: 3,
+    id: 6,
     slug: 'plants-arbustes',
     nameFr: 'Plants Bio Prêts à Planter',
     nameEn: 'Organic Seedlings & Herbs',
@@ -29,7 +53,7 @@ const DEFAULT_CATEGORIES: Category[] = [
     description: 'Élevés sous serre et acclimatés au climat marocain dans des godets biodégradables.'
   },
   {
-    id: 4,
+    id: 7,
     slug: 'fruits-legumes',
     nameFr: 'Paniers Récolte du Jour',
     nameEn: 'Fresh Harvest Baskets',
@@ -37,7 +61,7 @@ const DEFAULT_CATEGORIES: Category[] = [
     description: 'Légumes et herbes fraîchement cueillis le matin dans le potager en permaculture de Rachid.'
   },
   {
-    id: 5,
+    id: 8,
     slug: 'epicerie-terroir',
     nameFr: 'Produits de la Ferme',
     nameEn: 'Farm Terroir Goods',
@@ -218,6 +242,160 @@ const DEFAULT_PRODUCTS: Product[] = [
     reviewCount: 37,
     imageUrl: '/images/rachid_real_yt_7fEJXuTmaPM.jpg',
     isFeatured: 0
+  },
+  {
+    id: 10,
+    slug: 'huile-grande-ortie-rachid-potagiste',
+    name: 'Huile de Grande Ortie Artisanale (زيت الحريقة)',
+    categorySlug: 'macerats-huiles-artisanales',
+    price: 5500, // 55 DH
+    originalPrice: 7000,
+    stock: 45,
+    unit: 'Flacon pipette verre ambré 100 ml',
+    description: 'Macérat huileux artisanal préparé à partir de feuilles fraîches de grande ortie (Urtica dioica) cueillies au potager par Rachid Potagiste. Recette d\'extraction artisanale exclusive présentée dans sa vidéo Facebook officielle.',
+    origin: 'Atelier de Macération de Rachid Potagiste - Maroc',
+    certification: '100% Naturel Fait Maison · Zéro Chimique',
+    ingredients: 'Feuilles fraîches de grande ortie du potager macérées dans huile végétale pure pressée à froid.',
+    benefits: 'Anti-chute de cheveux éprouvé, soin anti-pelliculaire purifiant, traitement apaisant de l\'acné, du psoriasis et soulagement des douleurs articulaires.',
+    rating: '5.0',
+    reviewCount: 164,
+    imageUrl: '/images/rachid_huile_ortie.jpg',
+    isFeatured: 1,
+    videoTutorialUrl: 'https://www.facebook.com/61567836723896/videos/2031746827748924/',
+    moroccanNameAr: 'زيت الحريقة البلدي الأصيل',
+    usageGuide: 'Appliquer en friction sur le cuir chevelu 2 fois par semaine pour stimuler la repousse, ou masser localement sur les articulations douloureuses et les zones irritées.'
+  },
+  {
+    id: 11,
+    slug: 'huile-souci-calendula-rachid-potagiste',
+    name: 'Huile de Souci / Calendula Macération Solaire (زيت آذريون)',
+    categorySlug: 'macerats-huiles-artisanales',
+    price: 6000, // 60 DH
+    originalPrice: 7500,
+    stock: 40,
+    unit: 'Flacon compte-gouttes 100 ml',
+    description: 'Macérat solaire de fleurs de souci (Calendula officinalis) récoltées manuellement dans le potager en permaculture de Rachid. Une recette de douceur pour toute la famille.',
+    origin: 'Potager & Atelier Rachid Potagiste',
+    certification: 'Macération Solaire Naturelle Fait Main',
+    ingredients: 'Pétales de fleurs de Calendula fraîches du potager macérées sous le soleil marocain dans une huile végétale d\'amande douce.',
+    benefits: 'Hydratation profonde de la peau (parfaitement adaptée aux enfants et nourrissons), apaisement des irritations cutanées, rougeurs et cicatrisation.',
+    rating: '4.9',
+    reviewCount: 128,
+    imageUrl: '/images/rachid_huile_calendula.jpg',
+    isFeatured: 1,
+    videoTutorialUrl: 'https://www.facebook.com/61567836723896/videos/26344602031857935/',
+    moroccanNameAr: 'زيت آذريون / الكاليندولا',
+    usageGuide: 'Appliquer quelques gouttes sur une peau nettoyée matin et soir, ou après le bain de bébé pour protéger et réparer la barrière cutanée.'
+  },
+  {
+    id: 12,
+    slug: 'huile-camomille-sauvage-rachid-potagiste',
+    name: 'Huile de Camomille Sauvage Décontractante (زيت البابونج)',
+    categorySlug: 'macerats-huiles-artisanales',
+    price: 5500, // 55 DH
+    originalPrice: 6500,
+    stock: 35,
+    unit: 'Flacon verre ambré 100 ml',
+    description: 'Extraction artisanale douce de capitules de camomille sauvage marocaine par Rachid Potagiste. Idéale pour délier les tensions et soigner la chevelure.',
+    origin: 'Atelier Rachid Potagiste - Maroc',
+    certification: 'Soin Botanique 100% Artisanal',
+    ingredients: 'Fleurs entières de camomille sauvage macérées avec soin selon la recette traditionnelle de Rachid.',
+    benefits: 'Massage moussant et apaisant, soulagement des courbatures musculaires et des tensions, éclaircissement naturel et reflets dorés des cheveux.',
+    rating: '4.9',
+    reviewCount: 95,
+    imageUrl: '/images/rachid_huile_camomille.jpg',
+    isFeatured: 1,
+    videoTutorialUrl: 'https://www.facebook.com/61567836723896/videos/26344602031857935/',
+    moroccanNameAr: 'زيت البابونج الطبيعي المهدئ',
+    usageGuide: 'Masser en profondeur sur les muscles endoloris après une journée d\'effort ou de jardinage, ou poser en masque capillaire nutritif 1h avant lavage.'
+  },
+  {
+    id: 13,
+    slug: 'huile-marrube-blanc-rachid-potagiste',
+    name: 'Huile de Marrube Blanc Anti-Inflammatoire (زيت المريوت)',
+    categorySlug: 'macerats-huiles-artisanales',
+    price: 5000, // 50 DH
+    originalPrice: 6000,
+    stock: 50,
+    unit: 'Flacon verre ambré 100 ml',
+    description: 'La fameuse huile de Marriout (Marrubium vulgare) préparée à la main par Rachid Potagiste ! Plante ancestrale du terroir marocain réputée pour ses vertus calmantes puissantes.',
+    origin: 'Récolte Potager Rachid Potagiste',
+    certification: 'Formule Traditionnelle Marocaine',
+    ingredients: 'Feuilles fraîches de marrube blanc du jardin permaculture et huile végétale vierge.',
+    benefits: 'Propriétés anti-inflammatoires intenses, apaisement et soulagement des douleurs musculaires, entorses et douleurs articulaires.',
+    rating: '5.0',
+    reviewCount: 142,
+    imageUrl: '/images/rachid_huile_marruve.jpg',
+    isFeatured: 1,
+    videoTutorialUrl: 'https://www.facebook.com/61567836723896/videos/2031746827748924/',
+    moroccanNameAr: 'زيت المريوت الأصيل للمفاصل',
+    usageGuide: 'Frictionner chaleureusement sur les zones articulaires sensibles (genoux, bas du dos, poignets) une à deux fois par jour.'
+  },
+  {
+    id: 14,
+    slug: 'ecran-solaire-naturel-oxyde-zinc-rachid-potagiste',
+    name: 'Écran Solaire Naturel Minéral à l\'Oxyde de Zinc (واقي شمس طبيعي)',
+    categorySlug: 'soins-cosmetique-naturelle',
+    price: 7500, // 75 DH
+    originalPrice: 9000,
+    stock: 40,
+    unit: 'Pot en verre recyclable 120 ml',
+    description: 'Protection solaire minérale naturelle haute efficacité préparée artisanalement par Rachid Potagiste. 100% filtre physique minéral, respectueuse de la peau et de l\'environnement.',
+    origin: 'Laboratoire Artisanal Rachid Potagiste',
+    certification: 'Écran Minéral Sans Perturbateurs Chimiques',
+    ingredients: 'Oxyde de zinc non-nano de qualité cosmétique, cire d\'abeille brute bio, huile de noix de coco vierge, huile de graines de carotte riche en bêta-carotène.',
+    benefits: 'Protection solaire haute fréquence (SPF 50+) préparée artisanalement, résiste à l\'eau et prévient le vieillissement solaire sans blanchir excessivement.',
+    rating: '4.9',
+    reviewCount: 110,
+    imageUrl: '/images/rachid_ecran_solaire.jpg',
+    isFeatured: 1,
+    videoTutorialUrl: 'https://www.facebook.com/61567836723896/videos/1785704152457778/',
+    moroccanNameAr: 'واقي شمس طبيعي بالأكسيد والزيوت (SPF 50+)',
+    usageGuide: 'Appliquer sur le visage et le cou 15 minutes avant toute exposition solaire. Texture fondante et nourrissante pour une protection optimale sous le soleil marocain.'
+  },
+  {
+    id: 15,
+    slug: 'savon-artisanal-melt-pour-glycerine-rachid-potagiste',
+    name: 'Savon Artisanal Melt & Pour à la Glycérine & Plantes (صابون طبيعي)',
+    categorySlug: 'soins-cosmetique-naturelle',
+    price: 3500, // 35 DH
+    originalPrice: 4500,
+    stock: 60,
+    unit: 'Pain de savon 120g avec lien de jute',
+    description: 'Savon artisanal Melt & Pour enrichi aux pétales et extraits botaniques du potager par Rachid Potagiste. Douceur extrême pour la toilette quotidienne.',
+    origin: 'Atelier Rachid Potagiste - Maroc',
+    certification: 'Soin Nettoyant Artisanal Surgras',
+    ingredients: 'Base glycérinée végétale pure, pétales de souci (calendula) séchés, feuilles de menthe marocaine et extrait d\'ortie fraîche.',
+    benefits: 'Soin nettoyant doux personnalisé à base de plantes du potager, préserve l\'hydratation naturelle, mousse fine et soyeuse.',
+    rating: '5.0',
+    reviewCount: 88,
+    imageUrl: '/images/rachid_savon_artisan.jpg',
+    isFeatured: 1,
+    videoTutorialUrl: 'https://www.facebook.com/61567836723896/videos/1500717554912769/',
+    moroccanNameAr: 'صابون طبيعي حرفي بالأعشاب الطازجة',
+    usageGuide: 'Utiliser sous la douche ou pour la toilette du visage. Convient à tous les types de peau, même sensibles.'
+  },
+  {
+    id: 16,
+    slug: 'purin-ortie-insecticide-naturel-rachid-potagiste',
+    name: 'Purin d\'Ortie Artisanal Concentré & Répulsif Naturel (سماد ومبيد الحريقة)',
+    categorySlug: 'traitements-ecologiques',
+    price: 4500, // 45 DH
+    originalPrice: 5500,
+    stock: 75,
+    unit: 'Bouteille pulvérisateur réutilisable 1 Litre',
+    description: 'Le soin protecteur et fertilisant incontournable du potager en permaculture de Rachid Potagiste ! Macération fermentée d\'orties fraîches non traitées.',
+    origin: 'Potager en Permaculture de Rachid Potagiste',
+    certification: 'Traitement 100% Biologique & Écologique',
+    ingredients: '100% extrait fermenté de grande ortie (Urtica dioica) filtré et stabilisé artisanalement.',
+    benefits: 'Traitement écologique pour potager et répulsif d\'insectes prédateurs (pucerons, acariens), engrais azoté naturel stimulant la croissance vigoureuse des plants.',
+    rating: '5.0',
+    reviewCount: 156,
+    imageUrl: '/images/rachid_purin_ortie.jpg',
+    isFeatured: 1,
+    videoTutorialUrl: 'https://www.facebook.com/61567836723896/posts/122164643006594557/',
+    moroccanNameAr: 'سماد ومبيد الحريقة الطبيعي للحديقة',
+    usageGuide: 'Diluer à 10% (100ml pour 1L d\'eau) en pulvérisation foliaire contre les pucerons, ou diluer à 20% au pied des tomates et légumes pour booster la vitalité.'
   }
 ];
 
@@ -372,8 +550,39 @@ class StoreService {
 
   private loadState() {
     try {
+      this.categories = DEFAULT_CATEGORIES;
       const savedProducts = localStorage.getItem('rp_products');
-      this.products = (savedProducts ? JSON.parse(savedProducts) : DEFAULT_PRODUCTS).map((p: Product) => ({
+      let loadedProds: Product[] = [];
+      if (savedProducts) {
+        try {
+          const parsed = JSON.parse(savedProducts) as Product[];
+          const map = new Map<string, Product>();
+          parsed.forEach(p => map.set(p.slug || String(p.id), p));
+          DEFAULT_PRODUCTS.forEach(dp => {
+            const key = dp.slug;
+            const existing = map.get(key) || (dp.id ? map.get(String(dp.id)) : undefined);
+            if (existing) {
+              map.set(key, {
+                ...existing,
+                ...dp,
+                imageUrl: resolveImageUrl(dp.imageUrl),
+                videoTutorialUrl: dp.videoTutorialUrl ?? existing.videoTutorialUrl,
+                moroccanNameAr: dp.moroccanNameAr ?? existing.moroccanNameAr,
+                usageGuide: dp.usageGuide ?? existing.usageGuide,
+              });
+            } else {
+              map.set(key, dp);
+            }
+          });
+          loadedProds = Array.from(map.values());
+        } catch {
+          loadedProds = DEFAULT_PRODUCTS;
+        }
+      } else {
+        loadedProds = DEFAULT_PRODUCTS;
+      }
+
+      this.products = loadedProds.map((p: Product) => ({
         ...p,
         imageUrl: resolveImageUrl(p.imageUrl)
       }));

@@ -1,4 +1,5 @@
 export type Language = 'fr' | 'en' | 'ar';
+export type AppTheme = 'white' | 'black';
 
 export interface Product {
   id: number;
@@ -18,6 +19,9 @@ export interface Product {
   reviewCount: number;
   imageUrl: string;
   isFeatured: number;
+  videoTutorialUrl?: string | null;
+  moroccanNameAr?: string | null;
+  usageGuide?: string | null;
 }
 
 export interface Category {

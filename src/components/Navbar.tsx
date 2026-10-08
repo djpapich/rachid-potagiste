@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Bell, ShieldCheck, Search, Globe, ChevronDown, Check, Youtube } from 'lucide-react';
-import { Language } from '../types/index.ts';
+import { ShoppingBag, Bell, ShieldCheck, Search, Globe, ChevronDown, Check, Youtube, Moon, Sun } from 'lucide-react';
+import { Language, AppTheme } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
 
 interface NavbarProps {
@@ -15,6 +15,8 @@ interface NavbarProps {
   onOpenEmailSim: () => void;
   searchQuery: string;
   onSearchChange: (q: string) => void;
+  theme: AppTheme;
+  onToggleTheme: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -29,6 +31,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenEmailSim,
   searchQuery,
   onSearchChange,
+  theme,
+  onToggleTheme,
 }) => {
   const t = translations[currentLang];
   const [langMenuOpen, setLangMenuOpen] = useState(false);
@@ -180,6 +184,25 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             )}
           </div>
+
+          {/* Black and White Theme Switcher */}
+          <button
+            onClick={onToggleTheme}
+            title={theme === 'black' ? 'Passer en Mode Blanc' : 'Passer en Mode Noir'}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-stone-200 hover:bg-stone-100 transition-colors cursor-pointer text-xs font-semibold"
+          >
+            {theme === 'black' ? (
+              <>
+                <Sun className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden sm:inline">Blanc</span>
+              </>
+            ) : (
+              <>
+                <Moon className="w-3.5 h-3.5 text-stone-700" />
+                <span className="hidden sm:inline">Noir</span>
+              </>
+            )}
+          </button>
 
           {/* Real-time Push Notifications Bell */}
           <button

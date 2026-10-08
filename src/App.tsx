@@ -18,13 +18,14 @@ import { NotificationPanel } from './components/NotificationToast.tsx';
 import { Footer } from './components/Footer.tsx';
 import { RachidMediaSection } from './components/RachidMediaSection.tsx';
 import { storeService } from './services/storeService.ts';
-import { Product, CartItem, Language, Order } from './types/index.ts';
+import { Product, CartItem, Language, Order, AppTheme } from './types/index.ts';
 import { translations } from './lib/translations.ts';
 import { resolveImageUrl, handleImageError } from './lib/imageHelper.ts';
 import { Filter, Sparkles, ShieldCheck, Truck, Leaf, Youtube } from 'lucide-react';
 
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('fr');
+  const [theme, setTheme] = useState<AppTheme>(() => (localStorage.getItem('rp_theme') as AppTheme) || 'white');
   const [activeView, setActiveView] = useState<'shop' | 'blog' | 'tracking' | 'admin'>('shop');
   
   // Store synced state
@@ -119,7 +120,7 @@ export default function App() {
   const unreadNotifsCount = notifications.filter(n => n.isRead === 0).length;
 
   return (
-    <div className={`min-h-screen bg-[#FBFBF9] flex flex-col ${isRtl ? 'rtl' : 'ltr'}`} dir={isRtl ? 'rtl' : 'ltr'}>
+    <div className={`min-h-screen bg-[#FBFBF9] flex flex-col transition-colors duration-200 ${theme === 'black' ? 'theme-black dark' : ''} ${isRtl ? 'rtl' : 'ltr'}`} dir={isRtl ? 'rtl' : 'ltr'}>
       {/* Top Bar Navigation */}
       <Navbar
         currentLang={currentLang}
@@ -133,6 +134,14 @@ export default function App() {
         onOpenEmailSim={() => setIsEmailSimOpen(true)}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
+        theme={theme}
+        onToggleTheme={() => {
+          setTheme(prev => {
+            const next = prev === 'white' ? 'black' : 'white';
+            localStorage.setItem('rp_theme', next);
+            return next;
+          });
+        }}
       />
 
       {/* Main Content Area */}
@@ -142,6 +151,7 @@ export default function App() {
             {/* Hero Section */}
             <Hero
               currentLang={currentLang}
+              theme={theme}
               onExplore={() => {
                 const el = document.getElementById('catalog-section');
                 el?.scrollIntoView({ behavior: 'smooth' });

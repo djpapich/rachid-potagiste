@@ -18,3 +18,95 @@ html {
   font-family: var(--font-sans);
 }
 
+/* Theme Black (Mode Noir & Mode Blanc) */
+.theme-black {
+  background-color: #0c0d0e !important;
+  color: #f3f4f6 !important;
+}
+
+.theme-black .bg-\[\#FBFBF9\],
+.theme-black .bg-\[\#FBFBF9\]\/95 {
+  background-color: #0c0d0e !important;
+}
+
+.theme-black .bg-\[\#F7F7F5\] {
+  background-color: #17181c !important;
+}
+
+.theme-black .bg-white {
+  background-color: #15171a !important;
+  color: #f3f4f6 !important;
+}
+
+.theme-black .bg-stone-50,
+.theme-black .bg-stone-50\/50,
+.theme-black .bg-stone-100 {
+  background-color: #1b1d22 !important;
+  color: #f3f4f6 !important;
+}
+
+.theme-black .border-stone-200,
+.theme-black .border-stone-200\/80,
+.theme-black .border-stone-200\/90,
+.theme-black .border-stone-100,
+.theme-black .border-stone-300 {
+  border-color: #272a30 !important;
+}
+
+.theme-black .text-stone-900 {
+  color: #f4f4f5 !important;
+}
+
+.theme-black .text-stone-800 {
+  color: #e4e4e7 !important;
+}
+
+.theme-black .text-stone-700 {
+  color: #d4d4d8 !important;
+}
+
+.theme-black .text-stone-600 {
+  color: #a1a1aa !important;
+}
+
+.theme-black .text-stone-500 {
+  color: #8b8e96 !important;
+}
+
+.theme-black header {
+  background-color: rgba(15, 17, 21, 0.95) !important;
+  border-bottom-color: #272a30 !important;
+}
+
+.theme-black footer {
+  background-color: #08090a !important;
+  border-top-color: #272a30 !important;
+}
+
+.theme-black .bg-emerald-50,
+.theme-black .bg-emerald-50\/70,
+.theme-black .bg-emerald-50\/60 {
+  background-color: rgba(6, 78, 59, 0.3) !important;
+  border-color: rgba(5, 150, 105, 0.35) !important;
+}
+
+.theme-black .text-emerald-900,
+.theme-black .text-emerald-800 {
+  color: #6ee7b7 !important;
+}
+
+.theme-black .bg-emerald-100,
+.theme-black .bg-emerald-100\/70 {
+  background-color: rgba(6, 78, 59, 0.45) !important;
+  color: #a7f3d0 !important;
+}
+
+.theme-black select,
+.theme-black input,
+.theme-black textarea {
+  background-color: #1b1d22 !important;
+  color: #f3f4f6 !important;
+  border-color: #2e323b !important;
+}
+
+

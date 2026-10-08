@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, Check, Star } from 'lucide-react';
+import { Plus, Check, Star, Video } from 'lucide-react';
 import { Product, Language } from '../types/index.ts';
 import { translations } from '../lib/translations.ts';
 import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
@@ -70,6 +70,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           >
             {product.name}
           </h3>
+
+          {/* Moroccan Arabic Name if available */}
+          {product.moroccanNameAr && (
+            <div className="mt-1 text-xs font-semibold text-emerald-800/90 font-serif">
+              {product.moroccanNameAr}
+            </div>
+          )}
+
+          {/* Video Tutorial Badge if linked to Rachid's Facebook/YouTube */}
+          {product.videoTutorialUrl && (
+            <a
+              href={product.videoTutorialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-red-600 hover:text-red-700 hover:underline cursor-pointer"
+            >
+              <Video className="w-3.5 h-3.5 text-red-500" />
+              <span>Voir le tutoriel de Rachid</span>
+            </a>
+          )}
         </div>
 
         {/* Stock Status Indicator */}

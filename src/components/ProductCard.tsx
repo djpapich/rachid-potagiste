@@ -1,153 +1,162 @@
-import React from 'react';
-import { Plus, Check, Star, Video } from 'lucide-react';
-import { Product, Language } from '../types/index.ts';
-import { translations } from '../lib/translations.ts';
-import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
+import React, { useState } from 'react';
+import { Product } from '../types/index.ts';
+import { MessageCircle, Plus, Check, Eye } from 'lucide-react';
+import { getProductWhatsAppUrl } from '../lib/whatsapp.ts';
 
 interface ProductCardProps {
   product: Product;
-  currentLang: Language;
+  onSelect: (product: Product) => void;
   onAddToCart: (product: Product) => void;
-  onOpenDetail: (product: Product) => void;
-  isAddedJustNow?: boolean;
+  isInCart?: boolean;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
-  currentLang,
+  onSelect,
   onAddToCart,
-  onOpenDetail,
-  isAddedJustNow = false,
+  isInCart = false,
 }) => {
-  const t = translations[currentLang];
-  const isOutOfStock = product.stock <= 0;
-  const isLowStock = product.stock > 0 && product.stock <= 10;
+  const [justAdded, setJustAdded] = useState(false);
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onAddToCart(product);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1500);
+  };
+
+  const handleWhatsApp = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.open(getProductWhatsAppUrl(product, 1), '_blank');
+  };
 
   return (
-    <div className="group bg-white rounded-xl border border-stone-200/90 overflow-hidden flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-      {/* Product Image Slot */}
-      <div 
-        onClick={() => onOpenDetail(product)}
-        className="relative bg-[#F7F7F5] aspect-4/3 overflow-hidden cursor-pointer"
-      >
+    <article
+      onClick={() => onSelect(product)}
+      className="group bg-[#FBFAF5] rounded-2xl border border-[#E5DFC9] hover:border-[#1F3D2B]/50 transition-all duration-300 shadow-xs hover:shadow-md flex flex-col justify-between overflow-hidden cursor-pointer relative"
+    >
+      {/* Top Image Container */}
+      <div className="relative aspect-square w-full bg-[#F4F1EA] overflow-hidden flex items-center justify-center p-4">
+        
+        {/* Product photo */}
         <img
-          src={resolveImageUrl(product.imageUrl)}
-          alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500 ease-out"
-          referrerPolicy="no-referrer"
+          src={product.image}
+          alt={product.nom}
+          className="w-full h-full object-contain object-center transform group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
-          onError={handleImageError}
         />
 
-        {/* Quiet top corner badges */}
-        {product.originalPrice && (
-          <span className="absolute top-3 left-3 bg-stone-900/85 text-white text-[11px] font-semibold px-2 py-0.5 rounded-sm tracking-wide">
-            -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-          </span>
-        )}
+        {/* Circular artisanal stamps directly like the real Moroccan label */}
+        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
+          {product.badges.map((badge, idx) => {
+            const isGreen = badge.type === 'green';
+            const isDarkGreen = badge.type === 'darkgreen';
+            return (
+              <span
+                key={idx}
+                className={`w-14 h-14 rounded-full text-[9px] font-bold tracking-tight leading-tight flex items-center justify-center text-center p-1.5 uppercase shadow-xs ${
+                  isGreen
+                    ? 'bg-[#3F6B2E] text-white'
+                    : isDarkGreen
+                    ? 'bg-[#1F3D2B] text-[#FBFAF5] border border-[#C9A227]/40'
+                    : 'bg-[#1C201D] text-[#FBFAF5]'
+                }`}
+              >
+                {badge.label}
+              </span>
+            );
+          })}
+        </div>
 
-        <div className="absolute top-3 right-3 flex items-center gap-1 bg-white/90 backdrop-blur-xs px-2 py-0.5 rounded-sm text-[11px] text-stone-700 font-medium shadow-2xs">
-          <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-          <span className="tabular-nums font-semibold">{product.rating}</span>
-          <span className="text-stone-400 text-[10px]">({product.reviewCount})</span>
+        {/* Quick view button on hover */}
+        <div className="absolute inset-0 bg-[#1F3D2B]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+          <span className="bg-[#FBFAF5] text-[#1F3D2B] text-xs font-semibold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+            <Eye className="w-3.5 h-3.5" />
+            Voir la fiche
+          </span>
+        </div>
+
+        {/* Contenance pill */}
+        <div className="absolute bottom-2.5 right-2.5 bg-[#FBFAF5]/90 backdrop-blur-xs px-2.5 py-1 rounded-md text-[11px] font-semibold text-[#1F3D2B] border border-[#E5DFC9] shadow-2xs">
+          {product.contenance}
         </div>
       </div>
 
-      {/* Card Info Details */}
-      <div className="p-4 flex flex-col flex-grow justify-between gap-3">
+      {/* Product Content Details */}
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
         <div>
-          {/* Metadata line: Origin & Unit (Zero-pill text) */}
-          <div className="flex items-center gap-1.5 text-xs text-stone-500 uppercase tracking-wider mb-1 truncate">
-            <span>{product.origin.split('-')[0].trim()}</span>
-            <span aria-hidden="true" className="text-stone-300">·</span>
-            <span className="text-emerald-800 font-medium">{product.unit}</span>
+          {/* Category / Family text (unboxed quiet metadata) */}
+          <div className="text-[11px] font-bold uppercase tracking-wider text-[#8C6D23] mb-1">
+            {product.familleLabel}
           </div>
 
-          {/* Product Name */}
-          <h3 
-            onClick={() => onOpenDetail(product)}
-            className="text-sm sm:text-base font-semibold text-stone-900 group-hover:text-emerald-900 transition-colors line-clamp-2 cursor-pointer leading-snug"
-          >
-            {product.name}
+          {/* Title */}
+          <h3 className="font-title text-base sm:text-lg font-bold text-[#1F3D2B] group-hover:text-[#3F6B2E] transition-colors leading-snug line-clamp-2">
+            {product.nom}
           </h3>
 
-          {/* Moroccan Arabic Name if available */}
-          {product.moroccanNameAr && (
-            <div className="mt-1 text-xs font-semibold text-emerald-800/90 font-serif">
-              {product.moroccanNameAr}
-            </div>
-          )}
+          {/* Handwritten Artisanal Catchphrase */}
+          <p className="font-script text-base sm:text-lg text-[#8C6D23] font-semibold italic mt-1 line-clamp-1">
+            « {product.accroche} »
+          </p>
 
-          {/* Video Tutorial Badge if linked to Rachid's Facebook/YouTube */}
-          {product.videoTutorialUrl && (
-            <a
-              href={product.videoTutorialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-red-600 hover:text-red-700 hover:underline cursor-pointer"
-            >
-              <Video className="w-3.5 h-3.5 text-red-500" />
-              <span>Voir le tutoriel de Rachid</span>
-            </a>
-          )}
+          {/* Ingredients snippet */}
+          <p className="text-xs text-[#1F3D2B]/70 mt-2 line-clamp-2">
+            {product.description}
+          </p>
         </div>
 
-        {/* Stock Status Indicator */}
-        <div className="text-xs">
-          {isOutOfStock ? (
-            <span className="text-rose-700 font-medium">{t.outOfStock}</span>
-          ) : isLowStock ? (
-            <span className="text-amber-700 font-medium flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-600 animate-ping inline-block" />
-              {t.lowStock.replace('{count}', product.stock.toString())}
-            </span>
-          ) : (
-            <span className="text-emerald-700 flex items-center gap-1 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block" />
-              {t.inStock} ({product.stock})
-            </span>
-          )}
-        </div>
-
-        {/* Baseline: Price in Dirhams (DH) & Add to Cart button */}
-        <div className="pt-2 border-t border-stone-100 flex items-center justify-between gap-2">
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-base sm:text-lg font-bold text-stone-900 tabular-nums">
-              {(product.price / 100).toFixed(2)} {t.currency}
-            </span>
-            {product.originalPrice && (
-              <span className="text-xs text-stone-400 line-through tabular-nums">
-                {(product.originalPrice / 100).toFixed(2)} {t.currency}
+        {/* Price & Action Buttons */}
+        <div className="pt-4 mt-3 border-t border-[#E5DFC9]/70 flex flex-col gap-2.5">
+          <div className="flex items-baseline justify-between">
+            <div>
+              <span className="text-lg sm:text-xl font-black text-[#1F3D2B] font-title">
+                {product.prix} <span className="text-sm font-semibold text-[#8C6D23]">DH</span>
               </span>
-            )}
+              <span className="text-[11px] text-[#1F3D2B]/60 block">Paiement à la livraison</span>
+            </div>
+
+            {/* "Ajouter à ma sélection" quick button */}
+            <button
+              onClick={handleAdd}
+              className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                justAdded
+                  ? 'bg-emerald-600 text-white border-emerald-600'
+                  : isInCart
+                  ? 'bg-[#EAE4D2] text-[#1F3D2B] border-[#D7CEBA] hover:bg-[#E0D7BF]'
+                  : 'bg-[#FBFAF5] text-[#1F3D2B] border-[#D7CEBA] hover:bg-[#1F3D2B] hover:text-[#FBFAF5] hover:border-[#1F3D2B]'
+              }`}
+              title="Ajouter à ma sélection"
+            >
+              {justAdded ? (
+                <>
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Ajouté</span>
+                </>
+              ) : isInCart ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>Sélectionné</span>
+                </>
+              ) : (
+                <>
+                  <Plus className="w-3.5 h-3.5 text-[#C9A227]" />
+                  <span>Sélectionner</span>
+                </>
+              )}
+            </button>
           </div>
 
+          {/* Direct WhatsApp CTA Button */}
           <button
-            onClick={() => onAddToCart(product)}
-            disabled={isOutOfStock}
-            className={`px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 ${
-              isOutOfStock
-                ? 'bg-stone-200 text-stone-400 cursor-not-allowed'
-                : isAddedJustNow
-                ? 'bg-emerald-700 text-white'
-                : 'bg-[#1F3A2B] text-white hover:bg-[#162a1f]'
-            }`}
+            onClick={handleWhatsApp}
+            className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-2 px-3 rounded-xl font-semibold text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
           >
-            {isAddedJustNow ? (
-              <>
-                <Check className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Ajouté</span>
-              </>
-            ) : (
-              <>
-                <Plus className="w-3.5 h-3.5" />
-                <span>{t.addToCart}</span>
-              </>
-            )}
+            <MessageCircle className="w-4 h-4 fill-current" />
+            <span>Commander sur WhatsApp</span>
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 };

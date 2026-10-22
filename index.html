@@ -1,17 +1,13 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
   <head>
     <script>
       (function() {
         try {
           var _origFetch = window.fetch ? window.fetch.bind(window) : undefined;
           Object.defineProperty(window, 'fetch', {
-            get: function() {
-              return _origFetch;
-            },
-            set: function(fn) {
-              _origFetch = fn;
-            },
+            get: function() { return _origFetch; },
+            set: function(fn) { _origFetch = fn; },
             configurable: true,
             enumerable: true
           });
@@ -19,12 +15,8 @@
           try {
             var _protoFetch = Window.prototype.fetch;
             Object.defineProperty(Window.prototype, 'fetch', {
-              get: function() {
-                return _protoFetch;
-              },
-              set: function(fn) {
-                _protoFetch = fn;
-              },
+              get: function() { return _protoFetch; },
+              set: function(fn) { _protoFetch = fn; },
               configurable: true,
               enumerable: true
             });
@@ -33,70 +25,118 @@
       })();
     </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RACHID POTAGISTE - Semences Paysannes, Plants Bio & Permaculture</title>
-    <meta name="description" content="Boutique officielle de Rachid Le Potagiste. Développé par Mehdi Ait Aissa. Semences paysannes reproductibles, lombricompost pur, plants bio et conseils potager au Maroc." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
-    <!-- OpenGraph & Social Sharing Cards -->
+    <!-- Primary Title & Meta Description -->
+    <title>Rachid Potagiste · Boutique Artisanale & Terroir Maroc</title>
+    <meta name="description" content="Boutique artisanale officielle de Rachid Potagiste au Maroc : légumes lacto-fermentés vivants en bocal, huiles de macération 50 ml, savons à la luffa végétale et crèmes de soin 100% naturelles. Commandes directes sur WhatsApp au +212 777-172677." />
+    <meta name="keywords" content="Rachid Potagiste, légumes lacto-fermentés Maroc, huile ortie, huile marrube blanc, savon luffa, crème de soin naturelle, artisanat Bouznika, fermentation vivante" />
+    <meta name="author" content="Rachid Potagiste" />
+
+    <!-- OpenGraph Social Sharing Cards -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="RACHID POTAGISTE - Boutique Bio & Permaculture Maroc" />
-    <meta property="og:description" content="Semences paysannes reproductibles, vermicompost vivant, plants bio et conseils potager de Rachid Le Potagiste. Développé par Mehdi Ait Aissa." />
-    <meta property="og:site_name" content="RACHID POTAGISTE" />
-    <meta property="og:image" content="/images/rachid_portrait_potagiste_1791482658073.jpg" />
+    <meta property="og:url" content="https://rachidpotagiste.netlify.app/" />
+    <meta property="og:title" content="Rachid Potagiste · Boutique Artisanale & Terroir Maroc" />
+    <meta property="og:description" content="Préparations naturelles faites main au Maroc : légumes lacto-fermentés vivants, huiles de macération lentes, savons luffa et crèmes de soin. Commandes faciles sur WhatsApp." />
+    <meta property="og:site_name" content="Rachid Potagiste" />
+    <meta property="og:image" content="/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg" />
+    <meta property="og:locale" content="fr_MA" />
+
+    <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="RACHID POTAGISTE - Boutique Bio & Permaculture" />
-    <meta name="twitter:description" content="Semences paysannes reproductibles, vermicompost vivant et plants bio au Maroc. Développé par Mehdi Ait Aissa." />
-    <meta name="twitter:image" content="/images/rachid_portrait_potagiste_1791482658073.jpg" />
-    
+    <meta name="twitter:title" content="Rachid Potagiste · Boutique Artisanale Maroc" />
+    <meta name="twitter:description" content="Légumes lacto-fermentés en bocal, huiles de macération 50 ml, savons luffa et crèmes 100% naturelles. Fait main à Bouznika, Maroc." />
+    <meta name="twitter:image" content="/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg" />
+
     <!-- Canonical & Robots -->
-    <link rel="canonical" href="https://www.thegreensouk.com" />
+    <link rel="canonical" href="https://rachidpotagiste.netlify.app/" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Inter Tight for bold titles, Caveat for authentic handwritten labels, Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter+Tight:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Schema.org JSON-LD Structured Data for Organic Store & YouTube Creator -->
+    <!-- Schema.org JSON-LD Structured Data for Moroccan Artisanal Store -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Store",
-      "name": "RACHID POTAGISTE",
-      "alternateName": "Boutique Rachid Le Potagiste",
-      "description": "Boutique officielle de semences paysannes bio, lombricompost artisanal, purins naturels et plants potagers de Rachid Le Potagiste. Développé par Mehdi Ait Aissa.",
-      "url": "https://www.thegreensouk.com",
-      "logo": "/images/rachid_portrait_potagiste_1791482658073.jpg",
-      "image": "/images/rachid_potager_permaculture_1791482667668.jpg",
+      "name": "Rachid Potagiste",
+      "alternateName": "Boutique Artisanale Rachid Potagiste",
+      "description": "Boutique artisanale marocaine de produits faits main : légumes lacto-fermentés vivants en bocaux dorés, huiles de macération lentes en flacon pompe 50 ml, savons naturels à l'éponge de luffa du potager et crèmes de soin en boîte métallique.",
+      "url": "https://rachidpotagiste.netlify.app/",
+      "telephone": "+212777172677",
+      "priceRange": "40 MAD - 80 MAD",
       "currenciesAccepted": "MAD",
-      "paymentAccepted": "Stripe, Cash on Delivery",
-      "priceRange": "40 DH - 150 DH",
+      "paymentAccepted": "Cash on Delivery (Paiement à la livraison)",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bouznika",
+        "addressRegion": "Casablanca-Settat",
+        "addressCountry": "MA"
+      },
       "founder": {
         "@type": "Person",
-        "name": "Rachid",
-        "jobTitle": "Maître Potagiste & Permaculteur",
+        "name": "Rachid Potagiste",
+        "jobTitle": "Technicien horticole, Permaculteur & Artisan",
         "sameAs": [
-          "https://www.youtube.com/@Rachid_Le_Potagiste"
+          "https://www.facebook.com/61567836723896"
         ]
       },
-      "creator": {
-        "@type": "Person",
-        "name": "Mehdi Ait Aissa",
-        "jobTitle": "Lead Full-Stack Software Engineer"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.95",
-        "reviewCount": "540",
-        "bestRating": "5",
-        "worstRating": "1"
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Catalogue Artisanal Rachid Potagiste",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "Légumes lacto-fermentés en bocal",
+            "itemListElement": [
+              { "@type": "Product", "name": "Chou vert lacto-fermenté 380 g" },
+              { "@type": "Product", "name": "Chou rouge lacto-fermenté 380 g" },
+              { "@type": "Product", "name": "Chou vert & carotte lacto-fermenté 380 g" },
+              { "@type": "Product", "name": "Carotte lacto-fermentée 380 g" },
+              { "@type": "Product", "name": "Betterave lacto-fermentée 380 g" },
+              { "@type": "Product", "name": "Oignon rouge lacto-fermenté 380 g" }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Huiles de macération 50 ml",
+            "itemListElement": [
+              { "@type": "Product", "name": "Huile de thym 50 ml" },
+              { "@type": "Product", "name": "Huile de romarin 50 ml" },
+              { "@type": "Product", "name": "Huile d'ortie 50 ml" },
+              { "@type": "Product", "name": "Huile de marrube blanc 50 ml" },
+              { "@type": "Product", "name": "Huile de lavande 50 ml" },
+              { "@type": "Product", "name": "Huile de calendula 50 ml" },
+              { "@type": "Product", "name": "Huile d'eucalyptus 50 ml" }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Savons artisanaux à la luffa",
+            "itemListElement": [
+              { "@type": "Product", "name": "Savon luffa & ortie 110 g" },
+              { "@type": "Product", "name": "Savon luffa & marrube blanc 110 g" }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Crèmes de soin 50 g",
+            "itemListElement": [
+              { "@type": "Product", "name": "Crème de marrube blanc 50 g" },
+              { "@type": "Product", "name": "Crème d'ortie 50 g" },
+              { "@type": "Product", "name": "Crème de soin respiratoire (Anti-grippe) 50 g" }
+            ]
+          }
+        ]
       }
     }
     </script>
   </head>
-  <body class="bg-[#FBFBF9] text-stone-900 font-sans antialiased selection:bg-emerald-800 selection:text-white">
+  <body class="bg-[#F4F1EA] text-[#1F3D2B] font-sans antialiased selection:bg-[#1F3D2B] selection:text-[#F4F1EA] min-h-screen">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

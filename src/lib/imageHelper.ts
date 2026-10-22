@@ -1,13 +1,11 @@
 import React from 'react';
 
-// Default trusted fallback image featuring Rachid's heirloom seeds
-export const DEFAULT_FALLBACK_IMAGE = '/images/rachid_graines_paysannes_1791482677509.jpg';
+// Default trusted fallback image featuring Rachid's lacto-fermented creation
+export const DEFAULT_FALLBACK_IMAGE = '/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg';
 
 /**
  * Resolves an image path to a clean, absolute URL guaranteed to work on Netlify,
  * Vite development, and production builds.
- *
- * Automatically converts legacy paths like '/src/assets/images/...' to '/images/...'.
  */
 export function resolveImageUrl(url?: string | null): string {
   if (!url || typeof url !== 'string' || !url.trim()) {
@@ -21,26 +19,11 @@ export function resolveImageUrl(url?: string | null): string {
     return trimmed;
   }
 
-  // Convert /src/assets/images/ to /images/
-  if (trimmed.startsWith('/src/assets/images/')) {
-    return '/images/' + trimmed.substring('/src/assets/images/'.length);
+  if (trimmed.startsWith('/assets/products/')) {
+    return trimmed;
   }
 
-  // Convert /src/assets/ to /images/
-  if (trimmed.startsWith('/src/assets/')) {
-    return '/images/' + trimmed.substring('/src/assets/'.length);
-  }
-
-  // Convert /public/images/ or public/images/ to /images/
-  if (trimmed.startsWith('/public/images/')) {
-    return '/images/' + trimmed.substring('/public/images/'.length);
-  }
-  if (trimmed.startsWith('public/images/')) {
-    return '/images/' + trimmed.substring('public/images/'.length);
-  }
-
-  // Convert relative images/... to /images/...
-  if (trimmed.startsWith('images/')) {
+  if (trimmed.startsWith('assets/products/')) {
     return '/' + trimmed;
   }
 
@@ -49,26 +32,14 @@ export function resolveImageUrl(url?: string | null): string {
 
 /**
  * Image error handler that gracefully recovers without showing broken image icons.
- * If Netlify fails to find a path, it tries an alternate path before falling back to default image.
  */
 export function handleImageError(
   e: React.SyntheticEvent<HTMLImageElement, Event>,
   fallback = DEFAULT_FALLBACK_IMAGE
 ) {
   const target = e.currentTarget;
-  const currentSrc = target.getAttribute('src') || '';
-
-  // If we haven't tried rewriting /src/assets/images/ to /images/
-  if (!target.dataset.triedRewrite && currentSrc.includes('/src/assets/images/')) {
-    target.dataset.triedRewrite = 'true';
-    target.src = currentSrc.replace('/src/assets/images/', '/images/');
-    return;
-  }
-
-  // If we haven't tried the fallback yet
   if (!target.dataset.triedFallback) {
     target.dataset.triedFallback = 'true';
     target.src = fallback;
-    return;
   }
 }

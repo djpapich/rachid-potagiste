@@ -1,113 +1,174 @@
 import React from 'react';
-import { ArrowRight, Leaf, Shield, Award, Youtube } from 'lucide-react';
-import { Language } from '../types/index.ts';
-import { translations } from '../lib/translations.ts';
-import { resolveImageUrl, handleImageError } from '../lib/imageHelper.ts';
+import { ArrowDown, MessageCircle, Sparkles, ShieldCheck, HeartHandshake, Leaf } from 'lucide-react';
+import { getGeneralInquiryWhatsAppUrl, WHATSAPP_DISPLAY_PHONE } from '../lib/whatsapp.ts';
 
-interface HeroProps {
-  currentLang: Language;
-  onExplore: () => void;
-  onViewBlog: () => void;
-  theme?: 'white' | 'black';
-}
-
-export const Hero: React.FC<HeroProps> = ({ currentLang, onExplore, onViewBlog }) => {
-  const t = translations[currentLang];
-
+export const Hero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-[#FBFBF9] border-b border-stone-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <section id="accueil" className="relative pt-8 pb-16 md:py-20 overflow-hidden bg-potager-grain">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Brand Headline & Credential */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-800">
-              <Leaf className="w-4 h-4 text-emerald-700" />
-              <span>{t.heroKicker}</span>
-              <span aria-hidden="true" className="text-stone-300">·</span>
-              <span className="text-stone-500">Maroc & Méditerranée</span>
-              <span aria-hidden="true" className="text-stone-300">·</span>
-              <span className="text-emerald-900 font-bold">{t.developedBy}</span>
+          {/* Left Text Column */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            
+            {/* Kicker Tag */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8E2D2] border border-[#D7CEBA] text-xs font-semibold text-[#1F3D2B] mb-5 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#3F6B2E]"></span>
+              <span>Atelier Artisanal · Bouznika, Maroc</span>
+              <span className="text-[#8C6D23]">★ Fait main</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-stone-900 leading-[1.15] text-balance">
-              {t.heroTitle}
+            {/* Main Headline */}
+            <h1 className="font-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#1F3D2B] leading-[1.1] mb-4">
+              L'Artisanat du Potager & Soins Naturels
             </h1>
 
-            <p className="text-base sm:text-lg text-stone-600 max-w-2xl font-normal leading-relaxed">
-              {t.heroSubtitle}
+            {/* Handwritten artisanal subtitle */}
+            <p className="font-script text-2xl sm:text-3xl text-[#8C6D23] font-bold mb-4 tracking-wide transform -rotate-1">
+              Des bocaux vivants aux baumes fondants, la nature marocaine mise en flacon
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                onClick={onExplore}
-                className="px-6 py-3.5 bg-[#1F3A2B] text-white text-xs sm:text-sm font-semibold rounded-lg hover:bg-[#162a1f] transition-all shadow-sm flex items-center gap-2 group cursor-pointer active:scale-98"
-              >
-                <span>{t.discoverCatalog}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+            {/* Body Description */}
+            <p className="text-base sm:text-lg text-[#1F3D2B]/80 max-w-2xl leading-relaxed mb-8">
+              Découvrez les 4 collections faites maison par Rachid Potagiste : 
+              <strong className="text-[#1F3D2B] font-semibold"> légumes lacto-fermentés</strong> pour votre microbiote, 
+              <strong className="text-[#1F3D2B] font-semibold"> huiles de macération lente</strong> en flacon pompe 50 ml, 
+              <strong className="text-[#1F3D2B] font-semibold"> savons exfoliants à la luffa végétale</strong> et 
+              <strong className="text-[#1F3D2B] font-semibold"> crèmes de soin</strong> en boîte métal. 
+              Tout est préparé avec des plantes de notre potager sans aucun produit chimique de synthèse.
+            </p>
 
+            {/* Main CTAs */}
+            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-10">
               <a
-                href="https://www.youtube.com/@Rachid_Le_Potagiste"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3.5 bg-red-600 text-white text-xs sm:text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
+                href="#lacto-fermentes"
+                className="inline-flex items-center justify-center gap-2 bg-[#1F3D2B] hover:bg-[#162D20] text-[#FBFAF5] px-6 py-3.5 rounded-xl font-semibold text-sm sm:text-base shadow-md transition-all active:scale-95"
               >
-                <Youtube className="w-4 h-4" />
-                <span>Voir les Tutos YouTube</span>
+                <span>Découvrir nos 18 créations</span>
+                <ArrowDown className="w-4 h-4 text-[#C9A227]" />
               </a>
 
-              <button
-                onClick={onViewBlog}
-                className="px-4 py-3.5 bg-stone-100 text-stone-800 text-xs sm:text-sm font-medium rounded-lg hover:bg-stone-200 transition-colors border border-stone-200 cursor-pointer"
+              <a
+                href={getGeneralInquiryWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-6 py-3.5 rounded-xl font-semibold text-sm sm:text-base shadow-md transition-all active:scale-95 pulse-whatsapp"
               >
-                {t.viewBlog}
-              </button>
+                <MessageCircle className="w-5 h-5 fill-current" />
+                <span>Commander sur WhatsApp</span>
+              </a>
             </div>
 
-            {/* Unboxed Trust Credentials (No pills) */}
-            <div className="pt-6 border-t border-stone-200/80 flex flex-wrap items-center gap-5 text-xs text-stone-600">
-              <div className="flex items-center gap-1.5">
-                <Shield className="w-4 h-4 text-emerald-800" />
-                <span>Paiement en Dirhams (DH) ou Cash</span>
-              </div>
-              <span aria-hidden="true" className="text-stone-300">/</span>
-              <div className="flex items-center gap-1.5">
-                <Award className="w-4 h-4 text-emerald-800" />
-                <span>Semences 100% Reproductibles</span>
-              </div>
-              <span aria-hidden="true" className="text-stone-300">/</span>
-              <div className="flex items-center gap-1.5">
-                <Leaf className="w-4 h-4 text-emerald-800" />
-                <span>Lombricompost Vivant Artisanal</span>
-              </div>
+            {/* Reassurance pills (unboxed text with separators per design rules) */}
+            <div className="flex flex-wrap items-center gap-y-2 gap-x-3 text-xs sm:text-sm font-medium text-[#1F3D2B]/75 border-t border-[#E5DFC9] pt-4 w-full">
+              <span className="flex items-center gap-1.5">
+                <Leaf className="w-4 h-4 text-[#3F6B2E]" />
+                100% Ingrédients Naturels
+              </span>
+              <span className="text-[#C9A227] font-bold">·</span>
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-[#3F6B2E]" />
+                Zéro Conservateur Chimique
+              </span>
+              <span className="text-[#C9A227] font-bold">·</span>
+              <span className="flex items-center gap-1.5">
+                <HeartHandshake className="w-4 h-4 text-[#3F6B2E]" />
+                Paiement à la livraison au Maroc
+              </span>
             </div>
+
           </div>
 
-          {/* Right Column: Hero Visual Asset (Rachid Portrait & Real Harvest Generated from his Real Photo) */}
-          <div className="lg:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-stone-200/90 aspect-square group">
-              <img
-                src={resolveImageUrl('/images/rachid_potagiste_hero_real.jpg')}
-                alt="Rachid Potagiste avec sa récolte et macérats artisanaux au Maroc"
-                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                referrerPolicy="no-referrer"
-                onError={handleImageError}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent flex flex-col justify-end p-5 text-white">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-semibold tracking-wider uppercase text-emerald-300">
-                    Rachid Potagiste · Maître Jardinier & Botaniste
-                  </span>
-                  <span className="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-1 font-semibold">
-                    <Youtube className="w-3 h-3" />
-                    <span>59K+</span>
-                  </span>
+          {/* Right Visual Showcase: 4 artisanal creations spotlight */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative mx-auto max-w-md lg:max-w-none">
+              
+              {/* Artisanal Framing background */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#E6E0CE] to-[#F1EBDC] rounded-3xl transform rotate-1 scale-95 border border-[#DACFBA]"></div>
+
+              {/* Main Card Spotlight */}
+              <div className="relative bg-[#FBFAF5] rounded-3xl p-6 sm:p-8 shadow-xl border border-[#E5DFC9] overflow-hidden">
+                
+                {/* Gold seal top right */}
+                <div className="absolute -top-3 -right-3 w-20 h-20 bg-[#C9A227] rounded-full flex items-center justify-center text-[#1F3D2B] font-title font-black text-[11px] uppercase tracking-wider text-center p-2 shadow-sm transform rotate-12">
+                  <span>Fait Main<br/>Maroc</span>
                 </div>
-                <p className="text-sm font-serif font-medium text-stone-100">
-                  « Pour que chaque foyer au Maroc puisse récolter ses propres légumes sains et bénéficier des remèdes naturels du potager. »
-                </p>
+
+                <div className="text-xs uppercase tracking-widest text-[#8C6D23] font-bold mb-1">
+                  Les 4 Familles du Terroir
+                </div>
+                <h3 className="font-title text-xl sm:text-2xl font-black text-[#1F3D2B] mb-4">
+                  Fraîcheur & Authenticité
+                </h3>
+
+                {/* 2x2 Grid of real products */}
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-5">
+                  
+                  {/* Item 1: Bocal */}
+                  <a href="#lacto-fermentes" className="group bg-[#F4F1EA] p-3 rounded-2xl border border-[#E5DFC9] text-center hover:border-[#1F3D2B] transition-all">
+                    <div className="h-28 flex items-center justify-center overflow-hidden mb-2">
+                      <img
+                        src="/assets/products/photos-fond-transparent/chou-vert-carotte-lacto-fermente.png"
+                        alt="Chou vert & carotte lacto-fermenté"
+                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                        loading="eager"
+                      />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#3F6B2E] block">Bocaux 380g</span>
+                    <span className="text-xs font-semibold text-[#1F3D2B] block leading-tight">Lacto-fermentation</span>
+                  </a>
+
+                  {/* Item 2: Huile */}
+                  <a href="#huiles" className="group bg-[#F4F1EA] p-3 rounded-2xl border border-[#E5DFC9] text-center hover:border-[#1F3D2B] transition-all">
+                    <div className="h-28 flex items-center justify-center overflow-hidden mb-2">
+                      <img
+                        src="/assets/products/photos-fond-transparent/huile-ortie.png"
+                        alt="Huile d'ortie 50ml"
+                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                        loading="eager"
+                      />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#3F6B2E] block">Flacon 50 ml</span>
+                    <span className="text-xs font-semibold text-[#1F3D2B] block leading-tight">Huiles de macération</span>
+                  </a>
+
+                  {/* Item 3: Savon luffa */}
+                  <a href="#savons" className="group bg-[#F4F1EA] p-3 rounded-2xl border border-[#E5DFC9] text-center hover:border-[#1F3D2B] transition-all">
+                    <div className="h-28 flex items-center justify-center overflow-hidden mb-2">
+                      <img
+                        src="/assets/products/photos-fond-transparent/savon-luffa-ortie.png"
+                        alt="Savon luffa & ortie"
+                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                        loading="eager"
+                      />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#3F6B2E] block">Luffa 110g</span>
+                    <span className="text-xs font-semibold text-[#1F3D2B] block leading-tight">Savons gommants</span>
+                  </a>
+
+                  {/* Item 4: Crème */}
+                  <a href="#cremes" className="group bg-[#F4F1EA] p-3 rounded-2xl border border-[#E5DFC9] text-center hover:border-[#1F3D2B] transition-all">
+                    <div className="h-28 flex items-center justify-center overflow-hidden mb-2">
+                      <img
+                        src="/assets/products/photos-fond-transparent/creme-ortie.png"
+                        alt="Crème d'ortie boîte métal 50g"
+                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                        loading="eager"
+                      />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#3F6B2E] block">Boîte métal 50g</span>
+                    <span className="text-xs font-semibold text-[#1F3D2B] block leading-tight">Crèmes de soin</span>
+                  </a>
+
+                </div>
+
+                <div className="bg-[#EAE4D2] p-3 rounded-xl border border-[#D8CEB7] flex items-center justify-between text-xs text-[#1F3D2B]">
+                  <span className="font-medium">Directement de notre potager à votre table</span>
+                  <a href="#lacto-fermentes" className="font-bold text-[#8C6D23] hover:underline">
+                    Tout voir →
+                  </a>
+                </div>
+
               </div>
             </div>
           </div>

@@ -1,0 +1,15 @@
+{
+  "active": true,
+  "code": "POTAGER10",
+  "remisePourcentage": 10,
+  "message": "Offre de lancement artisanale : -10% sur votre commande avec le code",
+  "sousTitre": "Préparations fraîches faites main au Maroc · Stock limité par macération",
+  "dateFin": "2026-11-15T23:59:59Z",
+  "packDecouverte": {
+    "titre": "Pack Découverte Potager & Soins",
+    "description": "1 Légume lacto-fermenté + 1 Huile de macération 50 ml + 1 Savon luffa + 1 Crème de soin 50 g",
+    "prixNormal": 240,
+    "prixPromo": 210,
+    "economie": "30 DH d'économie"
+  }
+}

@@ -1,0 +1,542 @@
+[
+  {
+    "id": "chou-vert-lacto-fermente",
+    "nom": "Chou vert lacto-fermenté",
+    "famille": "lacto-fermentes",
+    "familleLabel": "Légumes lacto-fermentés",
+    "accroche": "Le grand classique croquant du potager",
+    "contenance": "Bocal en verre 380 g",
+    "poidsNet": "380 g",
+    "prix": 45,
+    "couleur": "#2F5D3A",
+    "image": "/assets/products/photos-site-1600x1600/chou-vert-lacto-fermente.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/chou-vert-lacto-fermente.png",
+    "badges": [
+      { "label": "Sans conservateur", "type": "green" },
+      { "label": "Sans eau ajoutée", "type": "dark" }
+    ],
+    "description": "Chou vert cultivé avec passion au potager, émincé finement puis lacto-fermenté dans son propre jus selon la méthode ancestrale. Riche en probiotiques vivants, fibres douces et vitamines C naturelles.",
+    "ingredients": "Chou vert du potager, sel marin naturel non raffiné, graines de carvi sauvages.",
+    "pointsForts": [
+      "Légume vivant naturellement riche en enzymes digestives",
+      "Fermentation spontanée au sel sec (aucun vinaigre, aucune eau ajoutée)",
+      "Texture croquante et saveur acidulée rafraîchissante",
+      "Idéal en condiment, salades, sandwichs ou accompagnement de tajines"
+    ],
+    "conseils": "Dégustez 1 à 2 cuillères à soupe par repas pour soutenir le microbiote intestinal. Ne pas cuire pour préserver les bactéries bénéfiques.",
+    "conservation": "Conserver au frais après ouverture et maintenir immergé dans la saumure. Se conserve plusieurs mois au réfrigérateur.",
+    "precautions": "Convient à toute la famille. Contient du sel naturel.",
+    "dlc": "12 mois (non ouvert)",
+    "enStock": true
+  },
+  {
+    "id": "chou-rouge-lacto-fermente",
+    "nom": "Chou rouge lacto-fermenté",
+    "famille": "lacto-fermentes",
+    "familleLabel": "Légumes lacto-fermentés",
+    "accroche": "Une couleur éclatante et une touche acidulée vive",
+    "contenance": "Bocal en verre 380 g",
+    "poidsNet": "380 g",
+    "prix": 45,
+    "couleur": "#6B1D4B",
+    "image": "/assets/products/photos-site-1600x1600/chou-rouge-lacto-fermente.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/chou-rouge-lacto-fermente.png",
+    "badges": [
+      { "label": "Sans conservateur", "type": "green" },
+      { "label": "Sans eau ajoutée", "type": "dark" }
+    ],
+    "description": "Chou rouge sélectionné pour sa couleur rubis intense, massé au sel marin puis affiné lentement en bocal hermétique sous couvercle doré. Un condensé naturel d'anthocyanes antioxydantes.",
+    "ingredients": "Chou rouge du potager, sel de mer pur, clou de girofle entier, baie de genièvre.",
+    "pointsForts": [
+      "Superbe teinte rubis qui illumine vos plats et salades marocaines",
+      "Antioxydants végétaux et microbiote renforcé",
+      "Croquant préservé sans aucun additif ni conservateur de synthèse",
+      "Accompagne merveilleusement poissons grillés, volailles et salades composées"
+    ],
+    "conseils": "À servir cru en garniture sur des bols chauds, dans des wraps ou aux côtés de légumes rôtis.",
+    "conservation": "Conserver au frais après ouverture. Bien refermer le couvercle doré.",
+    "precautions": "Aliment fermenté vivant. Un léger dégagement gazeux à l'ouverture est le signe d'une fermentation active saine.",
+    "dlc": "12 mois (non ouvert)",
+    "enStock": true
+  },
+  {
+    "id": "chou-vert-carotte-lacto-fermente",
+    "nom": "Chou vert & carotte lacto-fermenté",
+    "famille": "lacto-fermentes",
+    "familleLabel": "Légumes lacto-fermentés",
+    "accroche": "Le duo vitaminé et gourmand du potager",
+    "contenance": "Bocal en verre 380 g",
+    "poidsNet": "380 g",
+    "prix": 48,
+    "couleur": "#3D6E35",
+    "image": "/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/chou-vert-carotte-lacto-fermente.png",
+    "badges": [
+      { "label": "Sans conservateur", "type": "green" },
+      { "label": "100 % naturel", "type": "darkgreen" }
+    ],
+    "description": "La douceur sucrée de la carotte fraîchement récoltée mariée à la fermeté du chou vert. Une recette équilibrée parfaite pour initier petits et grands aux légumes lacto-fermentés.",
+    "ingredients": "Chou vert émincé, carottes râpées du potager, sel marin, graines de moutarde douce.",
+    "pointsForts": [
+      "Équilibre subtil entre la douceur de la carotte et le peps de la saumure",
+      "Riche en bêta-carotène et probiotiques vivants",
+      "Très facile à intégrer dans les repas du quotidien au Maroc",
+      "100% artisanal, sans pasteurisation pour garder la flore active"
+    ],
+    "conseils": "Mélangez à vos salades composées ou dégustez directement en tapas santé.",
+    "conservation": "À garder au frais après ouverture. Conserver les légumes dans leur jus.",
+    "precautions": "Convient à toute la famille.",
+    "dlc": "12 mois (non ouvert)",
+    "enStock": true
+  },
+  {
+    "id": "carotte-lacto-fermentee",
+    "nom": "Carotte lacto-fermentée",
+    "famille": "lacto-fermentes",
+    "familleLabel": "Légumes lacto-fermentés",
+    "accroche": "Bâtonnets croquants et doux à grignoter sans modération",
+    "contenance": "Bocal en verre 380 g",
+    "poidsNet": "380 g",
+    "prix": 45,
+    "couleur": "#D35400",
+    "image": "/assets/products/photos-site-1600x1600/carotte-lacto-fermentee.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/carotte-lacto-fermentee.png",
+    "badges": [
+      { "label": "Sans conservateur", "type": "green" },
+      { "label": "Parfumé aux épices", "type": "dark" }
+    ],
+    "description": "Carottes paysannes entières ou en bâtonnets, préparées avec une saumure légère parfumée aux épices douces. Une texture craquante irrésistible et une acidité tonique.",
+    "ingredients": "Carottes paysannes du potager, eau de source, sel de mer, graines de coriandre, gingembre frais.",
+    "pointsForts": [
+      "Croquant remarquable qui plaît énormément aux enfants",
+      "Favorise un microbiote sain et diversifié",
+      "Apéritif santé idéal pour remplacer les pickles industriels",
+      "Préparé sans aucun conservateur ni sucre ajouté"
+    ],
+    "conseils": "Servez frais à l'apéritif ou pour accompagner les grillades et sandwichs maison.",
+    "conservation": "Conserver au frais après ouverture.",
+    "precautions": "Produit non pasteurisé.",
+    "dlc": "12 mois (non ouvert)",
+    "enStock": true
+  },
+  {
+    "id": "betterave-lacto-fermentee",
+    "nom": "Betterave lacto-fermentée",
+    "famille": "lacto-fermentes",
+    "familleLabel": "Légumes lacto-fermentés",
+    "accroche": "La douceur terreuse sublimée par la fermentation",
+    "contenance": "Bocal en verre 380 g",
+    "poidsNet": "380 g",
+    "prix": 45,
+    "couleur": "#80142B",
+    "image": "/assets/products/photos-site-1600x1600/betterave-lacto-fermentee.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/betterave-lacto-fermentee.png",
+    "badges": [
+      { "label": "Sans conservateur", "type": "green" },
+      { "label": "100 % naturel", "type": "darkgreen" }
+    ],
+    "description": "Betteraves rouges locales gorgées de sève, coupées en tranches et fermentées avec délicatesse. Le jus rubis (kvass naturel) est un véritable tonique digestif très prisé.",
+    "ingredients": "Betteraves rouges fraîches, sel marin, eau de source, ail nouveau, grains de poivre noir.",
+    "pointsForts": [
+      "Goût rond et profond, adouci par la note acidulée de la fermentation",
+      "Le jus de saumure peut se boire comme élixir bien-être matinal",
+      "Source d'acide folique, de fer et de bétaïne protectrice",
+      "Apporte une touche de chef à toutes vos assiettes froides"
+    ],
+    "conseils": "Dégustez les tranches en salade et buvez une gorgée du précieux jus de saumure.",
+    "conservation": "À conserver au réfrigérateur après ouverture.",
+    "precautions": "Coloration naturelle due aux pigments de betterave.",
+    "dlc": "12 mois (non ouvert)",
+    "enStock": true
+  },
+  {
+    "id": "oignon-rouge-lacto-fermente",
+    "nom": "Oignon rouge lacto-fermenté",
+    "famille": "lacto-fermentes",
+    "familleLabel": "Légumes lacto-fermentés",
+    "accroche": "Le petit plus de vos assiettes",
+    "contenance": "Bocal en verre 380 g",
+    "poidsNet": "380 g",
+    "prix": 48,
+    "couleur": "#78286D",
+    "image": "/assets/products/photos-site-1600x1600/oignon-rouge-lacto-fermente.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/oignon-rouge-lacto-fermente.png",
+    "badges": [
+      { "label": "Sans conservateur", "type": "green" },
+      { "label": "Parfumé aux épices", "type": "dark" }
+    ],
+    "description": "Oignons rouges finement tranchés, macérés en lacto-fermentation douce avec graines de coriandre et grains de poivre. L'amertume et le piquant de l'oignon cru s'effacent pour laisser place à une finesse acidulée addictive.",
+    "ingredients": "Oignon rouge, sel marin, graines de coriandre, poivre noir.",
+    "pointsForts": [
+      "Oignon rouge, sel, coriandre, poivre noir",
+      "Sans conservateur, parfumé aux épices",
+      "Digestion facile : aucun brûleur d'estomac contrairement à l'oignon cru",
+      "Le condiment magique pour rehausser burgers, toasts, tacos et plats traditionnels"
+    ],
+    "conseils": "Ajoutez une cuillerée généreuse sur vos œufs au plat, salades de tomates ou grillades.",
+    "conservation": "À garder au frais après ouverture.",
+    "precautions": "Conserver les rondelles sous le niveau du liquide.",
+    "dlc": "12 mois (non ouvert)",
+    "enStock": true
+  },
+  {
+    "id": "huile-thym",
+    "nom": "Huile de thym",
+    "famille": "huiles",
+    "familleLabel": "Huiles de macération 50 ml",
+    "accroche": "Le parfum chaud du thym, lentement infusé",
+    "contenance": "Flacon pompe en verre 50 ml",
+    "poidsNet": "50 ml",
+    "prix": 75,
+    "couleur": "#4A6038",
+    "image": "/assets/products/photos-site-1600x1600/huile-thym.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/huile-thym.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Macération lente", "type": "dark" }
+    ],
+    "description": "Thym aromatique séché récolté sur les collines marocaines, infusé patiemment pendant plusieurs semaines dans une base d'huile végétale d'amande douce et de jojoba. Flacon pompe hygiénique pour un dosage précis goutte à goutte.",
+    "ingredients": "Amande douce, huile de jojoba, thym séché marocain (Thymus capitatus / serpyllum).",
+    "pointsForts": [
+      "Thym séché, plante aromatique réputée purifiante",
+      "Base nourrissante d'amande douce et de jojoba pénétrante",
+      "Macération solaire lente respectueuse des principes actifs",
+      "Flacon pompe en verre ambré protégeant des rayons lumineux"
+    ],
+    "conseils": "Appliquez 2 à 3 pressions le soir sur la zone ciblée ou le torse en massage circulaire réchauffant.",
+    "conservation": "Usage externe uniquement. Conserver à l'abri de la lumière et de la chaleur.",
+    "precautions": "Usage externe uniquement. Déconseillée aux femmes enceintes, allaitantes et aux jeunes enfants. Contient de l'huile d'amande douce (allergène potentiel fruits à coque). Ne pas ingérer.",
+    "dlc": "18 mois",
+    "enStock": true
+  },
+  {
+    "id": "huile-romarin",
+    "nom": "Huile de romarin",
+    "famille": "huiles",
+    "familleLabel": "Huiles de macération 50 ml",
+    "accroche": "Le parfum de garrigue dans votre routine",
+    "contenance": "Flacon pompe en verre 50 ml",
+    "poidsNet": "50 ml",
+    "prix": 75,
+    "couleur": "#2E5A44",
+    "image": "/assets/products/photos-site-1600x1600/huile-romarin.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/huile-romarin.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Macération lente", "type": "dark" }
+    ],
+    "description": "Sommités fleuries de romarin sauvage macérées à froid. Connue depuis des générations au Maroc pour tonifier le cuir chevelu, stimuler la pousse des cheveux et vivifier la peau.",
+    "ingredients": "Huile d'amande douce, huile de jojoba vierge, romarin séché du potager.",
+    "pointsForts": [
+      "Romarin séché, plante tonifiante d'excellence",
+      "Idéal en bain d'huile pour le cuir chevelu et les racines fatiguées",
+      "Soin vivifiant pour le corps après l'effort ou la douche",
+      "Extraction artisanale douce sans solvant chimique"
+    ],
+    "conseils": "Masser le cuir chevelu avec quelques pressions 30 minutes avant le shampoing, ou appliquer sur les tempes pour un effet coup de fouet aromatique.",
+    "conservation": "Usage externe uniquement. Conserver le flacon fermé dans un endroit sec et frais.",
+    "precautions": "Usage externe uniquement. Déconseillée aux femmes enceintes et enfants en bas âge. Ne remplace pas un traitement médical.",
+    "dlc": "18 mois",
+    "enStock": true
+  },
+  {
+    "id": "huile-ortie",
+    "nom": "Huile d'ortie",
+    "famille": "huiles",
+    "familleLabel": "Huiles de macération 50 ml",
+    "accroche": "L'ortie du potager, patiemment macérée",
+    "contenance": "Flacon pompe en verre 50 ml",
+    "poidsNet": "50 ml",
+    "prix": 80,
+    "couleur": "#1E4D2B",
+    "image": "/assets/products/photos-site-1600x1600/huile-ortie.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/huile-ortie.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Macération lente", "type": "dark" }
+    ],
+    "description": "Feuilles de grande ortie (Urtica dioica) cueillies à la main dans notre potager écologique, séchées à l'ombre puis immergées de longues semaines. L'ortie est reconnue pour sa richesse en silice, fer, zinc et vitamines minéralisantes.",
+    "ingredients": "Huile d'amande douce, huile de jojoba végétale, ortie séchée du potager.",
+    "pointsForts": [
+      "Ortie, plante reine traditionnellement utilisée pour fortifier le cuir chevelu",
+      "Aide à réguler les excès de sébum et revitaliser les cheveux ternes",
+      "Texture soyeuse non collante qui pénètre rapidement",
+      "100% pure macération végétale sans parfum ni conservateur artificiel"
+    ],
+    "conseils": "Appliquer en massage stimulant à la racine des cheveux 2 à 3 fois par semaine, laisser poser avant lavage.",
+    "conservation": "Usage externe uniquement. Conserver à l'abri de la lumière.",
+    "precautions": "Usage externe uniquement. Éviter le contact avec les yeux. Tester dans le pli du coude 24h avant premier usage.",
+    "dlc": "18 mois",
+    "enStock": true
+  },
+  {
+    "id": "huile-marrube-blanc",
+    "nom": "Huile de marrube blanc",
+    "famille": "huiles",
+    "familleLabel": "Huiles de macération 50 ml",
+    "accroche": "Un savoir de chez nous, pour vos moments de soin",
+    "contenance": "Flacon pompe en verre 50 ml",
+    "poidsNet": "50 ml",
+    "prix": 80,
+    "couleur": "#556B2F",
+    "image": "/assets/products/photos-site-1600x1600/huile-marrube-blanc.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/huile-marrube-blanc.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Macération lente", "type": "dark" }
+    ],
+    "description": "Le marrube blanc (Marrubium vulgare), appelé traditionnellement 'Merriwet' au Maroc, est une plante médicinale emblématique du terroir méditerranéen. Macéré avec respect pour délivrer toutes ses vertus apaisantes pour les peaux tiraillées et les articulations fatiguées.",
+    "ingredients": "Huile d'amande douce, huile de jojoba, sommités de marrube blanc séchées.",
+    "pointsForts": [
+      "Marrube blanc, plante de la pharmacopée marocaine traditionnelle",
+      "Base d'amande douce et de jojoba satinante",
+      "Flacon pompe pratique pour une utilisation propre et ciblée",
+      "Idéal en massage réconfortant du buste, du cou et des zones articulaires"
+    ],
+    "conseils": "Masser par frictions douces sur la zone souhaitée le soir au coucher.",
+    "conservation": "Usage externe uniquement. Conserver à l'abri de la lumière.",
+    "precautions": "Usage externe uniquement. Déconseillé aux femmes enceintes. Tenir hors de portée des enfants.",
+    "dlc": "18 mois",
+    "enStock": true
+  },
+  {
+    "id": "huile-lavande",
+    "nom": "Huile de lavande",
+    "famille": "huiles",
+    "familleLabel": "Huiles de macération 50 ml",
+    "accroche": "Douceur florale et relaxation profonde",
+    "contenance": "Flacon pompe en verre 50 ml",
+    "poidsNet": "50 ml",
+    "prix": 75,
+    "couleur": "#4B5584",
+    "image": "/assets/products/photos-site-1600x1600/huile-lavande.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/huile-lavande.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Macération lente", "type": "dark" }
+    ],
+    "description": "Fleurs de lavande vraie récoltées sous le soleil marocain, macérées avec patience pour libérer leurs esters apaisants. Une huile réconfortante par excellence qui invite à la détente et prend soin des peaux sensibles.",
+    "ingredients": "Huile d'amande douce pressée à froid, huile de jojoba, fleurs de lavande séchées.",
+    "pointsForts": [
+      "Parfum floral naturel subtil, propice à l'apaisement avant la nuit",
+      "Apaise les sensations de tiraillement après une journée au soleil",
+      "Parfaite pour les massages délassants des épaules et des pieds",
+      "Huile de macération pure, sans parfum de synthèse"
+    ],
+    "conseils": "Appliquer quelques gouttes sur les tempes, le cou ou les poignets avant de dormir.",
+    "conservation": "Usage externe uniquement. À l'abri de la lumière.",
+    "precautions": "Usage externe uniquement.",
+    "dlc": "18 mois",
+    "enStock": true
+  },
+  {
+    "id": "huile-calendula",
+    "nom": "Huile de calendula (souci)",
+    "famille": "huiles",
+    "familleLabel": "Huiles de macération 50 ml",
+    "accroche": "La caresse végétale des peaux fragiles",
+    "contenance": "Flacon pompe en verre 50 ml",
+    "poidsNet": "50 ml",
+    "prix": 80,
+    "couleur": "#C97A14",
+    "image": "/assets/products/photos-site-1600x1600/huile-calendula.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/huile-calendula.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Macération lente", "type": "dark" }
+    ],
+    "description": "Pétales dorés de souci des jardins (Calendula officinalis) infusés à température douce. L'huile de calendula est réputée comme l'alliée bienveillante des peaux sèches, réactives ou irritées par le vent et le froid.",
+    "ingredients": "Huile d'amande douce, huile de jojoba dorée, pétales séchés de fleurs de souci (calendula).",
+    "pointsForts": [
+      "Extrêmement douce, tolérée par les épidermes les plus délicats",
+      "Favorise la régénération cutanée après exposition au soleil ou rasage",
+      "Lente macération solaire pour extraire les caroténoïdes naturels",
+      "Toucher velours sans sensation de gras excessif"
+    ],
+    "conseils": "Appliquer matin et soir sur le visage et le cou parfaitement nettoyés.",
+    "conservation": "Usage externe uniquement. Conserver à température ambiante à l'abri du soleil direct.",
+    "precautions": "Usage externe uniquement. Convient à toute la famille.",
+    "dlc": "18 mois",
+    "enStock": true
+  },
+  {
+    "id": "huile-eucalyptus",
+    "nom": "Huile d'eucalyptus",
+    "famille": "huiles",
+    "familleLabel": "Huiles de macération 50 ml",
+    "accroche": "Fraîcheur vivifiante et souffle pur",
+    "contenance": "Flacon pompe en verre 50 ml",
+    "poidsNet": "50 ml",
+    "prix": 75,
+    "couleur": "#2A6F6D",
+    "image": "/assets/products/photos-site-1600x1600/huile-eucalyptus.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/huile-eucalyptus.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Macération lente", "type": "dark" }
+    ],
+    "description": "Feuilles d'eucalyptus fraîches séchées délicatement puis macérées dans notre base végétale. Développe des arômes camphrés stimulants qui procurent une sensation immédiate de respiration libérée.",
+    "ingredients": "Huile d'amande douce, huile de jojoba vierge, feuilles séchées d'eucalyptus marocain.",
+    "pointsForts": [
+      "Effet rafraîchissant immédiat lors des changements de saison",
+      "Formidable en massage pectoral avant la nuit",
+      "Idéal après la séance de sport ou pour soulager les jambes lourdes",
+      "Flacon pompe économique et précis"
+    ],
+    "conseils": "Chauffer quelques gouttes au creux des mains et frictionner le torse, le haut du dos ou les mollets.",
+    "conservation": "Usage externe uniquement. Tenir bien fermé.",
+    "precautions": "Usage externe uniquement. Déconseillé aux enfants de moins de 6 ans et aux femmes enceintes.",
+    "dlc": "18 mois",
+    "enStock": true
+  },
+  {
+    "id": "savon-luffa-ortie",
+    "nom": "Savon luffa & ortie",
+    "famille": "savons",
+    "familleLabel": "Savons artisanaux à la luffa",
+    "accroche": "Un luffa du potager, un savon tout simple",
+    "contenance": "Pain de savon ~110 g",
+    "poidsNet": "110 g",
+    "prix": 40,
+    "couleur": "#1F3D2B",
+    "image": "/assets/products/photos-site-1600x1600/savon-luffa-ortie.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/savon-luffa-ortie.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Sans conservateur", "type": "green" }
+    ],
+    "description": "Savon artisanal enrichi en macérat d'ortie fraîche et coulé sur une véritable tranche de courge luffa cultivée au potager. En se lavant, la luffa végétale se gorge d'eau et offre une exfoliation mécanique naturelle et douce pour stimuler le renouvellement cellulaire.",
+    "ingredients": "Savon à base d'huiles végétales saponifiées (olive et coco), macérat d'ortie du potager, éponge de luffa végétale naturelle intégrée.",
+    "pointsForts": [
+      "Savon à l'ortie enrichi en chlorophylle et minéraux",
+      "Éponge de luffa naturelle intégrée directement dans le pain",
+      "Exfoliation douce sans microplastiques ni particules synthétiques",
+      "Élimine les peaux mortes et laisse un épiderme tonifié et lisse"
+    ],
+    "conseils": "Faire mousser sur peau humide en mouvements circulaires. Idéal pour le corps et les zones rugueuses (coudes, talons, genoux).",
+    "conservation": "Usage externe uniquement. Laisser sécher le savon sur un porte-savon aéré après chaque usage.",
+    "precautions": "Usage externe uniquement. Ne pas frotter vigoureusement sur le visage délicat.",
+    "dlc": "24 mois",
+    "enStock": true
+  },
+  {
+    "id": "savon-luffa-marrube-blanc",
+    "nom": "Savon luffa & marrube blanc",
+    "famille": "savons",
+    "familleLabel": "Savons artisanaux à la luffa",
+    "accroche": "Le marrube blanc, version toilette",
+    "contenance": "Pain de savon ~110 g",
+    "poidsNet": "110 g",
+    "prix": 40,
+    "couleur": "#4D5D38",
+    "image": "/assets/products/photos-site-1600x1600/savon-luffa-marrube-blanc.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/savon-luffa-marrube-blanc.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Sans conservateur", "type": "green" }
+    ],
+    "description": "Une alliance pure entre les propriétés assainissantes traditionnelles du marrube blanc ('Merriwet') et la texture exfoliante de la fibre de luffa du potager. Nettoie en profondeur sans agresser le film hydrolipidique.",
+    "ingredients": "Huiles végétales nobles saponifiées, macérat concentré de marrube blanc, fibre de luffa 100% végétale.",
+    "pointsForts": [
+      "Savon au marrube blanc réputé pour purifier et clarifier la peau",
+      "Éponge de luffa naturelle intégrée pour une action gommante douce",
+      "Mousse généreuse et onctueuse facile à rincer",
+      "Fait main au Maroc dans le respect des traditions de toilette"
+    ],
+    "conseils": "Utiliser sous la douche 2 à 3 fois par semaine pour un rituel hammam ou douche purifiant.",
+    "conservation": "Usage externe uniquement. Conserver au sec entre chaque utilisation.",
+    "precautions": "Usage externe uniquement. Éviter le contact direct avec les yeux.",
+    "dlc": "24 mois",
+    "enStock": true
+  },
+  {
+    "id": "creme-marrube-blanc",
+    "nom": "Crème de marrube blanc",
+    "famille": "cremes",
+    "familleLabel": "Crèmes de soin 50 g",
+    "accroche": "Le baume réconfortant aux herbes de terroir",
+    "contenance": "Boîte métallique 50 g",
+    "poidsNet": "50 g",
+    "prix": 70,
+    "couleur": "#4D5D38",
+    "image": "/assets/products/photos-site-1600x1600/creme-marrube-blanc.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/creme-marrube-blanc.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Sans conservateur", "type": "green" }
+    ],
+    "description": "Crème riche formulée à base de beurre végétal, d'huile d'amande douce et de macérat concentré de marrube blanc. Conditionnée dans un élégant boîtier métal réutilisable, elle nourrit intensément les peaux sèches et soulage les tiraillements.",
+    "ingredients": "Beurre de karité brut, huile végétale de coco, macérat de marrube blanc du potager, cire végétale protectrice.",
+    "pointsForts": [
+      "Nourrit intensément les zones gercées, sèches ou fragilisées",
+      "Texture baume fondante au contact de la chaleur de la peau",
+      "Formule 100% active sans eau ajoutée ni dérivés pétrochimiques",
+      "Boîtier métal nomade hermétique à emporter partout"
+    ],
+    "conseils": "Prélever une noisette, chauffer entre les paumes et masser délicatement sur les zones sèches (mains, coudes, visage).",
+    "conservation": "Usage externe uniquement. Conserver à température ambiante à l'abri des fortes chaleurs.",
+    "precautions": "Usage externe uniquement. Ne contient aucun conservateur artificiel. Ne remplace pas un avis médical.",
+    "dlc": "12 mois",
+    "enStock": true
+  },
+  {
+    "id": "creme-ortie",
+    "nom": "Crème d'ortie",
+    "famille": "cremes",
+    "familleLabel": "Crèmes de soin 50 g",
+    "accroche": "La force minérale du potager dans un baume soyeux",
+    "contenance": "Boîte métallique 50 g",
+    "poidsNet": "50 g",
+    "prix": 70,
+    "couleur": "#1E4D2B",
+    "image": "/assets/products/photos-site-1600x1600/creme-ortie.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/creme-ortie.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Sans conservateur", "type": "green" }
+    ],
+    "description": "Un soin artisanal fondant à l'ortie dioïque, riche en minéraux et flavonoïdes végétaux. Conçu pour calmer les irritations superficielles, régénérer les épidermes réactifs et protéger des agressions climatiques.",
+    "ingredients": "Macérat huileux d'ortie, beurre végétal de karité équitable, huile d'amande douce, cire protectrice naturelle.",
+    "pointsForts": [
+      "Régénère le film lipidique des peaux agressées par l'eau calcaire ou le soleil",
+      "Propriétés adoucissantes et tonifiantes naturelles de l'ortie",
+      "Zéro parfum de synthèse, arôme végétal discret et authentique",
+      "S'applique en voile soyeux sans sensation de film gras persistant"
+    ],
+    "conseils": "Appliquer matin ou soir en fine couche sur une peau propre. Idéale en soin de nuit.",
+    "conservation": "Usage externe uniquement. Conserver au sec.",
+    "precautions": "Usage externe uniquement. Contient du beurre de karité et de l'amande douce (fruits à coque).",
+    "dlc": "12 mois",
+    "enStock": true
+  },
+  {
+    "id": "creme-anti-grippe",
+    "nom": "Crème de soin respiratoire (Anti-grippe)",
+    "famille": "cremes",
+    "familleLabel": "Crèmes de soin 50 g",
+    "accroche": "Le baume de friction pectoral aux plantes aromatiques",
+    "contenance": "Boîte métallique 50 g",
+    "poidsNet": "50 g",
+    "prix": 75,
+    "couleur": "#B45309",
+    "image": "/assets/products/photos-site-1600x1600/creme-anti-grippe.jpg",
+    "imagePng": "/assets/products/photos-fond-transparent/creme-anti-grippe.png",
+    "badges": [
+      { "label": "100 % naturel", "type": "darkgreen" },
+      { "label": "Usage externe", "type": "dark" }
+    ],
+    "description": "Baume aromatique traditionnel de friction inspiré des remèdes familiaux marocains. Synergie de macérats de thym, d'eucalyptus et de marrube blanc pour réchauffer le corps lors des coups de froid et libérer la sensation de confort respiratoire.",
+    "ingredients": "Cire d'abeille naturelle du terroir, beurre de karité, macérat d'eucalyptus, macérat de thym sauvage, macérat de marrube blanc.",
+    "pointsForts": [
+      "Synergie de 3 plantes aromatiques puissantes du terroir marocain",
+      "Friction réchauffante idéale le soir avant d'aller au lit",
+      "Cire d'abeille naturelle qui scelle les bienfaits des plantes sur la peau",
+      "Économique : une petite noisette suffit pour un massage enveloppant"
+    ],
+    "conseils": "Masser doucement sur la poitrine, la gorge et le haut du dos le soir au coucher. Bien se couvrir ensuite.",
+    "conservation": "Usage externe uniquement. Conserver à température ambiante.",
+    "precautions": "Crème de soin à usage externe uniquement, ne remplace pas un avis médical. Déconseillée aux enfants de moins de 6 ans et aux femmes enceintes. Ne pas avaler, ne pas appliquer dans le nez ou sur les yeux.",
+    "dlc": "12 mois",
+    "enStock": true
+  }
+]

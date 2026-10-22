@@ -1,112 +1,82 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-title: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-script: 'Caveat', cursive;
+  
+  --color-creme: #F4F1EA;
+  --color-carte: #FBFAF5;
+  --color-foret: #1F3D2B;
+  --color-feuille: #3F6B2E;
+  --color-dore: #C9A227;
+  --color-bordure: #E5DFC9;
 }
 
-/* Custom scrollbars and sleek typography */
+/* Base typography */
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-body);
+  background-color: #F4F1EA;
+  color: #1F3D2B;
 }
 
-.font-serif {
-  font-family: var(--font-serif);
+body {
+  overflow-x: hidden;
+  background-color: #F4F1EA;
 }
 
-.font-sans {
-  font-family: var(--font-sans);
+.font-title {
+  font-family: var(--font-title);
+  letter-spacing: -0.02em;
 }
 
-/* Theme Black (Mode Noir & Mode Blanc) */
-.theme-black {
-  background-color: #0c0d0e !important;
-  color: #f3f4f6 !important;
+.font-script {
+  font-family: var(--font-script);
 }
 
-.theme-black .bg-\[\#FBFBF9\],
-.theme-black .bg-\[\#FBFBF9\]\/95 {
-  background-color: #0c0d0e !important;
+.font-body {
+  font-family: var(--font-body);
 }
 
-.theme-black .bg-\[\#F7F7F5\] {
-  background-color: #17181c !important;
+/* Subtle Moroccan geometric / linen grain overlay */
+.bg-potager-grain {
+  background-color: #F4F1EA;
+  background-image: radial-gradient(rgba(31, 61, 43, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-.theme-black .bg-white {
-  background-color: #15171a !important;
-  color: #f3f4f6 !important;
+/* Custom artisanal scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-.theme-black .bg-stone-50,
-.theme-black .bg-stone-50\/50,
-.theme-black .bg-stone-100 {
-  background-color: #1b1d22 !important;
-  color: #f3f4f6 !important;
+::-webkit-scrollbar-track {
+  background: #F4F1EA;
 }
 
-.theme-black .border-stone-200,
-.theme-black .border-stone-200\/80,
-.theme-black .border-stone-200\/90,
-.theme-black .border-stone-100,
-.theme-black .border-stone-300 {
-  border-color: #272a30 !important;
+::-webkit-scrollbar-thumb {
+  background: #C9A227;
+  border-radius: 4px;
 }
 
-.theme-black .text-stone-900 {
-  color: #f4f4f5 !important;
+::-webkit-scrollbar-thumb:hover {
+  background: #1F3D2B;
 }
 
-.theme-black .text-stone-800 {
-  color: #e4e4e7 !important;
+/* Pulsing subtle aura for WhatsApp CTA */
+@keyframes softPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+  }
 }
 
-.theme-black .text-stone-700 {
-  color: #d4d4d8 !important;
+.pulse-whatsapp {
+  animation: softPulse 2.8s infinite ease-in-out;
 }
-
-.theme-black .text-stone-600 {
-  color: #a1a1aa !important;
-}
-
-.theme-black .text-stone-500 {
-  color: #8b8e96 !important;
-}
-
-.theme-black header {
-  background-color: rgba(15, 17, 21, 0.95) !important;
-  border-bottom-color: #272a30 !important;
-}
-
-.theme-black footer {
-  background-color: #08090a !important;
-  border-top-color: #272a30 !important;
-}
-
-.theme-black .bg-emerald-50,
-.theme-black .bg-emerald-50\/70,
-.theme-black .bg-emerald-50\/60 {
-  background-color: rgba(6, 78, 59, 0.3) !important;
-  border-color: rgba(5, 150, 105, 0.35) !important;
-}
-
-.theme-black .text-emerald-900,
-.theme-black .text-emerald-800 {
-  color: #6ee7b7 !important;
-}
-
-.theme-black .bg-emerald-100,
-.theme-black .bg-emerald-100\/70 {
-  background-color: rgba(6, 78, 59, 0.45) !important;
-  color: #a7f3d0 !important;
-}
-
-.theme-black select,
-.theme-black input,
-.theme-black textarea {
-  background-color: #1b1d22 !important;
-  color: #f3f4f6 !important;
-  border-color: #2e323b !important;
-}
-
-

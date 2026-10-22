@@ -1,27 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import { Product, PromoConfig, CartItem, ProductFamily } from './types/index.ts';
+import { Product, PromoConfig, CartItem, ProductFamily, Language, AppTheme, PageView } from './types/index.ts';
 import { PromoBanner } from './components/PromoBanner.tsx';
-import { Header } from './components/Header.tsx';
-import { Hero } from './components/Hero.tsx';
-import { PackDecouverte } from './components/PackDecouverte.tsx';
-import { ProductFamilySection } from './components/ProductFamilySection.tsx';
-import { ProductDetailModal } from './components/ProductDetailModal.tsx';
+import { Navbar } from './components/Navbar.tsx';
+import { HomePage } from './components/HomePage.tsx';
+import { CategoryPage } from './components/CategoryPage.tsx';
+import { ProductDetailPage } from './components/ProductDetailPage.tsx';
+import { CartPage } from './components/CartPage.tsx';
+import { AboutPage } from './components/AboutPage.tsx';
+import { ContactPage } from './components/ContactPage.tsx';
 import { CartDrawer } from './components/CartDrawer.tsx';
-import { ArtisanalPhilosophy } from './components/ArtisanalPhilosophy.tsx';
-import { AboutRachid } from './components/AboutRachid.tsx';
-import { HowToOrder } from './components/HowToOrder.tsx';
-import { FaqSection } from './components/FaqSection.tsx';
 import { Footer } from './components/Footer.tsx';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp.tsx';
 
-const CART_STORAGE_KEY = 'rachid_potagiste_selection_v2';
+const CART_STORAGE_KEY = 'rachid_potagiste_selection_v3';
+const THEME_STORAGE_KEY = 'rachid_potagiste_theme';
+const LANG_STORAGE_KEY = 'rachid_potagiste_lang';
+const WA_LINE_STORAGE_KEY = 'rachid_potagiste_wa_line';
 
 export function App() {
   const [products, setProducts] = useState<Product[]>([]);
   const [promo, setPromo] = useState<PromoConfig | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Cart / Selection state
+  // Language state (default 'fr')
+  const [lang, setLang] = useState<Language>(() => {
+    try {
+      const saved = localStorage.getItem(LANG_STORAGE_KEY) as Language;
+      return saved === 'ar' || saved === 'en' ? saved : 'fr';
+    } catch {
+      return 'fr';
+    }
+  });
+
+  // Theme state (default 'light')
+  const [theme, setTheme] = useState<AppTheme>(() => {
+    try {
+      const saved = localStorage.getItem(THEME_STORAGE_KEY) as AppTheme;
+      return saved === 'dark' ? 'dark' : 'light';
+    } catch {
+      return 'light';
+    }
+  });
+
+  // Active WhatsApp Line (Line 1: 07 86 73 16 66 or Line 2: 07 21 04 58 01)
+  const [whatsappLine, setWhatsappLine] = useState<'line1' | 'line2'>(() => {
+    try {
+      const saved = localStorage.getItem(WA_LINE_STORAGE_KEY) as 'line1' | 'line2';
+      return saved === 'line2' ? 'line2' : 'line1';
+    } catch {
+      return 'line1';
+    }
+  });
+
+  // Page Routing State
+  const [currentPage, setCurrentPage] = useState<PageView>({ type: 'home' });
+  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
+
+  // Cart selection state
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem(CART_STORAGE_KEY);
@@ -31,10 +66,42 @@ export function App() {
     }
   });
 
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  // Apply RTL direction when Arabic is selected
+  useEffect(() => {
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', lang);
+    try {
+      localStorage.setItem(LANG_STORAGE_KEY, lang);
+    } catch {
+      // ignore
+    }
+  }, [lang]);
 
-  // Save selection to localStorage
+  // Apply dark theme attribute
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+      // ignore
+    }
+  }, [theme]);
+
+  // Save WhatsApp line
+  useEffect(() => {
+    try {
+      localStorage.setItem(WA_LINE_STORAGE_KEY, whatsappLine);
+    } catch {
+      // ignore
+    }
+  }, [whatsappLine]);
+
+  // Save Cart
   useEffect(() => {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
@@ -62,7 +129,7 @@ export function App() {
           setPromo(promoData);
         }
       } catch (err) {
-        console.error('Error loading data:', err);
+        console.error('Error loading catalog data:', err);
       } finally {
         setLoading(false);
       }
@@ -71,7 +138,7 @@ export function App() {
     fetchData();
   }, []);
 
-  // Cart actions
+  // Cart operations
   const handleAddToCart = (product: Product, quantity = 1) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.product.id === product.id);
@@ -106,124 +173,139 @@ export function App() {
     setCartItems([]);
   };
 
-  // Filter products by families
-  const lactoFermentes = products.filter((p) => p.famille === 'lacto-fermentes');
-  const huiles = products.filter((p) => p.famille === 'huiles');
-  const savons = products.filter((p) => p.famille === 'savons');
-  const cremes = products.filter((p) => p.famille === 'cremes');
+  const handleNavigate = (page: PageView) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectProduct = (product: Product) => {
+    handleNavigate({ type: 'product', productId: product.id });
+  };
 
   const cartProductIds = new Set(cartItems.map((item) => item.product.id));
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  return (
-    <div className="min-h-screen bg-[#F4F1EA] text-[#1F3D2B] flex flex-col font-sans">
-      
-      {/* 1. Promo banner */}
-      <PromoBanner promo={promo} />
+  // Find product for product detail page
+  const activeProduct =
+    currentPage.type === 'product'
+      ? products.find((p) => p.id === currentPage.productId) || products[0]
+      : null;
 
-      {/* 2. Header */}
-      <Header
-        cartItemCount={totalCartCount}
-        onOpenCart={() => setIsCartOpen(true)}
+  return (
+    <div className="min-h-screen flex flex-col bg-[#F4F1EA] dark:bg-[#0D140F] text-[#1F3D2B] dark:text-[#F4F1EA] transition-colors duration-200">
+      
+      {/* 1. Promo top strip */}
+      <PromoBanner
+        promo={promo}
+        lang={lang}
+        theme={theme}
       />
 
-      {/* Main Content */}
+      {/* 2. Main Navigation Bar */}
+      <Navbar
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        cartItemCount={totalCartCount}
+        lang={lang}
+        onLanguageChange={setLang}
+        theme={theme}
+        onThemeToggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        whatsappLine={whatsappLine}
+        onWhatsappLineChange={setWhatsappLine}
+        products={products}
+        onSelectProduct={handleSelectProduct}
+      />
+
+      {/* 3. Main Multi-Page Content */}
       <main className="flex-1">
-        
-        {/* 3. Hero Section */}
-        <Hero />
+        {currentPage.type === 'home' && (
+          <HomePage
+            products={products}
+            promo={promo}
+            onSelectProduct={handleSelectProduct}
+            onAddToCart={(p) => handleAddToCart(p, 1)}
+            cartProductIds={cartProductIds}
+            onNavigate={handleNavigate}
+            lang={lang}
+            theme={theme}
+            whatsappLine={whatsappLine}
+          />
+        )}
 
-        {/* 4. Pack Découverte */}
-        <PackDecouverte promo={promo} />
+        {currentPage.type === 'category' && (
+          <CategoryPage
+            family={currentPage.family}
+            products={products}
+            onSelectProduct={handleSelectProduct}
+            onAddToCart={(p) => handleAddToCart(p, 1)}
+            cartProductIds={cartProductIds}
+            onNavigate={handleNavigate}
+            lang={lang}
+            theme={theme}
+            whatsappLine={whatsappLine}
+          />
+        )}
 
-        {/* 5. Family 1: Légumes Lacto-fermentés (6 produits) */}
-        <ProductFamilySection
-          id="lacto-fermentes"
-          family="lacto-fermentes"
-          title="Légumes Lacto-fermentés en Bocal"
-          subtitle="Alimentation Vivante & Probiotiques Naturels"
-          handwrittenQuote="Le croquant naturel du potager, bonifié par le temps et le sel marin"
-          description="Chou vert, chou rouge, carotte, betterave et oignon rouge : fermentés spontanément dans leur jus avec du sel pur non raffiné, sans vinaigre ni conservateur de synthèse. Une source inestimable de probiotiques actifs pour chérir votre microbiote."
-          products={lactoFermentes}
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          onAddToCart={(p) => handleAddToCart(p, 1)}
-          cartProductIds={cartProductIds}
-        />
+        {currentPage.type === 'product' && activeProduct && (
+          <ProductDetailPage
+            product={activeProduct}
+            allProducts={products}
+            onSelectProduct={handleSelectProduct}
+            onAddToCart={handleAddToCart}
+            cartProductIds={cartProductIds}
+            onNavigate={handleNavigate}
+            lang={lang}
+            theme={theme}
+          />
+        )}
 
-        {/* 6. Family 2: Huiles de Macération (7 produits) */}
-        <ProductFamilySection
-          id="huiles"
-          family="huiles"
-          title="Huiles de Macération Botanique"
-          subtitle="Flacon Pompe 50 ml · Soin Végétal Pur"
-          handwrittenQuote="Des semaines de patience solaire pour recueillir la quintessence de la plante"
-          description="Thym, romarin, ortie, marrube blanc, lavande, calendula et eucalyptus : lentement macérés dans une base précieuse d'amande douce et de jojoba. Flacon pompe en verre pour une utilisation propre et un dosage goutte à goutte. Usage externe uniquement."
-          products={huiles}
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          onAddToCart={(p) => handleAddToCart(p, 1)}
-          cartProductIds={cartProductIds}
-        />
+        {currentPage.type === 'cart' && (
+          <CartPage
+            items={cartItems}
+            onUpdateQuantity={handleUpdateQuantity}
+            onRemoveItem={handleRemoveItem}
+            onClearCart={handleClearCart}
+            promo={promo}
+            onNavigate={handleNavigate}
+            lang={lang}
+            theme={theme}
+            whatsappLine={whatsappLine}
+            onWhatsappLineChange={setWhatsappLine}
+          />
+        )}
 
-        {/* 7. Family 3: Savons à la Luffa (2 produits) */}
-        <ProductFamilySection
-          id="savons"
-          family="savons"
-          title="Savons Artisanaux à la Luffa"
-          subtitle="Éponge Végétale Intégrée · Exfoliation Douce"
-          handwrittenQuote="Une vraie courge luffa du jardin coulée dans un savon surgras"
-          description="Nos savons sont enrichis aux macérats d'ortie et de marrube blanc du potager, coulés directement autour d'une tranche de luffa végétale séchée. Une mousse onctueuse et un gommage naturel vivifiant sans aucun microplastique."
-          products={savons}
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          onAddToCart={(p) => handleAddToCart(p, 1)}
-          cartProductIds={cartProductIds}
-        />
+        {currentPage.type === 'about' && (
+          <AboutPage
+            onNavigate={handleNavigate}
+            lang={lang}
+            theme={theme}
+            whatsappLine={whatsappLine}
+          />
+        )}
 
-        {/* 8. Family 4: Crèmes de Soin (3 produits) */}
-        <ProductFamilySection
-          id="cremes"
-          family="cremes"
-          title="Crèmes & Baumes de Soin"
-          subtitle="Boîte Métallique 50 g · Sans Eau Ajoutée"
-          handwrittenQuote="La texture fondante d'un baume protecteur aux herbes de terroir"
-          description="Crème de marrube blanc, crème d'ortie et crème respiratoire de friction aux plantes aromatiques. Formulées sans eau, avec du beurre végétal et de la cire protectrice dans une boîte en métal nomade. Usage externe uniquement."
-          products={cremes}
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          onAddToCart={(p) => handleAddToCart(p, 1)}
-          cartProductIds={cartProductIds}
-        />
-
-        {/* 9. Charte / Pourquoi le Fait Main */}
-        <ArtisanalPhilosophy />
-
-        {/* 10. À propos de Rachid Potagiste */}
-        <AboutRachid />
-
-        {/* 11. Comment commander en 3 étapes */}
-        <HowToOrder />
-
-        {/* 12. Questions Fréquentes */}
-        <FaqSection />
-
+        {currentPage.type === 'contact' && (
+          <ContactPage
+            onNavigate={handleNavigate}
+            lang={lang}
+            theme={theme}
+          />
+        )}
       </main>
 
-      {/* 13. Footer */}
-      <Footer />
-
-      {/* 14. Floating WhatsApp button */}
-      <FloatingWhatsApp />
-
-      {/* 15. Product Detail Modal */}
-      <ProductDetailModal
-        product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-        onAddToCart={handleAddToCart}
-        isInCart={selectedProduct ? cartProductIds.has(selectedProduct.id) : false}
+      {/* 4. Footer */}
+      <Footer
+        onNavigate={handleNavigate}
+        lang={lang}
+        theme={theme}
       />
 
-      {/* 16. Cart Drawer (Ma sélection) */}
+      {/* 5. Floating WhatsApp Selector */}
+      <FloatingWhatsApp lang={lang} />
+
+      {/* 6. Quick Cart Drawer */}
       <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
+        isOpen={isCartDrawerOpen}
+        onClose={() => setIsCartDrawerOpen(false)}
         items={cartItems}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}

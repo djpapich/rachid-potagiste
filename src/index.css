@@ -4,26 +4,49 @@
   --font-title: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-script: 'Caveat', cursive;
-  
-  --color-creme: #F4F1EA;
-  --color-carte: #FBFAF5;
-  --color-foret: #1F3D2B;
-  --color-feuille: #3F6B2E;
-  --color-dore: #C9A227;
-  --color-bordure: #E5DFC9;
+  --font-arabic: 'Cairo', 'Amiri', 'Segoe UI', Tahoma, sans-serif;
 }
 
-/* Base typography */
+/* Light Theme Variables */
+:root {
+  --bg-page: #F4F1EA;
+  --bg-card: #FBFAF5;
+  --bg-subtle: #EFECE3;
+  --text-main: #1F3D2B;
+  --text-muted: rgba(31, 61, 43, 0.75);
+  --border-color: #E5DFC9;
+  --accent-gold: #C9A227;
+  --accent-green: #3F6B2E;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --bg-page: #0D140F;
+  --bg-card: #152219;
+  --bg-subtle: #1C2D21;
+  --text-main: #F4F1EA;
+  --text-muted: rgba(244, 241, 234, 0.7);
+  --border-color: #273D2C;
+  --accent-gold: #E5B834;
+  --accent-green: #528B3E;
+}
+
 html {
   scroll-behavior: smooth;
   font-family: var(--font-body);
-  background-color: #F4F1EA;
-  color: #1F3D2B;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+[dir="rtl"] {
+  font-family: var(--font-arabic);
 }
 
 body {
   overflow-x: hidden;
-  background-color: #F4F1EA;
+  background-color: var(--bg-page);
+  color: var(--text-main);
 }
 
 .font-title {
@@ -31,48 +54,42 @@ body {
   letter-spacing: -0.02em;
 }
 
+[dir="rtl"] .font-title {
+  font-family: var(--font-arabic);
+  letter-spacing: normal;
+}
+
 .font-script {
   font-family: var(--font-script);
 }
 
-.font-body {
-  font-family: var(--font-body);
+/* Scrollbar utilities for horizontal Amazon/Jumia carousels */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Subtle Moroccan geometric / linen grain overlay */
+/* Subtle background grain */
 .bg-potager-grain {
-  background-color: #F4F1EA;
   background-image: radial-gradient(rgba(31, 61, 43, 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* Custom artisanal scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+[data-theme="dark"] .bg-potager-grain {
+  background-image: radial-gradient(rgba(229, 184, 52, 0.05) 1px, transparent 1px);
 }
 
-::-webkit-scrollbar-track {
-  background: #F4F1EA;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #C9A227;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #1F3D2B;
-}
-
-/* Pulsing subtle aura for WhatsApp CTA */
+/* Soft pulse for WhatsApp button */
 @keyframes softPulse {
   0%, 100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
   }
   50% {
-    transform: scale(1.03);
+    transform: scale(1.04);
     box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
   }
 }

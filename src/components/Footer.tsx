@@ -1,17 +1,34 @@
 import React from 'react';
+import { Language, AppTheme, PageView } from '../types/index.ts';
 import { MapPin, Phone, MessageCircle, Heart, ShieldAlert, ExternalLink } from 'lucide-react';
-import { WHATSAPP_DISPLAY_PHONE, getGeneralInquiryWhatsAppUrl } from '../lib/whatsapp.ts';
+import {
+  WHATSAPP_LINE_1_DISPLAY,
+  WHATSAPP_LINE_2_DISPLAY,
+  getGeneralInquiryWhatsAppUrl
+} from '../lib/whatsapp.ts';
+import { translations } from '../lib/translations.ts';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate: (page: PageView) => void;
+  lang: Language;
+  theme: AppTheme;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
+  const t = translations[lang] || translations.fr;
+
   return (
-    <footer id="contact" className="bg-[#14281C] text-[#FBFAF5] pt-14 pb-10 border-t border-[#C9A227]/30">
+    <footer className="bg-[#14281C] dark:bg-[#0A100C] text-[#FBFAF5] pt-14 pb-10 border-t border-[#C9A227]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
           
           {/* Brand Column */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
+          <div className="lg:col-span-4 space-y-4">
+            <button
+              onClick={() => onNavigate({ type: 'home' })}
+              className="flex items-center gap-3 text-left rtl:text-right cursor-pointer"
+            >
               <div className="w-10 h-10 rounded-full bg-[#FBFAF5] border border-[#C9A227] flex items-center justify-center p-1">
                 <svg viewBox="0 0 100 100" className="w-full h-full text-[#C9A227]">
                   <circle cx="50" cy="50" r="46" fill="#14281C" />
@@ -22,77 +39,104 @@ export const Footer: React.FC = () => {
 
               <div>
                 <span className="font-title text-lg font-black tracking-wider text-[#FBFAF5] uppercase block">
-                  Rachid Potagiste
+                  {t.siteTitle}
                 </span>
                 <span className="text-[10px] tracking-widest font-semibold text-[#C9A227] uppercase block">
-                  Fait main · Maroc
+                  {t.tagline}
                 </span>
               </div>
-            </div>
+            </button>
 
             <p className="text-xs text-[#E5DFC9]/80 leading-relaxed max-w-sm">
-              Artisanat du terroir marocain : légumes lacto-fermentés vivants en bocal doré, huiles de macération lente 50 ml, savons à la luffa végétale et crèmes de soin 100% pures. Cultivé et préparé avec respect à Bouznika.
+              Artisanat du potager & préparations naturelles faites main au Maroc. Légumes lacto-fermentés vivants, huiles de macération 50 ml, savons à la luffa végétale et crèmes concentrées en boîte métal.
             </p>
 
-            <div className="flex items-center gap-3 text-xs text-[#E5DFC9]/80 pt-1">
+            <div className="flex items-center gap-2 text-xs text-[#E5DFC9]/80 pt-1">
               <MapPin className="w-4 h-4 text-[#C9A227] shrink-0" />
-              <span>Bouznika & Mohammedia, Maroc · Expédition tout le Royaume</span>
+              <span>Bouznika & Mohammedia, Maroc · Livraison partout au Royaume</span>
             </div>
           </div>
 
-          {/* Catalog Navigation */}
-          <div className="lg:col-span-3 space-y-3">
+          {/* Catalog Categories */}
+          <div className="lg:col-span-4 space-y-3">
             <h4 className="font-title text-sm font-bold uppercase tracking-wider text-[#C9A227]">
-              Les 4 Familles
+              {t.categories}
             </h4>
             <ul className="space-y-2 text-xs text-[#E5DFC9]">
               <li>
-                <a href="#lacto-fermentes" className="hover:text-white transition-colors">
-                  Légumes lacto-fermentés (Bocaux 380 g)
-                </a>
+                <button
+                  onClick={() => onNavigate({ type: 'category', family: 'lacto-fermentes' })}
+                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                >
+                  {t.navLacto} (70 - 80 DH)
+                </button>
               </li>
               <li>
-                <a href="#huiles" className="hover:text-white transition-colors">
-                  Huiles de macération (Flacons 50 ml)
-                </a>
+                <button
+                  onClick={() => onNavigate({ type: 'category', family: 'huiles' })}
+                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                >
+                  {t.navOils} (70 - 80 DH)
+                </button>
               </li>
               <li>
-                <a href="#savons" className="hover:text-white transition-colors">
-                  Savons artisanaux à la luffa (~110 g)
-                </a>
+                <button
+                  onClick={() => onNavigate({ type: 'category', family: 'savons' })}
+                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                >
+                  {t.navSoaps} (45 DH)
+                </button>
               </li>
               <li>
-                <a href="#cremes" className="hover:text-white transition-colors">
-                  Crèmes de soin (Boîtes métal 50 g)
-                </a>
+                <button
+                  onClick={() => onNavigate({ type: 'category', family: 'cremes' })}
+                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                >
+                  {t.navCreams} (70 - 80 DH)
+                </button>
               </li>
               <li>
-                <a href="#pourquoi" className="hover:text-white transition-colors">
-                  Notre charte qualité fait main
-                </a>
+                <button
+                  onClick={() => onNavigate({ type: 'about' })}
+                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                >
+                  {t.navAbout}
+                </button>
               </li>
             </ul>
           </div>
 
-          {/* Direct WhatsApp Ordering */}
+          {/* TWO WhatsApp Lines and Contact */}
           <div className="lg:col-span-4 space-y-3">
             <h4 className="font-title text-sm font-bold uppercase tracking-wider text-[#C9A227]">
-              Commandes & Contact Direct
+              Commandes WhatsApp 7j/7
             </h4>
             
             <p className="text-xs text-[#E5DFC9]/80 leading-relaxed">
-              Toutes nos commandes s'effectuent simplement par échange WhatsApp. Nous répondons 7j/7 de 8h à 20h.
+              Pour commander ou demander conseil, contactez-nous directement sur nos deux lignes :
             </p>
 
-            <a
-              href={getGeneralInquiryWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-4 py-2.5 rounded-xl font-bold text-xs shadow-md transition-all"
-            >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              <span>Écrire à Rachid : {WHATSAPP_DISPLAY_PHONE}</span>
-            </a>
+            <div className="space-y-2 pt-1">
+              <a
+                href={getGeneralInquiryWhatsAppUrl('line1', lang)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
+              >
+                <MessageCircle className="w-4 h-4 fill-current shrink-0" />
+                <span>WhatsApp 1 : {WHATSAPP_LINE_1_DISPLAY}</span>
+              </a>
+
+              <a
+                href={getGeneralInquiryWhatsAppUrl('line2', lang)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
+              >
+                <MessageCircle className="w-4 h-4 fill-current shrink-0" />
+                <span>WhatsApp 2 : {WHATSAPP_LINE_2_DISPLAY}</span>
+              </a>
+            </div>
 
             <div className="pt-2">
               <a
@@ -109,22 +153,22 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Health disclaimer banner in footer */}
-        <div className="p-4 rounded-2xl bg-[#0E1C13] border border-[#3F6B2E]/40 text-xs text-[#E5DFC9]/75 mb-8 flex items-start gap-3">
+        {/* Legal Disclaimer */}
+        <div className="p-4 rounded-2xl bg-[#0E1C13] dark:bg-[#080D09] border border-[#3F6B2E]/40 text-xs text-[#E5DFC9]/75 mb-8 flex items-start gap-3">
           <ShieldAlert className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <span className="font-bold text-[#C9A227]">Mentions légales et d'usage :</span>
+            <span className="font-bold text-[#C9A227]">Avertissements d'usage :</span>
             <p className="text-[11px] leading-relaxed">
-              Les huiles de macération, savons et crèmes de soin sont exclusivement destinés à un <strong>usage externe</strong>. Nos préparations artisanales du potager sont issues de traditions ancestrales et ne constituent en aucun cas des médicaments ni des allégations thérapeutiques. En cas de doute médical ou dermatologique, consultez un médecin.
+              Les huiles de macération, crèmes et savons artisanaux sont strictement réservés à un <strong>usage externe</strong>. Nos produits naturels ne se substituent pas à un avis ou diagnostic médical.
             </p>
           </div>
         </div>
 
-        {/* Bottom copyright line */}
+        {/* Copyright */}
         <div className="border-t border-[#1F3D2B] pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#E5DFC9]/60 gap-3">
           <p>© 2026 Rachid Potagiste. Tous droits réservés.</p>
           <p className="flex items-center gap-1">
-            <span>Fait avec amour au Maroc</span>
+            <span>Fait avec passion au Maroc</span>
             <Heart className="w-3 h-3 text-red-500 fill-current" />
             <span>· Bouznika</span>
           </p>

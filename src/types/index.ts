@@ -1,19 +1,29 @@
-export type Language = 'fr' | 'ar';
+export type Language = 'fr' | 'ar' | 'en';
+export type AppTheme = 'light' | 'dark';
 
 export type ProductFamily = 'lacto-fermentes' | 'huiles' | 'savons' | 'cremes';
 
 export interface ProductBadge {
   label: string;
+  labelAr?: string;
   type: 'green' | 'dark' | 'darkgreen';
 }
 
 export interface Product {
   id: string;
   nom: string;
+  nomAr?: string;
+  nomEn?: string;
   famille: ProductFamily;
   familleLabel: string;
+  familleLabelAr?: string;
+  familleLabelEn?: string;
   accroche: string;
+  accrocheAr?: string;
+  accrocheEn?: string;
   contenance: string;
+  contenanceAr?: string;
+  contenanceEn?: string;
   poidsNet: string;
   prix: number; // in MAD
   couleur: string;
@@ -21,12 +31,23 @@ export interface Product {
   imagePng: string;
   badges: ProductBadge[];
   description: string;
+  descriptionAr?: string;
+  descriptionEn?: string;
   ingredients: string;
+  ingredientsAr?: string;
+  ingredientsEn?: string;
   pointsForts: string[];
+  pointsFortsAr?: string[];
+  pointsFortsEn?: string[];
   conseils: string;
+  conseilsAr?: string;
+  conseilsEn?: string;
   conservation: string;
+  conservationAr?: string;
+  conservationEn?: string;
   precautions: string;
-  dlc: string;
+  precautionsAr?: string;
+  precautionsEn?: string;
   enStock: boolean;
 }
 
@@ -58,4 +79,13 @@ export interface CustomerOrderInfo {
   telephone: string;
   notes?: string;
   codePromo?: string;
+  whatsappLine?: 'line1' | 'line2';
 }
+
+export type PageView = 
+  | { type: 'home' }
+  | { type: 'category'; family: ProductFamily }
+  | { type: 'product'; productId: string }
+  | { type: 'cart' }
+  | { type: 'about' }
+  | { type: 'contact' };

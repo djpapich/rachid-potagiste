@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { CartItem, CustomerOrderInfo, PromoConfig } from '../types/index.ts';
+import {
+  OrderField,
+  checkPromoCode,
+  promoErrorMessage,
+  promoPercent,
+  validateOrderInfo,
+} from '../lib/validation.ts';
 import { X, Trash2, Plus, Minus, MessageCircle, ShoppingBag, Tag, Check, Sparkles, MapPin } from 'lucide-react';
-import { getCartWhatsAppUrl, WHATSAPP_DISPLAY_PHONE } from '../lib/whatsapp.ts';
+import { openWhatsApp, getCartWhatsAppUrl, WHATSAPP_DISPLAY_PHONE } from '../lib/whatsapp.ts';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -25,6 +32,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const [promoCodeInput, setPromoCodeInput] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [promoError, setPromoError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Partial<Record<OrderField, string>>>({});
 
   const [customerInfo, setCustomerInfo] = useState<CustomerOrderInfo>({
     nom: '',
@@ -37,26 +45,30 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   if (!isOpen) return null;
 
   const subtotal = items.reduce((sum, item) => sum + item.product.prix * item.quantity, 0);
-  const discountPercentage = appliedPromo ? (promo?.remisePourcentage || 10) : 0;
+  const discountPercentage = promoPercent(promo, appliedPromo);
   const discountAmount = Math.round(subtotal * (discountPercentage / 100));
   const finalTotal = subtotal - discountAmount;
 
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
     setPromoError(null);
-    const clean = promoCodeInput.trim().toUpperCase();
+    const result = checkPromoCode(promo, promoCodeInput);
 
-    if (promo && promo.active && clean === promo.code.toUpperCase()) {
-      setAppliedPromo(clean);
+    if (result === 'ok' && promo) {
+      setAppliedPromo(promo.code.toUpperCase());
     } else {
-      setPromoError('Code promo invalide. Essayez POTAGER10');
+      setAppliedPromo(null);
+      setPromoError(promoErrorMessage(result, 'fr'));
     }
   };
 
   const handleSendOrder = () => {
     if (items.length === 0) return;
-    const url = getCartWhatsAppUrl(items, customerInfo, discountPercentage, appliedPromo || '');
-    window.open(url, '_blank');
+    const validation = validateOrderInfo(customerInfo, 'fr');
+    setErrors(validation.errors);
+    if (!validation.ok) return;
+    const url = getCartWhatsAppUrl(items, validation.clean, discountPercentage, appliedPromo || '');
+    openWhatsApp(url);
   };
 
   return (
@@ -177,7 +189,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <Tag className="w-4 h-4 absolute left-3 top-2.5 text-[#8C6D23]" />
                     <input
                       type="text"
-                      placeholder="Code promo (ex: POTAGER10)"
+                      placeholder="Code promo" maxLength={32} autoComplete="off"
                       value={promoCodeInput}
                       onChange={(e) => setPromoCodeInput(e.target.value)}
                       className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl bg-white border border-[#D7CEBA] focus:outline-hidden focus:border-[#1F3D2B] uppercase font-mono"
@@ -220,8 +232,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       placeholder="Votre nom complet"
                       value={customerInfo.nom}
                       onChange={(e) => setCustomerInfo({ ...customerInfo, nom: e.target.value })}
+                      maxLength={80}
+                      aria-invalid={Boolean(errors.nom)}
                       className="w-full px-3 py-2 rounded-xl bg-white border border-[#D7CEBA] focus:outline-hidden focus:border-[#1F3D2B]"
                     />
+                    {errors.nom && <p className="mt-1 text-[11px] text-red-700 font-medium">{errors.nom}</p>}
                   </div>
 
                   <div>
@@ -234,22 +249,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       placeholder="Ex: Casablanca, Rabat, Bouznika..."
                       value={customerInfo.ville}
                       onChange={(e) => setCustomerInfo({ ...customerInfo, ville: e.target.value })}
+                      maxLength={60}
+                      aria-invalid={Boolean(errors.ville)}
                       className="w-full px-3 py-2 rounded-xl bg-white border border-[#D7CEBA] focus:outline-hidden focus:border-[#1F3D2B]"
                     />
+                    {errors.ville && <p className="mt-1 text-[11px] text-red-700 font-medium">{errors.ville}</p>}
                   </div>
                 </div>
 
                 <div className="text-xs">
                   <label className="block text-[11px] font-semibold text-[#1F3D2B]/80 mb-1">
-                    Adresse complète de livraison
+                    Adresse complète de livraison *
                   </label>
                   <input
                     type="text"
                     placeholder="Quartier, rue, numéro ou repère"
                     value={customerInfo.adresse}
                     onChange={(e) => setCustomerInfo({ ...customerInfo, adresse: e.target.value })}
+                    maxLength={200}
+                    aria-invalid={Boolean(errors.adresse)}
                     className="w-full px-3 py-2 rounded-xl bg-white border border-[#D7CEBA] focus:outline-hidden focus:border-[#1F3D2B]"
                   />
+                  {errors.adresse && <p className="mt-1 text-[11px] text-red-700 font-medium">{errors.adresse}</p>}
                 </div>
 
                 <div className="text-xs">
@@ -261,8 +282,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     placeholder="Ex: 06 00 00 00 00"
                     value={customerInfo.telephone}
                     onChange={(e) => setCustomerInfo({ ...customerInfo, telephone: e.target.value })}
+                    maxLength={20}
+                    aria-invalid={Boolean(errors.telephone)}
                     className="w-full px-3 py-2 rounded-xl bg-white border border-[#D7CEBA] focus:outline-hidden focus:border-[#1F3D2B]"
                   />
+                  {errors.telephone && <p className="mt-1 text-[11px] text-red-700 font-medium">{errors.telephone}</p>}
                 </div>
 
                 <div className="text-xs">
@@ -274,6 +298,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     placeholder="Instructions particulières de livraison"
                     value={customerInfo.notes}
                     onChange={(e) => setCustomerInfo({ ...customerInfo, notes: e.target.value })}
+                    maxLength={300}
                     className="w-full px-3 py-2 rounded-xl bg-white border border-[#D7CEBA] focus:outline-hidden focus:border-[#1F3D2B]"
                   />
                 </div>

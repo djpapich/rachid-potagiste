@@ -1,7 +1,7 @@
 import React from 'react';
 import { PromoConfig, Language, AppTheme } from '../types/index.ts';
 import { Sparkles, MessageCircle, Gift } from 'lucide-react';
-import { getPackDecouverteWhatsAppUrl } from '../lib/whatsapp.ts';
+import { openWhatsApp, getPackDecouverteWhatsAppUrl } from '../lib/whatsapp.ts';
 import { translations } from '../lib/translations.ts';
 
 interface PackDecouverteProps {
@@ -33,7 +33,7 @@ export const PackDecouverte: React.FC<PackDecouverteProps> = ({
 
   const handleOrderPack = () => {
     const url = getPackDecouverteWhatsAppUrl(packTitle, pack.prixPromo);
-    window.open(url, '_blank');
+    openWhatsApp(url);
   };
 
   return (

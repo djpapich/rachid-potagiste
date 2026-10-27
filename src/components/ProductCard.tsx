@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Product, Language, AppTheme } from '../types/index.ts';
 import { MessageCircle, Plus, Check, Eye } from 'lucide-react';
-import { getProductWhatsAppUrl } from '../lib/whatsapp.ts';
+import { openWhatsApp, getProductWhatsAppUrl } from '../lib/whatsapp.ts';
 import { translations } from '../lib/translations.ts';
 
 interface ProductCardProps {
@@ -35,7 +35,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleWhatsApp = (e: React.MouseEvent) => {
     e.stopPropagation();
-    window.open(getProductWhatsAppUrl(product, 1, whatsappLine, lang), '_blank');
+    openWhatsApp(getProductWhatsAppUrl(product, 1, whatsappLine, lang));
   };
 
   const title = lang === 'ar' ? (product.nomAr || product.nom) : lang === 'en' ? (product.nomEn || product.nom) : product.nom;

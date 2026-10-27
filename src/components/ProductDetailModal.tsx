@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Product } from '../types/index.ts';
 import { X, MessageCircle, Plus, Minus, Check, ShieldAlert, Sparkles, CheckCircle2, Info } from 'lucide-react';
-import { getProductWhatsAppUrl } from '../lib/whatsapp.ts';
+import { openWhatsApp, getProductWhatsAppUrl } from '../lib/whatsapp.ts';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -29,7 +29,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   };
 
   const handleDirectWhatsApp = () => {
-    window.open(getProductWhatsAppUrl(product, quantity), '_blank');
+    openWhatsApp(getProductWhatsAppUrl(product, quantity));
   };
 
   return (

@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+.aistudio/
+# local lockfile for npm (the project uses bun.lock)
+package-lock.json

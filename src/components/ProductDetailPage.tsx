@@ -14,7 +14,7 @@ import {
   Truck,
   Leaf
 } from 'lucide-react';
-import {
+import { openWhatsApp,
   WHATSAPP_LINE_1_DISPLAY,
   WHATSAPP_LINE_2_DISPLAY,
   getProductWhatsAppUrl
@@ -69,7 +69,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   };
 
   const handleDirectWhatsApp = (line: 'line1' | 'line2') => {
-    window.open(getProductWhatsAppUrl(product, quantity, line, lang), '_blank');
+    openWhatsApp(getProductWhatsAppUrl(product, quantity, line, lang));
   };
 
   // Related products from the same family or others

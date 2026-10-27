@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Product, PromoConfig, CartItem, ProductFamily, Language, AppTheme, PageView } from './types/index.ts';
 import { PromoBanner } from './components/PromoBanner.tsx';
 import { Navbar } from './components/Navbar.tsx';
@@ -11,8 +11,18 @@ import { ContactPage } from './components/ContactPage.tsx';
 import { CartDrawer } from './components/CartDrawer.tsx';
 import { Footer } from './components/Footer.tsx';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp.tsx';
+import {
+  MAX_QTY,
+  clampQuantity,
+  hydrateCart,
+  parseStoredCart,
+  sanitizeProducts,
+  sanitizePromo,
+} from './lib/validation.ts';
 
-const CART_STORAGE_KEY = 'rachid_potagiste_selection_v3';
+// The cart is stored as [{ id, quantity }] only: prices and names always come from the catalogue.
+const CART_STORAGE_KEY = 'rachid_potagiste_cart_v4';
+const LEGACY_CART_STORAGE_KEY = 'rachid_potagiste_selection_v3';
 const THEME_STORAGE_KEY = 'rachid_potagiste_theme';
 const LANG_STORAGE_KEY = 'rachid_potagiste_lang';
 const WA_LINE_STORAGE_KEY = 'rachid_potagiste_wa_line';
@@ -56,15 +66,20 @@ export function App() {
   const [currentPage, setCurrentPage] = useState<PageView>({ type: 'home' });
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
 
-  // Cart selection state
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    try {
-      const saved = localStorage.getItem(CART_STORAGE_KEY);
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  // Cart selection state. Saved lines wait here until the trusted catalogue has loaded.
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartHydrated, setCartHydrated] = useState(false);
+  const storedCartRef = useRef(
+    (() => {
+      try {
+        return parseStoredCart(
+          localStorage.getItem(CART_STORAGE_KEY) ?? localStorage.getItem(LEGACY_CART_STORAGE_KEY)
+        );
+      } catch {
+        return [];
+      }
+    })()
+  );
 
   // Apply RTL direction when Arabic is selected
   useEffect(() => {
@@ -101,14 +116,24 @@ export function App() {
     }
   }, [whatsappLine]);
 
-  // Save Cart
+  // Rebuild the cart from the catalogue once it is available (drops unknown / out-of-stock items)
   useEffect(() => {
+    if (cartHydrated || products.length === 0) return;
+    setCartItems(hydrateCart(storedCartRef.current, products));
+    setCartHydrated(true);
+  }, [products, cartHydrated]);
+
+  // Save Cart (ids and quantities only, and never before the cart has been rebuilt)
+  useEffect(() => {
+    if (!cartHydrated) return;
     try {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+      const lines = cartItems.map((item) => ({ id: item.product.id, quantity: item.quantity }));
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(lines));
+      localStorage.removeItem(LEGACY_CART_STORAGE_KEY);
     } catch {
       // ignore
     }
-  }, [cartItems]);
+  }, [cartItems, cartHydrated]);
 
   // Load products and promo configuration
   useEffect(() => {
@@ -121,12 +146,12 @@ export function App() {
 
         if (prodRes.ok) {
           const prodData = await prodRes.json();
-          setProducts(prodData);
+          setProducts(sanitizeProducts(prodData));
         }
 
         if (promoRes.ok) {
           const promoData = await promoRes.json();
-          setPromo(promoData);
+          setPromo(sanitizePromo(promoData));
         }
       } catch (err) {
         console.error('Error loading catalog data:', err);
@@ -140,16 +165,18 @@ export function App() {
 
   // Cart operations
   const handleAddToCart = (product: Product, quantity = 1) => {
+    if (!product.enStock) return;
+    const amount = clampQuantity(quantity);
     setCartItems((prev) => {
       const existing = prev.find((item) => item.product.id === product.id);
       if (existing) {
         return prev.map((item) =>
           item.product.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: Math.min(MAX_QTY, item.quantity + amount) }
             : item
         );
       }
-      return [...prev, { product, quantity }];
+      return [...prev, { product, quantity: amount }];
     });
   };
 
@@ -158,9 +185,10 @@ export function App() {
       handleRemoveItem(productId);
       return;
     }
+    const safeQuantity = clampQuantity(quantity);
     setCartItems((prev) =>
       prev.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
+        item.product.id === productId ? { ...item, quantity: safeQuantity } : item
       )
     );
   };

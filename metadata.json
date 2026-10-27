@@ -1,6 +1,5 @@
 {
   "name": "Rachid Potagiste - Boutique Artisanale Maroc",
   "description": "Boutique artisanale officielle de Rachid Potagiste au Maroc : légumes lacto-fermentés vivants en bocal, huiles de macération lentes 50 ml, savons à la luffa végétale et crèmes de soin 100% naturelles. Commandes directes sur WhatsApp.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "requestFramePermissions": []
 }

@@ -1,10 +1,10 @@
 import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
-// Users table (Firebase Auth UID as key)
+// Users table (keyed by the auth provider user id)
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
-  uid: text('uid').notNull().unique(), // Firebase Auth UID
+  uid: text('uid').notNull().unique(), // auth provider user id
   email: text('email').notNull(),
   name: text('name'),
   role: text('role').notNull().default('customer'), // 'customer' | 'admin'
@@ -31,17 +31,17 @@ export const products = pgTable('products', {
   slug: text('slug').notNull().unique(),
   name: text('name').notNull(),
   categorySlug: text('category_slug').notNull(),
-  price: integer('price').notNull(), // in cents (e.g. 1850 for 18.50 €)
+  price: integer('price').notNull(), // whole MAD (the shop prices in dirhams)
   originalPrice: integer('original_price'), // for discounts
   stock: integer('stock').notNull().default(30),
   unit: text('unit').notNull().default('unité'),
   description: text('description').notNull(),
   origin: text('origin').notNull(),
-  certification: text('certification').notNull().default('Certifié Bio Ecocert'),
+  certification: text('certification'), // only set when a real certificate exists (never a default claim)
   ingredients: text('ingredients'),
   benefits: text('benefits'),
-  rating: text('rating').default('4.9'),
-  reviewCount: integer('review_count').default(42),
+  rating: text('rating'), // computed from approved reviews, no invented default
+  reviewCount: integer('review_count').notNull().default(0),
   imageUrl: text('image_url').notNull(),
   isFeatured: integer('is_featured').default(0),
   createdAt: timestamp('created_at').defaultNow(),
@@ -51,17 +51,17 @@ export const products = pgTable('products', {
 export const orders = pgTable('orders', {
   id: serial('id').primaryKey(),
   orderNumber: text('order_number').notNull().unique(),
-  userId: text('user_id').notNull(), // Firebase UID or guest ID
+  userId: text('user_id').notNull(), // auth user id or guest id
   customerEmail: text('customer_email').notNull(),
   customerName: text('customer_name').notNull(),
   customerPhone: text('customer_phone').notNull(),
   shippingAddress: text('shipping_address').notNull(),
   shippingCity: text('shipping_city').notNull(),
   shippingPostalCode: text('shipping_postal_code'),
-  totalAmount: integer('total_amount').notNull(), // in cents
-  status: text('status').notNull().default('confirmed'), // 'confirmed' | 'preparing' | 'shipped' | 'delivered' | 'cancelled'
-  paymentMethod: text('payment_method').notNull().default('stripe_card'), // 'stripe_card' | 'cod'
-  paymentStatus: text('payment_status').notNull().default('paid'),
+  totalAmount: integer('total_amount').notNull(), // whole MAD, recomputed server-side from product prices
+  status: text('status').notNull().default('pending'), // 'pending' | 'confirmed' | 'preparing' | 'shipped' | 'delivered' | 'cancelled'
+  paymentMethod: text('payment_method').notNull().default('cod'), // 'cod' (cash on delivery) | 'card'
+  paymentStatus: text('payment_status').notNull().default('unpaid'), // never default to 'paid'
   trackingNumber: text('tracking_number'),
   itemsJson: text('items_json').notNull(), // JSON stringified array of ordered items
   createdAt: timestamp('created_at').defaultNow(),
@@ -114,8 +114,8 @@ export const reviews = pgTable('reviews', {
   authorLocation: text('author_location'),
   rating: integer('rating').notNull(), // 1 to 5
   comment: text('comment').notNull(),
-  status: text('status').notNull().default('approved'), // 'pending' | 'approved' | 'rejected'
-  verifiedPurchase: integer('verified_purchase').default(1),
+  status: text('status').notNull().default('pending'), // reviews are moderated before being shown
+  verifiedPurchase: integer('verified_purchase').notNull().default(0),
   source: text('source').default('community'), // 'youtube_community' | 'verified_customer'
   createdAt: timestamp('created_at').defaultNow(),
 });

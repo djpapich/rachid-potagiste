@@ -1,29 +1,6 @@
 <!doctype html>
 <html lang="fr" dir="ltr">
   <head>
-    <script>
-      (function() {
-        try {
-          var _origFetch = window.fetch ? window.fetch.bind(window) : undefined;
-          Object.defineProperty(window, 'fetch', {
-            get: function() { return _origFetch; },
-            set: function(fn) { _origFetch = fn; },
-            configurable: true,
-            enumerable: true
-          });
-        } catch (err) {
-          try {
-            var _protoFetch = Window.prototype.fetch;
-            Object.defineProperty(Window.prototype, 'fetch', {
-              get: function() { return _protoFetch; },
-              set: function(fn) { _protoFetch = fn; },
-              configurable: true,
-              enumerable: true
-            });
-          } catch (err2) {}
-        }
-      })();
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
@@ -39,14 +16,14 @@
     <meta property="og:title" content="Rachid Potagiste · Boutique Artisanale & Terroir Maroc" />
     <meta property="og:description" content="Préparations naturelles faites main au Maroc : légumes lacto-fermentés vivants, huiles de macération lentes, savons luffa et crèmes de soin. Commandes faciles sur WhatsApp." />
     <meta property="og:site_name" content="Rachid Potagiste" />
-    <meta property="og:image" content="/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg" />
+    <meta property="og:image" content="https://rachidpotagiste.netlify.app/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg" />
     <meta property="og:locale" content="fr_MA" />
 
     <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Rachid Potagiste · Boutique Artisanale Maroc" />
     <meta name="twitter:description" content="Légumes lacto-fermentés en bocal, huiles de macération 50 ml, savons luffa et crèmes 100% naturelles. Fait main à Bouznika, Maroc." />
-    <meta name="twitter:image" content="/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg" />
+    <meta name="twitter:image" content="https://rachidpotagiste.netlify.app/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg" />
 
     <!-- Canonical & Robots -->
     <link rel="canonical" href="https://rachidpotagiste.netlify.app/" />

@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
               onNavigate={onNavigate}
               className="flex items-center gap-3 text-left rtl:text-right"
             >
-              <div className="w-10 h-10 rounded-full bg-[#FBFAF5] border border-[#C9A227] flex items-center justify-center p-1">
+              <div data-fixed-colors className="w-10 h-10 rounded-full bg-[#FBFAF5] border border-[#C9A227] flex items-center justify-center p-1">
                 <svg viewBox="0 0 100 100" className="w-full h-full text-[#C9A227]">
                   <circle cx="50" cy="50" r="46" fill="#14281C" />
                   <path d="M50 15 C32 30 30 65 50 82 C70 65 68 30 50 15 Z" fill="#C9A227" />
@@ -128,7 +128,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
                 href={getGeneralInquiryWhatsAppUrl('line1', lang)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
+                className="flex items-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
               >
                 <MessageCircle className="w-4 h-4 fill-current shrink-0" />
                 <span>WhatsApp 1 : {WHATSAPP_LINE_1_DISPLAY}</span>
@@ -138,7 +138,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
                 href={getGeneralInquiryWhatsAppUrl('line2', lang)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
+                className="flex items-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
               >
                 <MessageCircle className="w-4 h-4 fill-current shrink-0" />
                 <span>WhatsApp 2 : {WHATSAPP_LINE_2_DISPLAY}</span>

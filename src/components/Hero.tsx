@@ -104,7 +104,7 @@ export const Hero: React.FC<HeroProps> = ({
                 href={getGeneralInquiryWhatsAppUrl(whatsappLine, lang)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-6 py-3.5 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 pulse-whatsapp"
+                className="inline-flex items-center justify-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white px-6 py-3.5 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 pulse-whatsapp"
               >
                 <MessageCircle className="w-5 h-5 fill-current" />
                 <span>{t.orderOnWhatsApp}</span>

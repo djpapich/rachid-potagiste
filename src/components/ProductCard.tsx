@@ -139,7 +139,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             type="button"
             onClick={() => openWhatsApp(getProductWhatsAppUrl(product, 1, whatsappLine, lang))}
-            className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-2.5 px-3 rounded-xl font-semibold text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white py-2.5 px-3 rounded-xl font-semibold text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 fill-current shrink-0" aria-hidden="true" />
             <span className="truncate">{t.orderOnWhatsApp}</span>

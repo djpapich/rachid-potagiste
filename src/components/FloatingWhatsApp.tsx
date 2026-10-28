@@ -78,7 +78,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ lang = 'fr',
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20BA5A] text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 pulse-whatsapp cursor-pointer"
+        className="w-14 h-14 rounded-full bg-[#0F7A40] hover:bg-[#0C6937] text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 pulse-whatsapp cursor-pointer"
         title="Contacter Rachid sur WhatsApp (07 86 73 16 66 / 07 21 04 58 01)"
         aria-label="Contacter Rachid Potagiste sur WhatsApp"
       >

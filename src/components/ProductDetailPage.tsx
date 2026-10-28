@@ -279,7 +279,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     key={line}
                     type="button"
                     onClick={() => openWhatsApp(getProductWhatsAppUrl(product, quantity, line, lang))}
-                    className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-3 px-4 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                    className="flex items-center justify-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white py-3 px-4 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all active:scale-[0.98] cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4 fill-current shrink-0" aria-hidden="true" />
                     <span>
@@ -429,7 +429,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           type="button"
           onClick={() => openWhatsApp(getProductWhatsAppUrl(product, quantity, whatsappLine, lang))}
           aria-label={t.orderOnWhatsApp}
-          className="w-12 h-12 shrink-0 rounded-xl bg-[#25D366] text-white flex items-center justify-center shadow-md cursor-pointer active:scale-95"
+          className="w-12 h-12 shrink-0 rounded-xl bg-[#0F7A40] text-white flex items-center justify-center shadow-md cursor-pointer active:scale-95"
         >
           <MessageCircle className="w-6 h-6 fill-current" aria-hidden="true" />
         </button>

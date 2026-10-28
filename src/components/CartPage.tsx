@@ -418,7 +418,7 @@ export const CartPage: React.FC<CartPageProps> = ({
                 {/* Dispatch Button */}
                 <button
                   onClick={handleSendOrder}
-                  className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer pulse-whatsapp"
+                  className="w-full flex items-center justify-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer pulse-whatsapp"
                 >
                   <MessageCircle className="w-5 h-5 fill-current shrink-0" />
                   <span>{t.sendOrderWhatsApp}</span>

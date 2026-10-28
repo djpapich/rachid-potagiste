@@ -82,7 +82,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, lang, them
               href={getGeneralInquiryWhatsAppUrl('line1', lang)}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95"
+              className="w-full flex items-center justify-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95"
             >
               <MessageCircle className="w-5 h-5 fill-current" />
               <span>{t.callOrChat} ({WHATSAPP_LINE_1_DISPLAY})</span>
@@ -110,7 +110,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, lang, them
               href={getGeneralInquiryWhatsAppUrl('line2', lang)}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95"
+              className="w-full flex items-center justify-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95"
             >
               <MessageCircle className="w-5 h-5 fill-current" />
               <span>{t.callOrChat} ({WHATSAPP_LINE_2_DISPLAY})</span>

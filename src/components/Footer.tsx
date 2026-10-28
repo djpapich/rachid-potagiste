@@ -128,7 +128,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
                 href={getGeneralInquiryWhatsAppUrl('line1', lang)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
+                className="flex items-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
               >
                 <MessageCircle className="w-4 h-4 fill-current shrink-0" />
                 <span>WhatsApp 1 : {WHATSAPP_LINE_1_DISPLAY}</span>
@@ -138,7 +138,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
                 href={getGeneralInquiryWhatsAppUrl('line2', lang)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
+                className="flex items-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white px-3.5 py-2 rounded-xl font-bold text-xs shadow-md transition-all w-full justify-center sm:justify-start"
               >
                 <MessageCircle className="w-4 h-4 fill-current shrink-0" />
                 <span>WhatsApp 2 : {WHATSAPP_LINE_2_DISPLAY}</span>

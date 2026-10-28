@@ -109,7 +109,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, lang, whatsapp
                 href={getGeneralInquiryWhatsAppUrl(whatsappLine, lang)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-5 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95"
+                className="inline-flex items-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white px-5 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95"
               >
                 <MessageCircle className="w-4 h-4 fill-current" aria-hidden="true" />
                 <span>Poser une question à Rachid</span>

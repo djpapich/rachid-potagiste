@@ -202,4 +202,23 @@ test('css: entrance animations never keep a filled transform (fill-mode both/for
   }
 });
 
+// --- regression: the dark/light toggle
+// Tailwind 4 ties dark: utilities to the OS setting unless told to follow the .dark class.
+test('theme: dark: utilities follow the .dark class set by the toggle', () => {
+  const css = fs.readFileSync('src/index.css', 'utf8');
+  assert.ok(/@custom-variant\s+dark\s*\(&:where\(\.dark,\s*\.dark \*\)\)/.test(css), 'missing @custom-variant dark');
+});
+test('theme: no light surface colour without a dark variant in any component', () => {
+  const offenders: string[] = [];
+  for (const f of fs.readdirSync('src/components').filter((n) => n.endsWith('.tsx'))) {
+    fs.readFileSync('src/components/' + f, 'utf8').split('\n').forEach((lineText, i) => {
+      for (const m of lineText.matchAll(/(?<![\w:-])bg-\[#(FBFAF5|F4F1EA)\]/gi)) {
+        // a hover/dark/opacity-modified use on the same line counts only if a dark: background is present too
+        if (!/dark:bg-\[#/.test(lineText) && !lineText.includes('data-fixed-colors')) offenders.push(`${f}:${i + 1} ${m[0]}`);
+      }
+    });
+  }
+  assert.deepEqual(offenders, []);
+});
+
 console.log(`\n${passed} security tests passed`);

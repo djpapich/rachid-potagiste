@@ -73,7 +73,7 @@ export const VideoShowcase: React.FC<{ lang: Language }> = ({ lang }) => {
               <span className="relative block aspect-video bg-black">
                 <img src={video.thumbUrl} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <span className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors">
-                  <span className="w-10 h-10 rounded-full bg-[#FBFAF5]/95 text-[#1F3D2B] flex items-center justify-center shadow-md">
+                  <span data-fixed-colors className="w-10 h-10 rounded-full bg-[#FBFAF5]/95 text-[#1F3D2B] flex items-center justify-center shadow-md">
                     <Play className="w-4 h-4 fill-current" aria-hidden="true" />
                   </span>
                 </span>

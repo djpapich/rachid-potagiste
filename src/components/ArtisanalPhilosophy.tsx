@@ -30,23 +30,23 @@ export const ArtisanalPhilosophy: React.FC = () => {
   ];
 
   return (
-    <section id="pourquoi" className="py-16 sm:py-20 bg-[#FBFAF5] border-b border-[#E5DFC9] scroll-mt-20">
+    <section id="pourquoi" className="py-16 sm:py-20 bg-[#FBFAF5] dark:bg-[#152219] border-b border-[#E5DFC9] dark:border-[#273D2C] scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAE4D2] text-xs font-semibold text-[#8C6D23] mb-3">
-            <Sprout className="w-3.5 h-3.5 text-[#3F6B2E]" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAE4D2] dark:bg-[#273D2C] text-xs font-semibold text-[#8C6D23] dark:text-[#E5B834] mb-3">
+            <Sprout className="w-3.5 h-3.5 text-[#3F6B2E] dark:text-[#528B3E]" />
             <span>La Charte du Potager</span>
           </div>
 
-          <h2 className="font-title text-2xl sm:text-3xl md:text-4xl font-black text-[#1F3D2B] mb-3">
+          <h2 className="font-title text-2xl sm:text-3xl md:text-4xl font-black text-[#1F3D2B] dark:text-[#F4F1EA] mb-3">
             Pourquoi Choisir Nos Préparations Faites Main ?
           </h2>
 
-          <p className="font-script text-xl sm:text-2xl text-[#8C6D23] font-bold italic mb-2">
+          <p className="font-script text-xl sm:text-2xl text-[#8C6D23] dark:text-[#E5B834] font-bold italic mb-2">
             « Nous fabriquons ce que nous offrons à nos propres enfants »
           </p>
-          <p className="text-xs sm:text-sm text-[#1F3D2B]/75">
+          <p className="text-xs sm:text-sm text-[#1F3D2B]/75 dark:text-[#F4F1EA]/75">
             Une approche respectueuse des rythmes de la nature, de la terre marocaine et de votre bien-être.
           </p>
         </div>
@@ -55,32 +55,32 @@ export const ArtisanalPhilosophy: React.FC = () => {
           {pillars.map((pillar, i) => (
             <div
               key={i}
-              className="bg-[#F4F1EA] rounded-2xl p-6 border border-[#E5DFC9] hover:border-[#3F6B2E]/60 transition-all shadow-xs flex flex-col justify-between"
+              className="bg-[#F4F1EA] dark:bg-[#1C2D21] rounded-2xl p-6 border border-[#E5DFC9] dark:border-[#273D2C] hover:border-[#3F6B2E]/60 dark:hover:border-[#528B3E]/60 transition-all shadow-xs flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono font-bold text-[#8C6D23] bg-[#EAE4D2] px-2 py-0.5 rounded-md">
+                  <span className="text-xs font-mono font-bold text-[#8C6D23] dark:text-[#E5B834] bg-[#EAE4D2] dark:bg-[#273D2C] px-2 py-0.5 rounded-md">
                     0{i + 1}
                   </span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#3F6B2E]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#3F6B2E] dark:text-[#528B3E]">
                     {pillar.badge}
                   </span>
                 </div>
 
-                <h3 className="font-title text-lg font-bold text-[#1F3D2B] mb-1">
+                <h3 className="font-title text-lg font-bold text-[#1F3D2B] dark:text-[#F4F1EA] mb-1">
                   {pillar.title}
                 </h3>
 
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#8C6D23] mb-3">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#8C6D23] dark:text-[#E5B834] mb-3">
                   {pillar.subtitle}
                 </p>
 
-                <p className="text-xs text-[#1F3D2B]/80 leading-relaxed">
+                <p className="text-xs text-[#1F3D2B]/80 dark:text-[#F4F1EA]/80 leading-relaxed">
                   {pillar.description}
                 </p>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-[#E5DFC9] text-[11px] font-semibold text-[#3F6B2E] flex items-center gap-1">
+              <div className="mt-6 pt-3 border-t border-[#E5DFC9] dark:border-[#273D2C] text-[11px] font-semibold text-[#3F6B2E] dark:text-[#528B3E] flex items-center gap-1">
                 <span>✓ Conforme à nos principes</span>
               </div>
             </div>

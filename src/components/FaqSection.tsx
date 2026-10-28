@@ -33,18 +33,18 @@ export const FaqSection: React.FC = () => {
   ];
 
   return (
-    <section id="faq" className="py-14 sm:py-18 bg-[#F4F1EA] border-b border-[#E5DFC9] scroll-mt-20">
+    <section id="faq" className="py-14 sm:py-18 bg-[#F4F1EA] dark:bg-[#1C2D21] border-b border-[#E5DFC9] dark:border-[#273D2C] scroll-mt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAE4D2] text-xs font-semibold text-[#8C6D23] mb-3">
-            <HelpCircle className="w-3.5 h-3.5 text-[#3F6B2E]" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAE4D2] dark:bg-[#273D2C] text-xs font-semibold text-[#8C6D23] dark:text-[#E5B834] mb-3">
+            <HelpCircle className="w-3.5 h-3.5 text-[#3F6B2E] dark:text-[#528B3E]" />
             <span>Foire Aux Questions</span>
           </div>
-          <h2 className="font-title text-2xl sm:text-3xl font-black text-[#1F3D2B] mb-2">
+          <h2 className="font-title text-2xl sm:text-3xl font-black text-[#1F3D2B] dark:text-[#F4F1EA] mb-2">
             Questions Fréquentes
           </h2>
-          <p className="text-xs sm:text-sm text-[#1F3D2B]/75">
+          <p className="text-xs sm:text-sm text-[#1F3D2B]/75 dark:text-[#F4F1EA]/75">
             Toutes les réponses pour bien choisir et conserver vos préparations.
           </p>
         </div>
@@ -55,22 +55,22 @@ export const FaqSection: React.FC = () => {
             return (
               <div
                 key={index}
-                className="bg-[#FBFAF5] rounded-2xl border border-[#E5DFC9] overflow-hidden transition-all"
+                className="bg-[#FBFAF5] dark:bg-[#152219] rounded-2xl border border-[#E5DFC9] dark:border-[#273D2C] overflow-hidden transition-all"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-4 font-title text-sm sm:text-base font-bold text-[#1F3D2B] hover:text-[#3F6B2E] transition-colors"
+                  className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-4 font-title text-sm sm:text-base font-bold text-[#1F3D2B] dark:text-[#F4F1EA] hover:text-[#3F6B2E] dark:hover:text-[#528B3E] transition-colors"
                 >
                   <span>{faq.question}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#8C6D23] shrink-0 transition-transform duration-300 ${
+                    className={`w-5 h-5 text-[#8C6D23] dark:text-[#E5B834] shrink-0 transition-transform duration-300 ${
                       isOpen ? 'transform rotate-180' : ''
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 pb-5 sm:px-5 sm:pb-6 text-xs sm:text-sm text-[#1F3D2B]/85 leading-relaxed border-t border-[#E5DFC9]/60 pt-3">
+                  <div className="px-4 pb-5 sm:px-5 sm:pb-6 text-xs sm:text-sm text-[#1F3D2B]/85 dark:text-[#F4F1EA]/85 leading-relaxed border-t border-[#E5DFC9]/60 dark:border-[#273D2C]/60 pt-3">
                     {faq.answer}
                   </div>
                 )}

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Tailwind 4 applies dark: utilities from the OS setting (prefers-color-scheme) by default.
+   The theme toggle sets the "dark" class on <html>, so dark: must follow that class instead;
+   otherwise the toggle only switches the CSS variables and leaves every dark: utility behind. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-title: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;

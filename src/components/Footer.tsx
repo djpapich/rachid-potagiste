@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
               onNavigate={onNavigate}
               className="flex items-center gap-3 text-left rtl:text-right"
             >
-              <div className="w-10 h-10 rounded-full bg-[#FBFAF5] border border-[#C9A227] flex items-center justify-center p-1">
+              <div data-fixed-colors className="w-10 h-10 rounded-full bg-[#FBFAF5] border border-[#C9A227] flex items-center justify-center p-1">
                 <svg viewBox="0 0 100 100" className="w-full h-full text-[#C9A227]">
                   <circle cx="50" cy="50" r="46" fill="#14281C" />
                   <path d="M50 15 C32 30 30 65 50 82 C70 65 68 30 50 15 Z" fill="#C9A227" />

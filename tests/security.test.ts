@@ -12,6 +12,8 @@ import {
   validateOrderInfo,
 } from '../src/lib/validation.ts';
 import { getCartWhatsAppUrl } from '../src/lib/whatsapp.ts';
+import { FAMILIES, pageToPath, pathToPage } from '../src/lib/router.ts';
+import { hasPhoto, photoFirst, productSrcSet } from '../src/lib/imageHelper.ts';
 import fs from 'node:fs';
 
 const catalogRaw = JSON.parse(fs.readFileSync('public/data/products.json', 'utf8'));
@@ -148,6 +150,56 @@ test('WhatsApp URL: control chars stripped, discount clamped, only wa.me, no raw
   assert.ok(text.includes('99×'), 'quantity capped at 99');
   assert.ok(text.includes('-50%'), 'discount capped at 50%');
   assert.ok(text.length < 2500, 'message length bounded');
+});
+
+// --- image paths in the catalogue
+test('image paths: only local /assets files (or empty = placeholder)', () => {
+  const base = catalogRaw[0];
+  const keep = (image: string) => sanitizeProducts([{ ...base, image }]).length === 1;
+  assert.ok(keep(''));
+  assert.ok(keep('/assets/products-web/huile-ortie-800.webp'));
+  for (const bad of ['https://evil.example/x.jpg', '//evil.example/x.jpg', '/assets/../etc/passwd', 'javascript:alert(1)', 'data:image/svg+xml,<svg onload=alert(1)>', '/images/x.jpg', '/assets/x.svg'])
+    assert.ok(!keep(bad), bad);
+});
+test('every real product photo exists on disk, and photo-less products are flagged', () => {
+  for (const p of catalog) {
+    if (hasPhoto(p)) {
+      assert.ok(fs.existsSync('public' + p.image), p.image);
+      assert.ok(fs.existsSync('public' + p.imagePng), p.imagePng);
+      assert.ok(productSrcSet(p.image)!.includes('-1200.webp 1200w'));
+    }
+  }
+  assert.deepEqual(catalog.filter((p) => !hasPhoto(p)).map((p) => p.id).sort(), ['huile-aloe-vera', 'huile-camomille']);
+});
+test('products with a photo are listed before products without', () => {
+  const sorted = photoFirst(catalog);
+  const firstEmpty = sorted.findIndex((p) => !hasPhoto(p));
+  assert.ok(sorted.slice(firstEmpty).every((p) => !hasPhoto(p)));
+});
+
+// --- router
+test('router: every page maps to a URL and back', () => {
+  const pages = [
+    { type: 'home' }, { type: 'cart' }, { type: 'about' }, { type: 'contact' },
+    ...FAMILIES.map((family) => ({ type: 'category', family })),
+    ...catalog.map((p) => ({ type: 'product', productId: p.id })),
+  ] as Parameters<typeof pageToPath>[0][];
+  for (const page of pages) assert.deepEqual(pathToPage(pageToPath(page)), page);
+});
+test('router: hostile or unknown paths are "notfound"', () => {
+  for (const bad of ['/produit/<script>alert(1)</script>', '/categorie/../etc', '/categorie/weapons', '/produit/', '/produit/a/b', '/%E0%A4%A', '/admin', '/produit/' + 'a'.repeat(100)])
+    assert.equal(pathToPage(bad).type, 'notfound', bad);
+  assert.equal(pathToPage('/panier/').type, 'cart');
+});
+
+
+// --- regression: a filled transform animation turns <main> into the containing block of
+// every position:fixed child (sticky buy bar ends up at the bottom of the page, not the screen)
+test('css: entrance animations never keep a filled transform (fill-mode both/forwards)', () => {
+  const css = fs.readFileSync('src/index.css', 'utf8');
+  for (const m of css.matchAll(/\.(page-enter|toast-in)\s*\{([^}]*)\}/g)) {
+    assert.ok(!/\b(both|forwards)\b/.test(m[2]), `.${m[1]} must not use fill-mode both/forwards`);
+  }
 });
 
 console.log(`\n${passed} security tests passed`);

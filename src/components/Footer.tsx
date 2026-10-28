@@ -7,6 +7,7 @@ import {
   getGeneralInquiryWhatsAppUrl
 } from '../lib/whatsapp.ts';
 import { translations } from '../lib/translations.ts';
+import { NavLink } from './NavLink.tsx';
 
 interface FooterProps {
   onNavigate: (page: PageView) => void;
@@ -25,9 +26,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
           
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-4">
-            <button
-              onClick={() => onNavigate({ type: 'home' })}
-              className="flex items-center gap-3 text-left rtl:text-right cursor-pointer"
+            <NavLink
+              page={{ type: 'home' }}
+              onNavigate={onNavigate}
+              className="flex items-center gap-3 text-left rtl:text-right"
             >
               <div className="w-10 h-10 rounded-full bg-[#FBFAF5] border border-[#C9A227] flex items-center justify-center p-1">
                 <svg viewBox="0 0 100 100" className="w-full h-full text-[#C9A227]">
@@ -45,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
                   {t.tagline}
                 </span>
               </div>
-            </button>
+            </NavLink>
 
             <p className="text-xs text-[#E5DFC9]/80 leading-relaxed max-w-sm">
               Artisanat du potager & préparations naturelles faites main au Maroc. Légumes lacto-fermentés vivants, huiles de macération 50 ml, savons à la luffa végétale et crèmes concentrées en boîte métal.
@@ -64,44 +66,49 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, lang, theme }) => {
             </h4>
             <ul className="space-y-2 text-xs text-[#E5DFC9]">
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'category', family: 'lacto-fermentes' })}
-                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                <NavLink
+                  page={{ type: 'category', family: 'lacto-fermentes' }}
+                  onNavigate={onNavigate}
+                  className="hover:text-white transition-colors"
                 >
                   {t.navLacto} (70 - 80 DH)
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'category', family: 'huiles' })}
-                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                <NavLink
+                  page={{ type: 'category', family: 'huiles' }}
+                  onNavigate={onNavigate}
+                  className="hover:text-white transition-colors"
                 >
                   {t.navOils} (70 - 80 DH)
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'category', family: 'savons' })}
-                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                <NavLink
+                  page={{ type: 'category', family: 'savons' }}
+                  onNavigate={onNavigate}
+                  className="hover:text-white transition-colors"
                 >
                   {t.navSoaps} (45 DH)
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'category', family: 'cremes' })}
-                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                <NavLink
+                  page={{ type: 'category', family: 'cremes' }}
+                  onNavigate={onNavigate}
+                  className="hover:text-white transition-colors"
                 >
                   {t.navCreams} (70 - 80 DH)
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'about' })}
-                  className="hover:text-white transition-colors cursor-pointer text-left rtl:text-right"
+                <NavLink
+                  page={{ type: 'about' }}
+                  onNavigate={onNavigate}
+                  className="hover:text-white transition-colors"
                 >
                   {t.navAbout}
-                </button>
+                </NavLink>
               </li>
             </ul>
           </div>

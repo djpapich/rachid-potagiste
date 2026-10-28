@@ -22,6 +22,7 @@ import { openWhatsApp,
   getCartWhatsAppUrl
 } from '../lib/whatsapp.ts';
 import { translations } from '../lib/translations.ts';
+import { ProductImage } from './ProductImage.tsx';
 import {
   OrderField,
   checkPromoCode,
@@ -175,11 +176,9 @@ export const CartPage: React.FC<CartPageProps> = ({
                         key={item.product.id}
                         className="flex gap-4 p-3.5 bg-[#F4F1EA] dark:bg-[#1C2D21] rounded-2xl border border-[#E5DFC9] dark:border-[#273D2C] items-center"
                       >
-                        <img
-                          src={item.product.image}
-                          alt={title}
-                          className="w-20 h-20 object-contain bg-white rounded-xl p-1 border border-[#E5DFC9] shrink-0"
-                        />
+                        <div className="w-20 h-20 bg-white dark:bg-[#101A13] rounded-xl p-1 border border-[#E5DFC9] dark:border-[#273D2C] shrink-0 overflow-hidden">
+                          <ProductImage src={item.product.image} alt={title} lang={lang} sizes="80px" className="w-full h-full object-contain" />
+                        </div>
 
                         <div className="flex-1 min-w-0">
                           <h3 className="font-title text-sm sm:text-base font-bold text-[#1F3D2B] dark:text-[#F4F1EA] truncate">

@@ -7,9 +7,12 @@ import { ArtisanalPhilosophy } from './ArtisanalPhilosophy.tsx';
 import { HowToOrder } from './HowToOrder.tsx';
 import { FaqSection } from './FaqSection.tsx';
 import { translations } from '../lib/translations.ts';
+import { photoFirst } from '../lib/imageHelper.ts';
+import { ProductGridSkeleton } from './Skeletons.tsx';
 
 interface HomePageProps {
   products: Product[];
+  loading?: boolean;
   promo: PromoConfig | null;
   onSelectProduct: (product: Product) => void;
   onAddToCart: (product: Product) => void;
@@ -22,6 +25,7 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({
   products,
+  loading = false,
   promo,
   onSelectProduct,
   onAddToCart,
@@ -34,10 +38,10 @@ export const HomePage: React.FC<HomePageProps> = ({
   const t = translations[lang] || translations.fr;
 
   // Filter products by family
-  const lactoProducts = products.filter((p) => p.famille === 'lacto-fermentes');
-  const oilProducts = products.filter((p) => p.famille === 'huiles');
-  const soapProducts = products.filter((p) => p.famille === 'savons');
-  const creamProducts = products.filter((p) => p.famille === 'cremes');
+  const lactoProducts = photoFirst(products.filter((p) => p.famille === 'lacto-fermentes'));
+  const oilProducts = photoFirst(products.filter((p) => p.famille === 'huiles'));
+  const soapProducts = photoFirst(products.filter((p) => p.famille === 'savons'));
+  const creamProducts = photoFirst(products.filter((p) => p.famille === 'cremes'));
   const soapAndCreamProducts = [...soapProducts, ...creamProducts];
 
   // Best sellers: curated selection from each category
@@ -62,6 +66,12 @@ export const HomePage: React.FC<HomePageProps> = ({
         theme={theme}
         whatsappLine={whatsappLine}
       />
+
+      {loading && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <ProductGridSkeleton count={4} />
+        </div>
+      )}
 
       {/* 2. Horizontal Scroll Carousel 1: Best Sellers & Featured */}
       <HorizontalProductCarousel

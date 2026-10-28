@@ -65,9 +65,12 @@ const REQUIRED_STRINGS = [
   'precautions',
 ] as const;
 
+// An empty path means "no photo yet" (the site shows a placeholder).
+// Otherwise only a local /assets/... image is accepted: no external hosts, no schemes, no "..".
+const IMAGE_PATH = /^\/assets\/[A-Za-z0-9/_.-]+\.(webp|jpg|jpeg|png)$/;
+
 function isSafeImagePath(value: string): boolean {
-  const v = value.trim().toLowerCase();
-  return v.length > 0 && !v.startsWith('javascript:') && !v.startsWith('vbscript:');
+  return value === '' || (IMAGE_PATH.test(value) && !value.includes('..'));
 }
 
 function toProduct(raw: unknown): Product | null {

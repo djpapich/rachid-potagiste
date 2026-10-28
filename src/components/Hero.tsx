@@ -3,6 +3,7 @@ import { ProductFamily, Language, AppTheme, PageView } from '../types/index.ts';
 import { ArrowRight, ArrowLeft, MessageCircle, Leaf, ShieldCheck, HeartHandshake } from 'lucide-react';
 import { getGeneralInquiryWhatsAppUrl, WHATSAPP_LINE_1_DISPLAY, WHATSAPP_LINE_2_DISPLAY } from '../lib/whatsapp.ts';
 import { translations } from '../lib/translations.ts';
+import { NavLink } from './NavLink.tsx';
 
 interface HeroProps {
   onNavigate: (page: PageView) => void;
@@ -32,28 +33,28 @@ export const Hero: React.FC<HeroProps> = ({
       label: lang === 'ar' ? 'خضر مخمرة حية' : 'Légumes lacto-fermentés',
       sub: lang === 'ar' ? 'أواني زجاجية' : 'Bocaux en verre',
       family: 'lacto-fermentes',
-      img: '/assets/products/photos-fond-transparent/chou-vert-carotte-lacto-fermente.png',
+      img: '/assets/products-web/chou-vert-carotte-lacto-fermente-cutout.webp',
       priceSnippet: '70 - 80 DH',
     },
     {
       label: lang === 'ar' ? 'زيوت التقطير البطيء' : 'Huiles de macération',
       sub: lang === 'ar' ? 'قوارير مضخة 50 مل' : 'Flacons pompe 50 ml',
       family: 'huiles',
-      img: '/assets/products/photos-fond-transparent/huile-ortie.png',
+      img: '/assets/products-web/huile-ortie-cutout.webp',
       priceSnippet: '70 - 80 DH',
     },
     {
       label: lang === 'ar' ? 'صابون بليفة البستان' : 'Savons à la luffa',
       sub: lang === 'ar' ? 'تقشير طبيعي' : 'Exfoliation douce',
       family: 'savons',
-      img: '/assets/products/photos-fond-transparent/savon-luffa-ortie.png',
+      img: '/assets/products-web/savon-luffa-ortie-cutout.webp',
       priceSnippet: '45 DH',
     },
     {
       label: lang === 'ar' ? 'مراهم وعناية طبيعية' : 'Crèmes & Baumes',
       sub: lang === 'ar' ? 'علب معدنية 50 غ' : 'Boîtes métal 50 g',
       family: 'cremes',
-      img: '/assets/products/photos-fond-transparent/creme-ortie.png',
+      img: '/assets/products-web/creme-ortie-cutout.webp',
       priceSnippet: '70 - 80 DH',
     },
   ];
@@ -90,13 +91,14 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full sm:w-auto mb-8">
-              <button
-                onClick={() => onNavigate({ type: 'category', family: 'lacto-fermentes' })}
-                className="inline-flex items-center justify-center gap-2 bg-[#1F3D2B] dark:bg-[#E5B834] text-white dark:text-[#0D140F] hover:bg-[#162D20] px-6 py-3.5 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer"
+              <NavLink
+                page={{ type: 'category', family: 'lacto-fermentes' }}
+                onNavigate={onNavigate}
+                className="inline-flex items-center justify-center gap-2 bg-[#1F3D2B] dark:bg-[#E5B834] text-white dark:text-[#0D140F] hover:bg-[#162D20] px-6 py-3.5 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95"
               >
                 <span>{t.seeCatalog}</span>
-                {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
-              </button>
+                {isRtl ? <ArrowLeft className="w-4 h-4" aria-hidden="true" /> : <ArrowRight className="w-4 h-4" aria-hidden="true" />}
+              </NavLink>
 
               <a
                 href={getGeneralInquiryWhatsAppUrl(whatsappLine, lang)}
@@ -150,10 +152,11 @@ export const Hero: React.FC<HeroProps> = ({
               {/* 2x2 Grid with real transparent product photos */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 {categoriesCards.map((cat) => (
-                  <button
+                  <NavLink
                     key={cat.family}
-                    onClick={() => onNavigate({ type: 'category', family: cat.family })}
-                    className="group bg-[#F4F1EA] dark:bg-[#1C2D21] p-3 rounded-2xl border border-[#E5DFC9] dark:border-[#273D2C] hover:border-[#1F3D2B] dark:hover:border-[#E5B834] transition-all text-center cursor-pointer flex flex-col justify-between"
+                    page={{ type: 'category', family: cat.family }}
+                    onNavigate={onNavigate}
+                    className="group bg-[#F4F1EA] dark:bg-[#1C2D21] p-3 rounded-2xl border border-[#E5DFC9] dark:border-[#273D2C] hover:border-[#1F3D2B] dark:hover:border-[#E5B834] transition-all text-center flex flex-col justify-between"
                   >
                     <div className="h-24 sm:h-28 flex items-center justify-center overflow-hidden mb-2">
                       <img
@@ -161,6 +164,9 @@ export const Hero: React.FC<HeroProps> = ({
                         alt={cat.label}
                         className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                         loading="eager"
+                        decoding="async"
+                        width={640}
+                        height={640}
                       />
                     </div>
                     <div>
@@ -174,7 +180,7 @@ export const Hero: React.FC<HeroProps> = ({
                         {cat.priceSnippet}
                       </span>
                     </div>
-                  </button>
+                  </NavLink>
                 ))}
               </div>
 

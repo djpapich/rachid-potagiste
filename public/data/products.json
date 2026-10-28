@@ -17,11 +17,19 @@
     "poidsNet": "50 g",
     "prix": 80,
     "couleur": "#1E4D2B",
-    "image": "/assets/products/photos-site-1600x1600/creme-ortie.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/creme-ortie.png",
+    "image": "/assets/products-web/creme-ortie-800.webp",
+    "imagePng": "/assets/products-web/creme-ortie-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Sans eau ajoutée", "labelAr": "بدون ماء مضاف", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Sans eau ajoutée",
+        "labelAr": "بدون ماء مضاف",
+        "type": "dark"
+      }
     ],
     "description": "Crème de soin fondante à l'ortie fraîche du potager, beurre végétal de karité brut et cire protectrice. Idéale pour nourrir les zones sèches, apaiser les rougeurs et tonifier l'épiderme.",
     "descriptionAr": "مرهم طبيعي مغذي بخلاصة نبات الحريقة الطري، زبدة الشيا النقية وشمع العسل الواقي. مثالي لترطيب المناطق الجافة وتهدئة البشرة وتجديد حيويتها.",
@@ -73,11 +81,19 @@
     "poidsNet": "50 g",
     "prix": 80,
     "couleur": "#4D5D38",
-    "image": "/assets/products/photos-site-1600x1600/creme-marrube-blanc.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/creme-marrube-blanc.png",
+    "image": "/assets/products-web/creme-marrube-blanc-800.webp",
+    "imagePng": "/assets/products-web/creme-marrube-blanc-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      }
     ],
     "description": "Formulé à base de macérat concentré de marrube blanc (Merriwet / مريوت), plante ancestrale de la pharmacopée marocaine, infusé dans des beurres et cires nobles.",
     "descriptionAr": "مركب طبيعي غني بمستخلص نبات المريوت البلدي المشهور في التراث المغربي لتهدئة العضلات والمفاصل وحماية البشرة الحساسة.",
@@ -129,11 +145,19 @@
     "poidsNet": "50 g",
     "prix": 70,
     "couleur": "#B45309",
-    "image": "/assets/products/photos-site-1600x1600/creme-anti-grippe.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/creme-anti-grippe.png",
+    "image": "/assets/products-web/creme-anti-grippe-800.webp",
+    "imagePng": "/assets/products-web/creme-anti-grippe-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Usage externe", "labelAr": "استعمال خارجي", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Usage externe",
+        "labelAr": "استعمال خارجي",
+        "type": "dark"
+      }
     ],
     "description": "Synergie aromatique de thym, eucalyptus et marrube blanc dans une base de cire d'abeille et karité. Apporte un soulagement réchauffant lors des coups de froid et dégage les voies respiratoires.",
     "descriptionAr": "مزيج عطري فعال من الزعتر والأوكاليبتوس والمريوت في قاعدة من شمع النحل وزبدة الشيا، يمنح دفئاً مريحاً للصدر ويسهل التنفس أثناء نزلات البرد.",
@@ -185,11 +209,19 @@
     "poidsNet": "50 ml",
     "prix": 80,
     "couleur": "#1E4D2B",
-    "image": "/assets/products/photos-site-1600x1600/huile-ortie.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-ortie.png",
+    "image": "/assets/products-web/huile-ortie-800.webp",
+    "imagePng": "/assets/products-web/huile-ortie-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Feuilles d'ortie récoltées à la main dans notre potager et infusées dans l'huile d'amande douce et jojoba. Idéale pour fortifier les racines des cheveux, ralentir la chute et revitaliser le cuir chevelu.",
     "descriptionAr": "أوراق الحريقة البلدية المقطوفة بعناية في بستاننا والمستخلصة في زيت اللوز والجوجوبا. ممتازة لتقوية بصيلات الشعر ومحاربة التساقط وتحفيز النمو.",
@@ -241,11 +273,19 @@
     "poidsNet": "50 ml",
     "prix": 70,
     "couleur": "#2E7D32",
-    "image": "/assets/products/photos-site-1600x1600/huile-aloe-vera.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-aloe-vera.png",
+    "image": "",
+    "imagePng": "",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Macérat de gel d'aloe vera frais cultivé localement. Apaise les coups de soleil, répare les pointes sèches et apporte une souplesse immédiate au visage et au corps.",
     "descriptionAr": "مستخلص جل الألوفيرا الطازج المزروع محلياً. يهدئ حروق الشمس ويهدئ التهيجات ويرطب أطراف الشعر ويمنح البشرة مرونة ونضارة فائقة.",
@@ -297,11 +337,19 @@
     "poidsNet": "50 ml",
     "prix": 80,
     "couleur": "#C97A14",
-    "image": "/assets/products/photos-site-1600x1600/huile-calendula.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-calendula.png",
+    "image": "/assets/products-web/huile-calendula-800.webp",
+    "imagePng": "/assets/products-web/huile-calendula-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Pétales dorés de fleurs de souci (calendula) infusés patiemment. Célèbre pour calmer les irritations, les rougeurs et convenir même à la peau délicate des enfants.",
     "descriptionAr": "بتلات زهور الآذريون الذهبية المستخلصة ببطء. معروفة بقدرتها الفائقة على تهدئة الحكة والالتهابات وتناسب حتى بشرة الأطفال الصغار.",
@@ -353,11 +401,19 @@
     "poidsNet": "50 ml",
     "prix": 70,
     "couleur": "#D99B26",
-    "image": "/assets/products/photos-site-1600x1600/huile-camomille.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-camomille.png",
+    "image": "",
+    "imagePng": "",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Fleurs de camomille sauvage macérées dans nos huiles végétales. Réputée pour délasser les traits du visage fatigué, calmer les rougeurs et illuminer naturellement les cheveux clairs.",
     "descriptionAr": "زهور البابونج البرية المستخلصة بعناية. تهدئ البشرة المجهدة وتساعد على استرخاء عضلات الوجه كما تمنح الشعر بريقاً ولمعاناً ناعماً.",
@@ -409,11 +465,19 @@
     "poidsNet": "50 ml",
     "prix": 80,
     "couleur": "#556B2F",
-    "image": "/assets/products/photos-site-1600x1600/huile-marrube-blanc.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-marrube-blanc.png",
+    "image": "/assets/products-web/huile-marrube-blanc-800.webp",
+    "imagePng": "/assets/products-web/huile-marrube-blanc-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Le marrube blanc ('Merriwet'), herbe maîtresse du Maroc, macéré à froid pour libérer ses principes purifiants et apaisants pour les tensions corporelles.",
     "descriptionAr": "عشبة المريوت المغربية المشهورة، مستخلصة على البارد لاستخراج فوائدها الفعالة في تخفيف آلام العضلات وتطهير البشرة.",
@@ -465,11 +529,19 @@
     "poidsNet": "50 ml",
     "prix": 70,
     "couleur": "#4A6038",
-    "image": "/assets/products/photos-site-1600x1600/huile-thym.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-thym.png",
+    "image": "/assets/products-web/huile-thym-800.webp",
+    "imagePng": "/assets/products-web/huile-thym-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Thym sauvage des collines marocaines macéré patiemment. Réputé pour assainir la peau, stimuler le cuir chevelu et réchauffer le corps lors des saisons fraîches.",
     "descriptionAr": "زعتر بري مقطوف من تلال المغرب مستخلص ببطء. مطهر طبيعي للبشرة ومنشط لفروة الرأس ويمنح الدفء عند تغير الفصول.",
@@ -521,11 +593,19 @@
     "poidsNet": "50 ml",
     "prix": 70,
     "couleur": "#2A6F6D",
-    "image": "/assets/products/photos-site-1600x1600/huile-eucalyptus.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-eucalyptus.png",
+    "image": "/assets/products-web/huile-eucalyptus-800.webp",
+    "imagePng": "/assets/products-web/huile-eucalyptus-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Feuilles d'eucalyptus frais infusées à froid. Dégage les voies respiratoires, délasse les jambes fatiguées et procure un souffle de fraîcheur instantané.",
     "descriptionAr": "أوراق الكاليبتوس الخضراء المستخلصة ببراعة. تفتح مجاري التنفس وتخفف ثقل الساقين وتمنح شعوراً رائعاً بالانتعاش والحيوية.",
@@ -577,11 +657,19 @@
     "poidsNet": "50 ml",
     "prix": 70,
     "couleur": "#4B5584",
-    "image": "/assets/products/photos-site-1600x1600/huile-lavande.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-lavande.png",
+    "image": "/assets/products-web/huile-lavande-800.webp",
+    "imagePng": "/assets/products-web/huile-lavande-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Fleurs de lavande vraie récoltées sous le soleil du terroir marocain. Favorise l'endormissement paisible, calme les irritations cutanées et détend les muscles des épaules.",
     "descriptionAr": "أزهار الخزامى البلدية المستخلصة ببطء. تساعد على النوم الهادئ وتهدئة تهيجات الجلد وتخفيف توتر عضلات الرقبة والكتفين.",
@@ -633,11 +721,19 @@
     "poidsNet": "50 ml",
     "prix": 70,
     "couleur": "#2E5A44",
-    "image": "/assets/products/photos-site-1600x1600/huile-romarin.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/huile-romarin.png",
+    "image": "/assets/products-web/huile-romarin-800.webp",
+    "imagePng": "/assets/products-web/huile-romarin-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Macération lente", "labelAr": "استخلاص بطيء", "type": "dark" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Macération lente",
+        "labelAr": "استخلاص بطيء",
+        "type": "dark"
+      }
     ],
     "description": "Sommités fleuries de romarin (Azir / أزير) macérées à froid. Réputé mondialement pour dynamiser la micro-circulation du cuir chevelu, freiner la chute et stimuler la mémoire sensorielle.",
     "descriptionAr": "أغصان إكليل الجبل (الأزير) البلدي المستخلصة بعناية. المشهور عالمياً بتنشيط الدورة الدموية في فروة الرأس وتحفيز إنبات الشعر وإيقاف تساقطه.",
@@ -689,11 +785,19 @@
     "poidsNet": "500 g",
     "prix": 80,
     "couleur": "#6B1D4B",
-    "image": "/assets/products/photos-site-1600x1600/chou-rouge-lacto-fermente.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/chou-rouge-lacto-fermente.png",
+    "image": "/assets/products-web/chou-rouge-lacto-fermente-800.webp",
+    "imagePng": "/assets/products-web/chou-rouge-lacto-fermente-cutout.webp",
     "badges": [
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" },
-      { "label": "Sans eau ajoutée", "labelAr": "بدون ماء مضاف", "type": "dark" }
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      },
+      {
+        "label": "Sans eau ajoutée",
+        "labelAr": "بدون ماء مضاف",
+        "type": "dark"
+      }
     ],
     "description": "Chou rouge du potager émincé et fermenté dans son propre jus au sel marin pur. Riche en probiotiques vivants et antioxydants précieux (anthocyanes). Bocal grand format 500g.",
     "descriptionAr": "كرنب أحمر طازج مقطع ومخمر في عصارته الطبيعية بالملح البحري الصافي. كنز من البروبيوتيك الحي ومضادات الأكسدة القوية في قنينة عائلية 500 غرام.",
@@ -745,11 +849,19 @@
     "poidsNet": "380 g",
     "prix": 80,
     "couleur": "#2F5D3A",
-    "image": "/assets/products/photos-site-1600x1600/chou-vert-lacto-fermente.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/chou-vert-lacto-fermente.png",
+    "image": "/assets/products-web/chou-vert-lacto-fermente-800.webp",
+    "imagePng": "/assets/products-web/chou-vert-lacto-fermente-cutout.webp",
     "badges": [
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" },
-      { "label": "Sans eau ajoutée", "labelAr": "بدون ماء مضاف", "type": "dark" }
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      },
+      {
+        "label": "Sans eau ajoutée",
+        "labelAr": "بدون ماء مضاف",
+        "type": "dark"
+      }
     ],
     "description": "Chou vert émincé finement, massé au sel sec puis maturé en bocal hermétique sous couvercle doré. Gorgé de vitamine C naturelle et de probiotiques.",
     "descriptionAr": "كرنب أخضر بلدي مقطع رقيقاً ومخمر بالملح الصافي بدون قطرة ماء، معبأ بعناية لتقديم أرقى بروبيوتيك حي ينعش الأمعاء والهضم.",
@@ -801,11 +913,19 @@
     "poidsNet": "380 g",
     "prix": 70,
     "couleur": "#3D6E35",
-    "image": "/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/chou-vert-carotte-lacto-fermente.png",
+    "image": "/assets/products-web/chou-vert-carotte-lacto-fermente-800.webp",
+    "imagePng": "/assets/products-web/chou-vert-carotte-lacto-fermente-cutout.webp",
     "badges": [
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" },
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" }
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      },
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      }
     ],
     "description": "L'association douce et croquante du chou vert et des carottes paysannes. Un équilibre parfait apprécié de toute la famille pour débuter la fermentation.",
     "descriptionAr": "مزيج متوازن يجمع بين طراوة الجزر البلدي وقوام الكرنب، بنكهة محببة لجميع أفراد الأسرة وغنية بفيتامين أ والبروبيوتيك.",
@@ -857,11 +977,19 @@
     "poidsNet": "380 g",
     "prix": 80,
     "couleur": "#78286D",
-    "image": "/assets/products/photos-site-1600x1600/oignon-rouge-lacto-fermente.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/oignon-rouge-lacto-fermente.png",
+    "image": "/assets/products-web/oignon-rouge-lacto-fermente-800.webp",
+    "imagePng": "/assets/products-web/oignon-rouge-lacto-fermente-cutout.webp",
     "badges": [
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" },
-      { "label": "Parfumé aux épices", "labelAr": "منسم بالتوابل", "type": "dark" }
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      },
+      {
+        "label": "Parfumé aux épices",
+        "labelAr": "منسم بالتوابل",
+        "type": "dark"
+      }
     ],
     "description": "Rondelles d'oignon rouge macérées doucement avec coriandre et poivre noir. La force piquante disparaît pour laisser place à une douceur acidulée incomparable.",
     "descriptionAr": "شرائح البصل الأحمر المنسمة بحبات القزبر والفلفل الأسود. تزول حرارة البصل الحادة لتتحول إلى نكهة مقرمشة حامضة تفتح الشهية دون أي إزعاج للمعدة.",
@@ -913,11 +1041,19 @@
     "poidsNet": "380 g",
     "prix": 70,
     "couleur": "#80142B",
-    "image": "/assets/products/photos-site-1600x1600/betterave-lacto-fermentee.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/betterave-lacto-fermentee.png",
+    "image": "/assets/products-web/betterave-lacto-fermentee-800.webp",
+    "imagePng": "/assets/products-web/betterave-lacto-fermentee-cutout.webp",
     "badges": [
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" },
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" }
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      },
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      }
     ],
     "description": "Tranches de betteraves rouges fraîches fermentées au sel de mer et épices douces. Son jus rubis (kvass végétal) est un tonique digestif et sanguin réputé.",
     "descriptionAr": "شرائح الباربا الطازجة المخمرة بالملح البحري والتوابل اللطيفة. عصيرها الأحمر المركز مشروب صحي منشط للدورة الدموية والكبد.",
@@ -969,11 +1105,19 @@
     "poidsNet": "380 g",
     "prix": 70,
     "couleur": "#D35400",
-    "image": "/assets/products/photos-site-1600x1600/carotte-lacto-fermentee.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/carotte-lacto-fermentee.png",
+    "image": "/assets/products-web/carotte-lacto-fermentee-800.webp",
+    "imagePng": "/assets/products-web/carotte-lacto-fermentee-cutout.webp",
     "badges": [
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" },
-      { "label": "Parfumé aux épices", "labelAr": "منسم بالتوابل", "type": "dark" }
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      },
+      {
+        "label": "Parfumé aux épices",
+        "labelAr": "منسم بالتوابل",
+        "type": "dark"
+      }
     ],
     "description": "Bâtonnets de carottes du potager macérés dans une saumure aux graines de coriandre et gingembre. Une texture craquante formidable pour remplacer les apéritifs industriels.",
     "descriptionAr": "أصابع الجزر البلدي المتبلة بحبوب القزبر والزنجبيل الطازج. قرمشة ممتعة ومذاق منعش بديل صحي للمخللات الصناعية.",
@@ -1025,11 +1169,19 @@
     "poidsNet": "110 g",
     "prix": 45,
     "couleur": "#1F3D2B",
-    "image": "/assets/products/photos-site-1600x1600/savon-luffa-ortie.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/savon-luffa-ortie.png",
+    "image": "/assets/products-web/savon-luffa-ortie-800.webp",
+    "imagePng": "/assets/products-web/savon-luffa-ortie-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      }
     ],
     "description": "Savon saponifié artisanalement enrichi à l'ortie et moulé autour d'une vraie rondelle d'éponge luffa végétale du potager. Exfolie les cellules mortes tout en nourrissant la peau.",
     "descriptionAr": "صابون بلدي مصنوع يدوياً غني بمستخلص نبات الحريقة ومصبوب حول قطعة حقيقية من ليفة نباتية طبيعية من بستاننا. يزيل الخلايا الميتة وينشط الدورة الدموية بنعومة.",
@@ -1081,11 +1233,19 @@
     "poidsNet": "110 g",
     "prix": 45,
     "couleur": "#4D5D38",
-    "image": "/assets/products/photos-site-1600x1600/savon-luffa-marrube-blanc.jpg",
-    "imagePng": "/assets/products/photos-fond-transparent/savon-luffa-marrube-blanc.png",
+    "image": "/assets/products-web/savon-luffa-marrube-blanc-800.webp",
+    "imagePng": "/assets/products-web/savon-luffa-marrube-blanc-cutout.webp",
     "badges": [
-      { "label": "100 % naturel", "labelAr": "100% طبيعي", "type": "darkgreen" },
-      { "label": "Sans conservateur", "labelAr": "بدون مواد حافظة", "type": "green" }
+      {
+        "label": "100 % naturel",
+        "labelAr": "100% طبيعي",
+        "type": "darkgreen"
+      },
+      {
+        "label": "Sans conservateur",
+        "labelAr": "بدون مواد حافظة",
+        "type": "green"
+      }
     ],
     "description": "L'association de l'extrait de marrube blanc (Merriwet) purifiant et de la fibre de luffa du jardin. Nettoie en profondeur sans agresser le film hydrolipidique de la peau.",
     "descriptionAr": "مزيج مطهر بين عشبة المريوت المغربية المشهورة وألياف الليفة النباتية المزروعة بالبستان. ينظف المسام بعمق ويمنح شعور الحمام المغربي الأصيل.",

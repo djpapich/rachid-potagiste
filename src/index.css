@@ -97,3 +97,82 @@ body {
 .pulse-whatsapp {
   animation: softPulse 2.8s infinite ease-in-out;
 }
+
+/* ------------------------------------------------------------------ */
+/* Accessibility & motion                                              */
+/* ------------------------------------------------------------------ */
+
+/* Visible keyboard focus everywhere (mouse users do not see it) */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  inset-inline-start: 0.75rem;
+  z-index: 100;
+  background: #1F3D2B;
+  color: #FBFAF5;
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-subtle) 25%, var(--border-color) 37%, var(--bg-subtle) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* Page transition and toast entrance.
+   fill-mode is "backwards", never "both"/"forwards": a filled transform keeps a computed
+   matrix on <main>, which turns it into the containing block of every position:fixed child
+   (the sticky buy bar would then sit at the bottom of the page instead of the screen). */
+.page-enter {
+  animation: pageEnter 0.35s ease backwards;
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.toast-in {
+  animation: toastIn 0.25s ease backwards;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Product card lift */
+.card-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+@media (hover: hover) {
+  .card-lift:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Respect the "reduce motion" system setting */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .pulse-whatsapp { animation: none; }
+}

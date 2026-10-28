@@ -11,15 +11,17 @@ import { Language } from '../types/index.ts';
 
 interface FloatingWhatsAppProps {
   lang?: Language;
+  /** Hidden on small screens where a sticky action bar already offers WhatsApp (product page). */
+  hideOnMobile?: boolean;
 }
 
-export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ lang = 'fr' }) => {
+export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ lang = 'fr', hideOnMobile = false }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <aside
       aria-label="Contact direct WhatsApp"
-      className="fixed bottom-5 right-5 rtl:right-auto rtl:left-5 z-50 flex flex-col items-end rtl:items-start gap-2"
+      className={`fixed bottom-5 right-5 rtl:right-auto rtl:left-5 z-50 flex-col items-end rtl:items-start gap-2 ${hideOnMobile ? 'hidden lg:flex' : 'flex'}`}
     >
       {/* Popover showing both WhatsApp options */}
       {isOpen && (
@@ -31,6 +33,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ lang = 'fr' 
             </span>
             <button
               onClick={() => setIsOpen(false)}
+              aria-label="Fermer"
               className="p-1 hover:bg-[#EAE4D2] dark:hover:bg-[#1C2D21] rounded-lg text-stone-500 cursor-pointer"
             >
               <X className="w-4 h-4" />
@@ -74,6 +77,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ lang = 'fr' 
       {/* Main Floating Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
         className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20BA5A] text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 pulse-whatsapp cursor-pointer"
         title="Contacter Rachid sur WhatsApp (07 86 73 16 66 / 07 21 04 58 01)"
         aria-label="Contacter Rachid Potagiste sur WhatsApp"

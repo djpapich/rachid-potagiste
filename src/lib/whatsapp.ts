@@ -1,4 +1,5 @@
 import { CartItem, CustomerOrderInfo, Language, Product } from '../types/index.ts';
+import { LIMITS, MAX_PROMO_PERCENT, clampQuantity, cleanText } from './validation.ts';
 
 export const WHATSAPP_LINE_1 = '212786731666';
 export const WHATSAPP_LINE_1_DISPLAY = '07 86 73 16 66';
@@ -8,6 +9,20 @@ export const WHATSAPP_LINE_2_DISPLAY = '07 21 04 58 01';
 
 export const WHATSAPP_PHONE = WHATSAPP_LINE_1;
 export const WHATSAPP_DISPLAY_PHONE = WHATSAPP_LINE_1_DISPLAY;
+
+/**
+ * Opens a WhatsApp link in a new tab. Refuses anything that is not https://wa.me/...
+ * and never gives the new tab access to window.opener.
+ */
+export function openWhatsApp(url: string): void {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:' || parsed.hostname !== 'wa.me') return;
+  } catch {
+    return;
+  }
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
 
 export function getPhoneNumber(line: 'line1' | 'line2' = 'line1'): string {
   return line === 'line2' ? WHATSAPP_LINE_2 : WHATSAPP_LINE_1;
@@ -19,6 +34,7 @@ export function getProductWhatsAppUrl(
   line: 'line1' | 'line2' = 'line1',
   lang: Language = 'fr'
 ): string {
+  quantity = clampQuantity(quantity);
   const phone = getPhoneNumber(line);
   const total = product.prix * quantity;
 
@@ -107,6 +123,16 @@ export function getCartWhatsAppUrl(
   lang: Language = 'fr'
 ): string {
   const phone = getPhoneNumber(line);
+  items = items.map((item) => ({ ...item, quantity: clampQuantity(item.quantity) }));
+  discountPercentage = Math.min(MAX_PROMO_PERCENT, Math.max(0, discountPercentage || 0));
+  promoCode = cleanText(promoCode, 32);
+  const safe = {
+    nom: cleanText(info.nom, LIMITS.nom),
+    ville: cleanText(info.ville, LIMITS.ville),
+    adresse: cleanText(info.adresse, LIMITS.adresse),
+    telephone: cleanText(info.telephone, LIMITS.telephone),
+    notes: cleanText(info.notes, LIMITS.notes),
+  };
   const subtotal = items.reduce((sum, item) => sum + item.product.prix * item.quantity, 0);
   const discountAmount = discountPercentage > 0 ? Math.round(subtotal * (discountPercentage / 100)) : 0;
   const finalTotal = subtotal - discountAmount;
@@ -130,12 +156,12 @@ export function getCartWhatsAppUrl(
     lines.push(`*المجموع الإجمالي : ${finalTotal} درهم* (الدفع عند الاستلام)`);
     lines.push('');
     lines.push('بيانات التوصيل :');
-    lines.push(`• الاسم والنسب : ${info.nom || '...'}`);
-    lines.push(`• المدينة : ${info.ville || '...'}`);
-    lines.push(`• العنوان : ${info.adresse || '...'}`);
-    lines.push(`• الهاتف : ${info.telephone || '...'}`);
-    if (info.notes?.trim()) {
-      lines.push(`• ملاحظة : ${info.notes.trim()}`);
+    lines.push(`• الاسم والنسب : ${safe.nom || '...'}`);
+    lines.push(`• المدينة : ${safe.ville || '...'}`);
+    lines.push(`• العنوان : ${safe.adresse || '...'}`);
+    lines.push(`• الهاتف : ${safe.telephone || '...'}`);
+    if (safe.notes) {
+      lines.push(`• ملاحظة : ${safe.notes}`);
     }
     lines.push('');
     lines.push('شكراً لكم وعلى جودة منتجاتكم الطبيعية !');
@@ -156,12 +182,12 @@ export function getCartWhatsAppUrl(
     lines.push(`*Estimated Total: ${finalTotal} MAD*`);
     lines.push('');
     lines.push('Delivery Details:');
-    lines.push(`• Full Name: ${info.nom || '...'}`);
-    lines.push(`• City: ${info.ville || '...'}`);
-    lines.push(`• Address: ${info.adresse || '...'}`);
-    lines.push(`• Phone: ${info.telephone || '...'}`);
-    if (info.notes?.trim()) {
-      lines.push(`• Note: ${info.notes.trim()}`);
+    lines.push(`• Full Name: ${safe.nom || '...'}`);
+    lines.push(`• City: ${safe.ville || '...'}`);
+    lines.push(`• Address: ${safe.adresse || '...'}`);
+    lines.push(`• Phone: ${safe.telephone || '...'}`);
+    if (safe.notes) {
+      lines.push(`• Note: ${safe.notes}`);
     }
     lines.push('');
     lines.push('Cash on delivery across Morocco. Thank you!');
@@ -181,12 +207,12 @@ export function getCartWhatsAppUrl(
     lines.push(`*Total estimé : ${finalTotal} DH*`);
     lines.push('');
     lines.push('Coordonnées de livraison :');
-    lines.push(`• Nom & Prénom : ${info.nom || '...'}`);
-    lines.push(`• Ville : ${info.ville || '...'}`);
-    lines.push(`• Adresse : ${info.adresse || '...'}`);
-    lines.push(`• Téléphone : ${info.telephone || '...'}`);
-    if (info.notes?.trim()) {
-      lines.push(`• Note : ${info.notes.trim()}`);
+    lines.push(`• Nom & Prénom : ${safe.nom || '...'}`);
+    lines.push(`• Ville : ${safe.ville || '...'}`);
+    lines.push(`• Adresse : ${safe.adresse || '...'}`);
+    lines.push(`• Téléphone : ${safe.telephone || '...'}`);
+    if (safe.notes) {
+      lines.push(`• Note : ${safe.notes}`);
     }
     lines.push('');
     lines.push('Paiement à la livraison. Merci !');

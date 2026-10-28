@@ -1,35 +1,16 @@
 <!doctype html>
 <html lang="fr" dir="ltr">
   <head>
-    <script>
-      (function() {
-        try {
-          var _origFetch = window.fetch ? window.fetch.bind(window) : undefined;
-          Object.defineProperty(window, 'fetch', {
-            get: function() { return _origFetch; },
-            set: function(fn) { _origFetch = fn; },
-            configurable: true,
-            enumerable: true
-          });
-        } catch (err) {
-          try {
-            var _protoFetch = Window.prototype.fetch;
-            Object.defineProperty(Window.prototype, 'fetch', {
-              get: function() { return _protoFetch; },
-              set: function(fn) { _protoFetch = fn; },
-              configurable: true,
-              enumerable: true
-            });
-          } catch (err2) {}
-        }
-      })();
-    </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1F3D2B" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     
     <!-- Primary Title & Meta Description -->
     <title>Rachid Potagiste · Boutique Artisanale & Terroir Maroc</title>
-    <meta name="description" content="Boutique artisanale officielle de Rachid Potagiste au Maroc : légumes lacto-fermentés vivants en bocal, huiles de macération 50 ml, savons à la luffa végétale et crèmes de soin 100% naturelles. Commandes directes sur WhatsApp au +212 777-172677." />
+    <meta name="description" content="Boutique artisanale officielle de Rachid Potagiste au Maroc : légumes lacto-fermentés vivants en bocal, huiles de macération 50 ml, savons à la luffa végétale et crèmes de soin 100% naturelles. Commandes directes sur WhatsApp au +212 7 86 73 16 66." />
     <meta name="keywords" content="Rachid Potagiste, légumes lacto-fermentés Maroc, huile ortie, huile marrube blanc, savon luffa, crème de soin naturelle, artisanat Bouznika, fermentation vivante" />
     <meta name="author" content="Rachid Potagiste" />
 
@@ -39,14 +20,16 @@
     <meta property="og:title" content="Rachid Potagiste · Boutique Artisanale & Terroir Maroc" />
     <meta property="og:description" content="Préparations naturelles faites main au Maroc : légumes lacto-fermentés vivants, huiles de macération lentes, savons luffa et crèmes de soin. Commandes faciles sur WhatsApp." />
     <meta property="og:site_name" content="Rachid Potagiste" />
-    <meta property="og:image" content="/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg" />
+    <meta property="og:image" content="https://rachidpotagiste.netlify.app/assets/og-cover.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="fr_MA" />
 
     <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Rachid Potagiste · Boutique Artisanale Maroc" />
     <meta name="twitter:description" content="Légumes lacto-fermentés en bocal, huiles de macération 50 ml, savons luffa et crèmes 100% naturelles. Fait main à Bouznika, Maroc." />
-    <meta name="twitter:image" content="/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg" />
+    <meta name="twitter:image" content="https://rachidpotagiste.netlify.app/assets/og-cover.jpg" />
 
     <!-- Canonical & Robots -->
     <link rel="canonical" href="https://rachidpotagiste.netlify.app/" />
@@ -66,8 +49,8 @@
       "alternateName": "Boutique Artisanale Rachid Potagiste",
       "description": "Boutique artisanale marocaine de produits faits main : légumes lacto-fermentés vivants en bocaux dorés, huiles de macération lentes en flacon pompe 50 ml, savons naturels à l'éponge de luffa du potager et crèmes de soin en boîte métallique.",
       "url": "https://rachidpotagiste.netlify.app/",
-      "telephone": "+212777172677",
-      "priceRange": "40 MAD - 80 MAD",
+      "telephone": "+212786731666",
+      "priceRange": "45 MAD - 80 MAD",
       "currenciesAccepted": "MAD",
       "paymentAccepted": "Cash on Delivery (Paiement à la livraison)",
       "address": {
@@ -82,54 +65,6 @@
         "jobTitle": "Technicien horticole, Permaculteur & Artisan",
         "sameAs": [
           "https://www.facebook.com/61567836723896"
-        ]
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Catalogue Artisanal Rachid Potagiste",
-        "itemListElement": [
-          {
-            "@type": "OfferCatalog",
-            "name": "Légumes lacto-fermentés en bocal",
-            "itemListElement": [
-              { "@type": "Product", "name": "Chou vert lacto-fermenté 380 g" },
-              { "@type": "Product", "name": "Chou rouge lacto-fermenté 380 g" },
-              { "@type": "Product", "name": "Chou vert & carotte lacto-fermenté 380 g" },
-              { "@type": "Product", "name": "Carotte lacto-fermentée 380 g" },
-              { "@type": "Product", "name": "Betterave lacto-fermentée 380 g" },
-              { "@type": "Product", "name": "Oignon rouge lacto-fermenté 380 g" }
-            ]
-          },
-          {
-            "@type": "OfferCatalog",
-            "name": "Huiles de macération 50 ml",
-            "itemListElement": [
-              { "@type": "Product", "name": "Huile de thym 50 ml" },
-              { "@type": "Product", "name": "Huile de romarin 50 ml" },
-              { "@type": "Product", "name": "Huile d'ortie 50 ml" },
-              { "@type": "Product", "name": "Huile de marrube blanc 50 ml" },
-              { "@type": "Product", "name": "Huile de lavande 50 ml" },
-              { "@type": "Product", "name": "Huile de calendula 50 ml" },
-              { "@type": "Product", "name": "Huile d'eucalyptus 50 ml" }
-            ]
-          },
-          {
-            "@type": "OfferCatalog",
-            "name": "Savons artisanaux à la luffa",
-            "itemListElement": [
-              { "@type": "Product", "name": "Savon luffa & ortie 110 g" },
-              { "@type": "Product", "name": "Savon luffa & marrube blanc 110 g" }
-            ]
-          },
-          {
-            "@type": "OfferCatalog",
-            "name": "Crèmes de soin 50 g",
-            "itemListElement": [
-              { "@type": "Product", "name": "Crème de marrube blanc 50 g" },
-              { "@type": "Product", "name": "Crème d'ortie 50 g" },
-              { "@type": "Product", "name": "Crème de soin respiratoire (Anti-grippe) 50 g" }
-            ]
-          }
         ]
       }
     }

@@ -14,7 +14,7 @@ import {
   ShieldCheck,
   MapPin
 } from 'lucide-react';
-import {
+import { openWhatsApp,
   WHATSAPP_LINE_1,
   WHATSAPP_LINE_1_DISPLAY,
   WHATSAPP_LINE_2,
@@ -22,6 +22,14 @@ import {
   getCartWhatsAppUrl
 } from '../lib/whatsapp.ts';
 import { translations } from '../lib/translations.ts';
+import { ProductImage } from './ProductImage.tsx';
+import {
+  OrderField,
+  checkPromoCode,
+  promoErrorMessage,
+  promoPercent,
+  validateOrderInfo,
+} from '../lib/validation.ts';
 
 interface CartPageProps {
   items: CartItem[];
@@ -51,6 +59,7 @@ export const CartPage: React.FC<CartPageProps> = ({
   const [promoCodeInput, setPromoCodeInput] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [promoError, setPromoError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Partial<Record<OrderField, string>>>({});
 
   const [customerInfo, setCustomerInfo] = useState<CustomerOrderInfo>({
     nom: '',
@@ -64,33 +73,37 @@ export const CartPage: React.FC<CartPageProps> = ({
   const isRtl = lang === 'ar';
 
   const subtotal = items.reduce((sum, item) => sum + item.product.prix * item.quantity, 0);
-  const discountPercentage = appliedPromo ? (promo?.remisePourcentage || 10) : 0;
+  const discountPercentage = promoPercent(promo, appliedPromo);
   const discountAmount = Math.round(subtotal * (discountPercentage / 100));
   const finalTotal = subtotal - discountAmount;
 
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
     setPromoError(null);
-    const clean = promoCodeInput.trim().toUpperCase();
+    const result = checkPromoCode(promo, promoCodeInput);
 
-    if (promo && promo.active && clean === promo.code.toUpperCase()) {
-      setAppliedPromo(clean);
+    if (result === 'ok' && promo) {
+      setAppliedPromo(promo.code.toUpperCase());
     } else {
-      setPromoError(lang === 'ar' ? 'كود تخفيض غير صالح. جرب POTAGER10' : 'Code promo invalide. Essayez POTAGER10');
+      setAppliedPromo(null);
+      setPromoError(promoErrorMessage(result, lang));
     }
   };
 
   const handleSendOrder = () => {
     if (items.length === 0) return;
+    const validation = validateOrderInfo(customerInfo, lang);
+    setErrors(validation.errors);
+    if (!validation.ok) return;
     const url = getCartWhatsAppUrl(
       items,
-      customerInfo,
+      validation.clean,
       discountPercentage,
       appliedPromo || '',
       whatsappLine,
       lang
     );
-    window.open(url, '_blank');
+    openWhatsApp(url);
   };
 
   return (
@@ -163,11 +176,9 @@ export const CartPage: React.FC<CartPageProps> = ({
                         key={item.product.id}
                         className="flex gap-4 p-3.5 bg-[#F4F1EA] dark:bg-[#1C2D21] rounded-2xl border border-[#E5DFC9] dark:border-[#273D2C] items-center"
                       >
-                        <img
-                          src={item.product.image}
-                          alt={title}
-                          className="w-20 h-20 object-contain bg-white rounded-xl p-1 border border-[#E5DFC9] shrink-0"
-                        />
+                        <div className="w-20 h-20 bg-white dark:bg-[#101A13] rounded-xl p-1 border border-[#E5DFC9] dark:border-[#273D2C] shrink-0 overflow-hidden">
+                          <ProductImage src={item.product.image} alt={title} lang={lang} sizes="80px" className="w-full h-full object-contain" />
+                        </div>
 
                         <div className="flex-1 min-w-0">
                           <h3 className="font-title text-sm sm:text-base font-bold text-[#1F3D2B] dark:text-[#F4F1EA] truncate">
@@ -223,7 +234,7 @@ export const CartPage: React.FC<CartPageProps> = ({
                     <Tag className="w-4 h-4 absolute left-3 rtl:left-auto rtl:right-3 top-3 text-[#8C6D23] dark:text-[#E5B834]" />
                     <input
                       type="text"
-                      placeholder="Code promo (ex: POTAGER10)"
+                      placeholder="Code promo" maxLength={32} autoComplete="off"
                       value={promoCodeInput}
                       onChange={(e) => setPromoCodeInput(e.target.value)}
                       className="w-full pl-9 pr-3 rtl:pr-9 rtl:pl-3 py-2 text-xs rounded-xl bg-white dark:bg-[#1C2D21] text-[#1F3D2B] dark:text-[#F4F1EA] border border-[#D7CEBA] dark:border-[#273D2C] uppercase font-mono"
@@ -271,8 +282,11 @@ export const CartPage: React.FC<CartPageProps> = ({
                       placeholder="Ex: Mohamed Alami"
                       value={customerInfo.nom}
                       onChange={(e) => setCustomerInfo({ ...customerInfo, nom: e.target.value })}
+                      maxLength={80}
+                      aria-invalid={Boolean(errors.nom)}
                       className="w-full px-3 py-2 rounded-xl bg-white dark:bg-[#1C2D21] text-[#1F3D2B] dark:text-[#F4F1EA] border border-[#D7CEBA] dark:border-[#273D2C]"
                     />
+                    {errors.nom && <p className="mt-1 text-[11px] text-red-600 dark:text-red-400 font-medium">{errors.nom}</p>}
                   </div>
 
                   <div>
@@ -285,8 +299,11 @@ export const CartPage: React.FC<CartPageProps> = ({
                       placeholder="Ex: Casablanca, Rabat, Marrakech, Bouznika..."
                       value={customerInfo.ville}
                       onChange={(e) => setCustomerInfo({ ...customerInfo, ville: e.target.value })}
+                      maxLength={60}
+                      aria-invalid={Boolean(errors.ville)}
                       className="w-full px-3 py-2 rounded-xl bg-white dark:bg-[#1C2D21] text-[#1F3D2B] dark:text-[#F4F1EA] border border-[#D7CEBA] dark:border-[#273D2C]"
                     />
+                    {errors.ville && <p className="mt-1 text-[11px] text-red-600 dark:text-red-400 font-medium">{errors.ville}</p>}
                   </div>
 
                   <div>
@@ -299,8 +316,11 @@ export const CartPage: React.FC<CartPageProps> = ({
                       placeholder="Quartier, rue, numéro de maison ou repère"
                       value={customerInfo.adresse}
                       onChange={(e) => setCustomerInfo({ ...customerInfo, adresse: e.target.value })}
+                      maxLength={200}
+                      aria-invalid={Boolean(errors.adresse)}
                       className="w-full px-3 py-2 rounded-xl bg-white dark:bg-[#1C2D21] text-[#1F3D2B] dark:text-[#F4F1EA] border border-[#D7CEBA] dark:border-[#273D2C]"
                     />
+                    {errors.adresse && <p className="mt-1 text-[11px] text-red-600 dark:text-red-400 font-medium">{errors.adresse}</p>}
                   </div>
 
                   <div>
@@ -313,8 +333,11 @@ export const CartPage: React.FC<CartPageProps> = ({
                       placeholder="Ex: 06 12 34 56 78"
                       value={customerInfo.telephone}
                       onChange={(e) => setCustomerInfo({ ...customerInfo, telephone: e.target.value })}
+                      maxLength={20}
+                      aria-invalid={Boolean(errors.telephone)}
                       className="w-full px-3 py-2 rounded-xl bg-white dark:bg-[#1C2D21] text-[#1F3D2B] dark:text-[#F4F1EA] border border-[#D7CEBA] dark:border-[#273D2C]"
                     />
+                    {errors.telephone && <p className="mt-1 text-[11px] text-red-600 dark:text-red-400 font-medium">{errors.telephone}</p>}
                   </div>
 
                   <div>
@@ -326,6 +349,7 @@ export const CartPage: React.FC<CartPageProps> = ({
                       placeholder="Instructions de livraison éventuelles"
                       value={customerInfo.notes}
                       onChange={(e) => setCustomerInfo({ ...customerInfo, notes: e.target.value })}
+                      maxLength={300}
                       className="w-full px-3 py-2 rounded-xl bg-white dark:bg-[#1C2D21] text-[#1F3D2B] dark:text-[#F4F1EA] border border-[#D7CEBA] dark:border-[#273D2C]"
                     />
                   </div>

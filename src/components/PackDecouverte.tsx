@@ -1,7 +1,7 @@
 import React from 'react';
 import { PromoConfig, Language, AppTheme } from '../types/index.ts';
 import { Sparkles, MessageCircle, Gift } from 'lucide-react';
-import { getPackDecouverteWhatsAppUrl } from '../lib/whatsapp.ts';
+import { openWhatsApp, getPackDecouverteWhatsAppUrl } from '../lib/whatsapp.ts';
 import { translations } from '../lib/translations.ts';
 
 interface PackDecouverteProps {
@@ -33,7 +33,7 @@ export const PackDecouverte: React.FC<PackDecouverteProps> = ({
 
   const handleOrderPack = () => {
     const url = getPackDecouverteWhatsAppUrl(packTitle, pack.prixPromo);
-    window.open(url, '_blank');
+    openWhatsApp(url);
   };
 
   return (
@@ -94,27 +94,27 @@ export const PackDecouverte: React.FC<PackDecouverteProps> = ({
               {/* 4 real transparent product cutouts */}
               <div className="flex items-center justify-center gap-2 py-3 px-4 bg-[#1F3D2B] dark:bg-[#152219] rounded-xl border border-[#3F6B2E]/40 w-full mb-3">
                 <img
-                  src="/assets/products/photos-fond-transparent/chou-vert-lacto-fermente.png"
+                  src="/assets/products-web/chou-vert-lacto-fermente-cutout.webp"
                   alt="Bocal"
-                  className="h-12 w-12 object-contain"
+                  className="h-12 w-12 object-contain" width={48} height={48} loading="lazy" decoding="async"
                 />
                 <span className="text-[#C9A227] font-bold">+</span>
                 <img
-                  src="/assets/products/photos-fond-transparent/huile-thym.png"
+                  src="/assets/products-web/huile-thym-cutout.webp"
                   alt="Huile"
-                  className="h-12 w-12 object-contain"
+                  className="h-12 w-12 object-contain" width={48} height={48} loading="lazy" decoding="async"
                 />
                 <span className="text-[#C9A227] font-bold">+</span>
                 <img
-                  src="/assets/products/photos-fond-transparent/savon-luffa-ortie.png"
+                  src="/assets/products-web/savon-luffa-ortie-cutout.webp"
                   alt="Savon"
-                  className="h-12 w-12 object-contain"
+                  className="h-12 w-12 object-contain" width={48} height={48} loading="lazy" decoding="async"
                 />
                 <span className="text-[#C9A227] font-bold">+</span>
                 <img
-                  src="/assets/products/photos-fond-transparent/creme-marrube-blanc.png"
+                  src="/assets/products-web/creme-marrube-blanc-cutout.webp"
                   alt="Crème"
-                  className="h-12 w-12 object-contain"
+                  className="h-12 w-12 object-contain" width={48} height={48} loading="lazy" decoding="async"
                 />
               </div>
 

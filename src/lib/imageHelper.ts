@@ -1,45 +1,22 @@
-import React from 'react';
-
-// Default trusted fallback image featuring Rachid's lacto-fermented creation
-export const DEFAULT_FALLBACK_IMAGE = '/assets/products/photos-site-1600x1600/chou-vert-carotte-lacto-fermente.jpg';
+import { Product } from '../types/index.ts';
 
 /**
- * Resolves an image path to a clean, absolute URL guaranteed to work on Netlify,
- * Vite development, and production builds.
+ * Product photos are shipped as <id>-400.webp, <id>-800.webp and <id>-1200.webp
+ * (plus <id>-cutout.webp for the transparent version). The catalogue stores the -800 file.
+ * An empty path means the real photo has not been supplied yet.
  */
-export function resolveImageUrl(url?: string | null): string {
-  if (!url || typeof url !== 'string' || !url.trim()) {
-    return DEFAULT_FALLBACK_IMAGE;
-  }
 
-  const trimmed = url.trim();
-
-  // If already full http(s) link or data URI
-  if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('data:')) {
-    return trimmed;
-  }
-
-  if (trimmed.startsWith('/assets/products/')) {
-    return trimmed;
-  }
-
-  if (trimmed.startsWith('assets/products/')) {
-    return '/' + trimmed;
-  }
-
-  return trimmed;
+export function hasPhoto(product: Pick<Product, 'image'>): boolean {
+  return Boolean(product.image);
 }
 
-/**
- * Image error handler that gracefully recovers without showing broken image icons.
- */
-export function handleImageError(
-  e: React.SyntheticEvent<HTMLImageElement, Event>,
-  fallback = DEFAULT_FALLBACK_IMAGE
-) {
-  const target = e.currentTarget;
-  if (!target.dataset.triedFallback) {
-    target.dataset.triedFallback = 'true';
-    target.src = fallback;
-  }
+export function productSrcSet(src: string): string | undefined {
+  if (!/-800\.webp$/.test(src)) return undefined;
+  const base = src.replace(/-800\.webp$/, '');
+  return `${base}-400.webp 400w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`;
+}
+
+/** Products with a real photo first, so the shop window never opens on a placeholder. */
+export function photoFirst<T extends Pick<Product, 'image'>>(products: T[]): T[] {
+  return [...products].sort((a, b) => Number(hasPhoto(b)) - Number(hasPhoto(a)));
 }

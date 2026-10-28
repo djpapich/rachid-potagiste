@@ -2,44 +2,164 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://rachidpotagiste.netlify.app/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://rachidpotagiste.netlify.app/#lacto-fermentes</loc>
-    <lastmod>2026-10-22</lastmod>
+    <loc>https://rachidpotagiste.netlify.app/categorie/lacto-fermentes</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://rachidpotagiste.netlify.app/#huiles</loc>
-    <lastmod>2026-10-22</lastmod>
+    <loc>https://rachidpotagiste.netlify.app/categorie/huiles</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://rachidpotagiste.netlify.app/#savons</loc>
-    <lastmod>2026-10-22</lastmod>
+    <loc>https://rachidpotagiste.netlify.app/categorie/savons</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://rachidpotagiste.netlify.app/#cremes</loc>
-    <lastmod>2026-10-22</lastmod>
+    <loc>https://rachidpotagiste.netlify.app/categorie/cremes</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://rachidpotagiste.netlify.app/#pourquoi</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://rachidpotagiste.netlify.app/#a-propos</loc>
-    <lastmod>2026-10-22</lastmod>
+    <loc>https://rachidpotagiste.netlify.app/produit/creme-ortie</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/creme-marrube-blanc</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/creme-anti-grippe</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-ortie</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-aloe-vera</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-calendula</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-camomille</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-marrube-blanc</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-thym</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-eucalyptus</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-lavande</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/huile-romarin</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/chou-rouge-lacto-fermente</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/chou-vert-lacto-fermente</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/chou-vert-carotte-lacto-fermente</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/oignon-rouge-lacto-fermente</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/betterave-lacto-fermentee</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/carotte-lacto-fermentee</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/savon-luffa-ortie</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/produit/savon-luffa-marrube-blanc</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/a-propos</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rachidpotagiste.netlify.app/contact</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

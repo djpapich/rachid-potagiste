@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { isPromoRunning } from '../lib/validation.ts';
 import { PromoConfig, Language, AppTheme } from '../types/index.ts';
 import { Copy, Check, Clock } from 'lucide-react';
 import { translations } from '../lib/translations.ts';
@@ -39,7 +40,7 @@ export const PromoBanner: React.FC<PromoBannerProps> = ({ promo, lang, theme }) 
     return () => clearInterval(interval);
   }, [promo]);
 
-  if (!promo || !promo.active) return null;
+  if (!promo || !isPromoRunning(promo)) return null;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(promo.code);

@@ -88,4 +88,5 @@ export type PageView =
   | { type: 'product'; productId: string }
   | { type: 'cart' }
   | { type: 'about' }
-  | { type: 'contact' };
+  | { type: 'contact' }
+  | { type: 'notfound' };

@@ -1,11 +1,12 @@
-node_modules/
-build/
-dist/
-coverage/
-.DS_Store
-*.log
-.env*
 !.env.example
-.aistudio/
 # local lockfile for npm (the project uses bun.lock)
+*.log
+.DS_Store
+.aistudio/
+.data/
+.env*
+build/
+coverage/
+dist/
+node_modules/
 package-lock.json

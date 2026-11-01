@@ -1,152 +1,170 @@
-import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
+import {
+  boolean,
+  check,
+  index,
+  integer,
+  jsonb,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  uniqueIndex,
+} from 'drizzle-orm/pg-core';
 
-// Users table (keyed by the auth provider user id)
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  uid: text('uid').notNull().unique(), // auth provider user id
-  email: text('email').notNull(),
-  name: text('name'),
-  role: text('role').notNull().default('customer'), // 'customer' | 'admin'
-  phone: text('phone'),
-  address: text('address'),
-  city: text('city'),
-  postalCode: text('postal_code'),
-  createdAt: timestamp('created_at').defaultNow(),
-});
+/**
+ * Database schema of the shop.
+ * Money is stored as whole Moroccan dirhams (MAD) in integer columns.
+ * Safety nets live in the database itself (CHECK constraints), so a bug in the
+ * application code can never sell stock that does not exist or store an inconsistent total.
+ */
 
-// Categories
-export const categories = pgTable('categories', {
-  id: serial('id').primaryKey(),
-  slug: text('slug').notNull().unique(),
-  nameFr: text('name_fr').notNull(),
-  nameEn: text('name_en').notNull(),
-  nameAr: text('name_ar').notNull(),
-  description: text('description'),
-});
+export const ORDER_STATUSES = ['pending', 'confirmed', 'preparing', 'shipped', 'delivered', 'cancelled'] as const;
+export type OrderStatus = (typeof ORDER_STATUSES)[number];
 
-// Products with real-time stock
-export const products = pgTable('products', {
-  id: serial('id').primaryKey(),
-  slug: text('slug').notNull().unique(),
-  name: text('name').notNull(),
-  categorySlug: text('category_slug').notNull(),
-  price: integer('price').notNull(), // whole MAD (the shop prices in dirhams)
-  originalPrice: integer('original_price'), // for discounts
-  stock: integer('stock').notNull().default(30),
-  unit: text('unit').notNull().default('unité'),
-  description: text('description').notNull(),
-  origin: text('origin').notNull(),
-  certification: text('certification'), // only set when a real certificate exists (never a default claim)
-  ingredients: text('ingredients'),
-  benefits: text('benefits'),
-  rating: text('rating'), // computed from approved reviews, no invented default
-  reviewCount: integer('review_count').notNull().default(0),
-  imageUrl: text('image_url').notNull(),
-  isFeatured: integer('is_featured').default(0),
-  createdAt: timestamp('created_at').defaultNow(),
-});
+export const users = pgTable(
+  'users',
+  {
+    id: serial('id').primaryKey(),
+    email: text('email').notNull(),
+    name: text('name').notNull(),
+    phone: text('phone'),
+    passwordHash: text('password_hash').notNull(),
+    role: text('role').notNull().default('customer'), // 'customer' | 'admin'
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex('users_email_lower_unique').on(sql`lower(${t.email})`),
+    check('users_role_valid', sql`${t.role} in ('customer', 'admin')`),
+  ]
+);
 
-// Orders
-export const orders = pgTable('orders', {
-  id: serial('id').primaryKey(),
-  orderNumber: text('order_number').notNull().unique(),
-  userId: text('user_id').notNull(), // auth user id or guest id
-  customerEmail: text('customer_email').notNull(),
-  customerName: text('customer_name').notNull(),
-  customerPhone: text('customer_phone').notNull(),
-  shippingAddress: text('shipping_address').notNull(),
-  shippingCity: text('shipping_city').notNull(),
-  shippingPostalCode: text('shipping_postal_code'),
-  totalAmount: integer('total_amount').notNull(), // whole MAD, recomputed server-side from product prices
-  status: text('status').notNull().default('pending'), // 'pending' | 'confirmed' | 'preparing' | 'shipped' | 'delivered' | 'cancelled'
-  paymentMethod: text('payment_method').notNull().default('cod'), // 'cod' (cash on delivery) | 'card'
-  paymentStatus: text('payment_status').notNull().default('unpaid'), // never default to 'paid'
-  trackingNumber: text('tracking_number'),
-  itemsJson: text('items_json').notNull(), // JSON stringified array of ordered items
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow(),
-});
+/** Only the SHA-256 of the session token is stored: a database leak does not leak live sessions. */
+export const sessions = pgTable(
+  'sessions',
+  {
+    id: text('id').primaryKey(),
+    userId: integer('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('sessions_user_idx').on(t.userId), index('sessions_expires_idx').on(t.expiresAt)]
+);
 
-// Order timeline & tracking events
-export const orderTimeline = pgTable('order_timeline', {
-  id: serial('id').primaryKey(),
-  orderId: integer('order_id').notNull(),
-  orderNumber: text('order_number').notNull(),
-  status: text('status').notNull(),
-  title: text('title').notNull(),
-  description: text('description').notNull(),
-  emailNotificationSent: integer('email_notification_sent').default(1),
-  createdAt: timestamp('created_at').defaultNow(),
-});
+/**
+ * `data` holds the full localized product sheet (names, descriptions, images...) in the same
+ * shape the storefront already uses. Price, stock and visibility are real columns because
+ * they are what orders depend on.
+ */
+export const products = pgTable(
+  'products',
+  {
+    id: text('id').primaryKey(), // url slug, e.g. "huile-ortie"
+    family: text('family').notNull(),
+    price: integer('price').notNull(),
+    stock: integer('stock').notNull().default(0),
+    active: boolean('active').notNull().default(true),
+    sort: integer('sort').notNull().default(0),
+    data: jsonb('data').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check('products_price_nonneg', sql`${t.price} >= 0`),
+    check('products_stock_nonneg', sql`${t.stock} >= 0`),
+    index('products_family_idx').on(t.family),
+  ]
+);
 
-// Blog Posts / Astuces Bio
-export const blogPosts = pgTable('blog_posts', {
-  id: serial('id').primaryKey(),
-  slug: text('slug').notNull().unique(),
-  title: text('title').notNull(),
-  excerpt: text('excerpt').notNull(),
-  content: text('content').notNull(),
-  category: text('category').notNull(),
-  readTime: text('read_time').notNull(),
-  author: text('author').notNull(),
-  imageUrl: text('image_url').notNull(),
-  publishedAt: text('published_at').notNull(),
-});
+export const promoCodes = pgTable(
+  'promo_codes',
+  {
+    code: text('code').primaryKey(), // always upper case
+    percent: integer('percent').notNull(),
+    active: boolean('active').notNull().default(true),
+    startsAt: timestamp('starts_at', { withTimezone: true }),
+    endsAt: timestamp('ends_at', { withTimezone: true }),
+    maxUses: integer('max_uses'),
+    usedCount: integer('used_count').notNull().default(0),
+    minSubtotal: integer('min_subtotal').notNull().default(0),
+    /** The one promotion advertised in the site banner. */
+    featured: boolean('featured').notNull().default(false),
+    /** Banner copy and the discovery pack, same shape as public/data/promo.json. */
+    banner: jsonb('banner'),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check('promo_percent_range', sql`${t.percent} between 0 and 50`),
+    check('promo_used_nonneg', sql`${t.usedCount} >= 0`),
+  ]
+);
 
-// Push notifications simulation
-export const pushNotifications = pgTable('push_notifications', {
-  id: serial('id').primaryKey(),
-  userId: text('user_id').notNull(),
-  title: text('title').notNull(),
-  body: text('body').notNull(),
-  type: text('type').notNull(), // 'order' | 'stock' | 'tips'
-  isRead: integer('is_read').default(0),
-  createdAt: timestamp('created_at').defaultNow(),
-});
+export const orders = pgTable(
+  'orders',
+  {
+    id: serial('id').primaryKey(),
+    number: text('number').notNull().unique(), // e.g. RP-261031-K7M2Q
+    userId: integer('user_id').references(() => users.id, { onDelete: 'set null' }),
+    customerName: text('customer_name').notNull(),
+    customerPhone: text('customer_phone').notNull(),
+    customerEmail: text('customer_email'),
+    city: text('city').notNull(),
+    address: text('address').notNull(),
+    notes: text('notes'),
+    subtotal: integer('subtotal').notNull(),
+    discount: integer('discount').notNull().default(0),
+    total: integer('total').notNull(),
+    promoCode: text('promo_code'),
+    status: text('status').notNull().default('pending'),
+    paymentMethod: text('payment_method').notNull().default('cod'), // cash on delivery
+    paymentStatus: text('payment_status').notNull().default('unpaid'),
+    whatsappLine: text('whatsapp_line').notNull().default('line1'),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check('orders_total_consistent', sql`${t.total} = ${t.subtotal} - ${t.discount} and ${t.total} >= 0`),
+    check(
+      'orders_status_valid',
+      sql`${t.status} in ('pending', 'confirmed', 'preparing', 'shipped', 'delivered', 'cancelled')`
+    ),
+    check('orders_payment_status_valid', sql`${t.paymentStatus} in ('unpaid', 'paid', 'refunded')`),
+    index('orders_status_idx').on(t.status),
+    index('orders_created_idx').on(t.createdAt),
+    index('orders_phone_idx').on(t.customerPhone),
+    index('orders_user_idx').on(t.userId),
+  ]
+);
 
-// Customer Reviews & Community Feedback
-export const reviews = pgTable('reviews', {
-  id: serial('id').primaryKey(),
-  productId: integer('product_id').notNull(),
-  userId: text('user_id').notNull(),
-  authorName: text('author_name').notNull(),
-  authorLocation: text('author_location'),
-  rating: integer('rating').notNull(), // 1 to 5
-  comment: text('comment').notNull(),
-  status: text('status').notNull().default('pending'), // reviews are moderated before being shown
-  verifiedPurchase: integer('verified_purchase').notNull().default(0),
-  source: text('source').default('community'), // 'youtube_community' | 'verified_customer'
-  createdAt: timestamp('created_at').defaultNow(),
-});
+/** Name and price are copied at order time, so later catalogue edits never rewrite history. */
+export const orderItems = pgTable(
+  'order_items',
+  {
+    id: serial('id').primaryKey(),
+    orderId: integer('order_id')
+      .notNull()
+      .references(() => orders.id, { onDelete: 'cascade' }),
+    productId: text('product_id').notNull(),
+    name: text('name').notNull(),
+    unitPrice: integer('unit_price').notNull(),
+    quantity: integer('quantity').notNull(),
+  },
+  (t) => [check('order_items_qty_positive', sql`${t.quantity} > 0`), index('order_items_order_idx').on(t.orderId)]
+);
 
-// User Browsing History for recommendations
-export const userBrowsingHistory = pgTable('user_browsing_history', {
-  id: serial('id').primaryKey(),
-  userId: text('user_id').notNull(),
-  productId: integer('product_id').notNull(),
-  viewedAt: timestamp('viewed_at').defaultNow(),
-});
-
-// Relations
-export const productsRelations = relations(products, ({ many }) => ({
-  reviews: many(reviews),
-}));
-
-export const reviewsRelations = relations(reviews, ({ one }) => ({
-  product: one(products, {
-    fields: [reviews.productId],
-    references: [products.id],
-  }),
-}));
-
-export const ordersRelations = relations(orders, ({ many }) => ({
-  timeline: many(orderTimeline),
-}));
-
-export const orderTimelineRelations = relations(orderTimeline, ({ one }) => ({
-  order: one(orders, {
-    fields: [orderTimeline.orderId],
-    references: [orders.id],
-  }),
-}));
+export const orderEvents = pgTable(
+  'order_events',
+  {
+    id: serial('id').primaryKey(),
+    orderId: integer('order_id')
+      .notNull()
+      .references(() => orders.id, { onDelete: 'cascade' }),
+    status: text('status').notNull(),
+    note: text('note'),
+    actorId: integer('actor_id').references(() => users.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('order_events_order_idx').on(t.orderId)]
+);

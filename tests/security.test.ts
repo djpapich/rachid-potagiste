@@ -187,9 +187,11 @@ test('router: every page maps to a URL and back', () => {
   for (const page of pages) assert.deepEqual(pathToPage(pageToPath(page)), page);
 });
 test('router: hostile or unknown paths are "notfound"', () => {
-  for (const bad of ['/produit/<script>alert(1)</script>', '/categorie/../etc', '/categorie/weapons', '/produit/', '/produit/a/b', '/%E0%A4%A', '/admin', '/produit/' + 'a'.repeat(100)])
+  for (const bad of ['/produit/<script>alert(1)</script>', '/categorie/../etc', '/categorie/weapons', '/produit/', '/produit/a/b', '/%E0%A4%A', '/admin/x', '/produit/' + 'a'.repeat(100)])
     assert.equal(pathToPage(bad).type, 'notfound', bad);
   assert.equal(pathToPage('/panier/').type, 'cart');
+  assert.equal(pathToPage('/admin').type, 'admin');
+  assert.equal(pathToPage('/suivi').type, 'track');
 });
 
 

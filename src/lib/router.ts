@@ -31,6 +31,10 @@ export function pageToPath(page: PageView): string {
       return '/a-propos';
     case 'contact':
       return '/contact';
+    case 'track':
+      return '/suivi';
+    case 'admin':
+      return '/admin';
     default:
       return '/introuvable';
   }
@@ -49,6 +53,8 @@ export function pathToPage(pathname: string): PageView {
   if (path === '/panier') return { type: 'cart' };
   if (path === '/a-propos') return { type: 'about' };
   if (path === '/contact') return { type: 'contact' };
+  if (path === '/suivi') return { type: 'track' };
+  if (path === '/admin') return { type: 'admin' };
 
   const category = /^\/categorie\/([a-z-]+)$/.exec(path);
   if (category && FAMILIES.includes(category[1] as ProductFamily)) {

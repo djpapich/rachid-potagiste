@@ -20,6 +20,7 @@ export default defineConfig(() => {
       assetsDir: 'static',
     },
     server: {
+      proxy: { '/api': 'http://127.0.0.1:3001' },
       // Set DISABLE_HMR=true to turn off hot reload and file watching.
       hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {},

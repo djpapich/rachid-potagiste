@@ -46,7 +46,7 @@ export const securityHeaders: RequestHandler = (_req, res, next) => {
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader(
     'Permissions-Policy',
-    'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), interest-cohort=()'
+    'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()'
   );
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
   res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');

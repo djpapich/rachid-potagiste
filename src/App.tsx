@@ -9,6 +9,9 @@ import { CartPage } from './components/CartPage.tsx';
 import { AboutPage } from './components/AboutPage.tsx';
 import { ContactPage } from './components/ContactPage.tsx';
 import { NotFoundPage } from './components/NotFoundPage.tsx';
+import { api } from './lib/api.ts';
+import { TrackPage } from './components/TrackPage.tsx';
+import { AdminPage } from './components/AdminPage.tsx';
 import { Footer } from './components/Footer.tsx';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp.tsx';
 import { Toaster, ToastItem } from './components/Toaster.tsx';
@@ -124,10 +127,22 @@ export function App() {
     let cancelled = false;
     const fetchData = async () => {
       try {
-        const [prodRes, promoRes] = await Promise.all([fetch('/data/products.json'), fetch('/data/promo.json')]);
+        // Live catalogue (stock and prices from the shop database); static files if the API is unreachable
+        const [apiProducts, apiPromo] = await Promise.all([
+          api<{ products: unknown[] }>('GET', '/products', undefined, 6000).catch(() => null),
+          api<unknown>('GET', '/promo', undefined, 6000).catch(() => null),
+        ]);
         if (cancelled) return;
-        if (prodRes.ok) setProducts(sanitizeProducts(await prodRes.json()));
-        if (promoRes.ok) setPromo(sanitizePromo(await promoRes.json()));
+        const live = apiProducts ? sanitizeProducts(apiProducts.products) : [];
+        if (live.length > 0) {
+          setProducts(live);
+          setPromo(sanitizePromo(apiPromo));
+        } else {
+          const [prodRes, promoRes] = await Promise.all([fetch('/data/products.json'), fetch('/data/promo.json')]);
+          if (cancelled) return;
+          if (prodRes.ok) setProducts(sanitizeProducts(await prodRes.json()));
+          if (promoRes.ok) setPromo(sanitizePromo(await promoRes.json()));
+        }
       } catch (err) {
         console.error('Error loading catalog data:', err);
       } finally {
@@ -213,6 +228,12 @@ export function App() {
         break;
       case 'contact':
         applySeo({ title: `${t.contactTitle}`, description: t.contactSubtitle, path });
+        break;
+      case 'track':
+        applySeo({ title: `Suivi de commande · ${brand}`, description: 'Suivez votre commande.', path, noindex: true });
+        break;
+      case 'admin':
+        applySeo({ title: `Administration · ${brand}`, description: 'Administration', path, noindex: true });
         break;
       default:
         applySeo({ title: `${t.notFoundTitle} · ${brand}`, description: t.notFoundDesc, path, noindex: true });
@@ -362,6 +383,10 @@ export function App() {
         return <AboutPage onNavigate={handleNavigate} lang={lang} theme={theme} whatsappLine={whatsappLine} />;
       case 'contact':
         return <ContactPage onNavigate={handleNavigate} lang={lang} theme={theme} />;
+      case 'track':
+        return <TrackPage lang={lang} onNavigate={handleNavigate} />;
+      case 'admin':
+        return <AdminPage />;
       default:
         return <NotFoundPage lang={lang} onNavigate={handleNavigate} />;
     }

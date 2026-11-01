@@ -21,6 +21,7 @@ import { openWhatsApp,
   WHATSAPP_LINE_2_DISPLAY,
   getCartWhatsAppUrl
 } from '../lib/whatsapp.ts';
+import { ApiError, isApiDown, placeOrder } from '../lib/api.ts';
 import { translations } from '../lib/translations.ts';
 import { ProductImage } from './ProductImage.tsx';
 import {
@@ -69,6 +70,10 @@ export const CartPage: React.FC<CartPageProps> = ({
     notes: '',
   });
 
+  const [busy, setBusy] = useState(false);
+  const [orderError, setOrderError] = useState<string | null>(null);
+  const [placed, setPlaced] = useState<{ number: string; url: string } | null>(null);
+
   const t = translations[lang] || translations.fr;
   const isRtl = lang === 'ar';
 
@@ -90,21 +95,55 @@ export const CartPage: React.FC<CartPageProps> = ({
     }
   };
 
-  const handleSendOrder = () => {
-    if (items.length === 0) return;
+  const handleSendOrder = async () => {
+    if (items.length === 0 || busy) return;
     const validation = validateOrderInfo(customerInfo, lang);
     setErrors(validation.errors);
+    setOrderError(null);
     if (!validation.ok) return;
-    const url = getCartWhatsAppUrl(
-      items,
-      validation.clean,
-      discountPercentage,
-      appliedPromo || '',
-      whatsappLine,
-      lang
-    );
-    openWhatsApp(url);
+    const whatsappUrl = (orderNumber = '') =>
+      getCartWhatsAppUrl(items, validation.clean, discountPercentage, appliedPromo || '', whatsappLine, lang, orderNumber);
+    setBusy(true);
+    try {
+      // 1. The order is recorded (price, stock and promo checked by the server)
+      const order = await placeOrder({
+        items: items.map((i) => ({ id: i.product.id, quantity: i.quantity })),
+        customer: { nom: validation.clean.nom, ville: validation.clean.ville, adresse: validation.clean.adresse, telephone: validation.clean.telephone, notes: validation.clean.notes ?? '' },
+        promoCode: appliedPromo || undefined,
+        line: whatsappLine,
+        lang,
+      });
+      // 2. WhatsApp message carries the order number
+      const url = whatsappUrl(order.number);
+      setPlaced({ number: order.number, url });
+      onClearCart();
+      openWhatsApp(url);
+    } catch (e) {
+      if (isApiDown(e)) {
+        openWhatsApp(whatsappUrl()); // shop server unreachable: classic direct WhatsApp order still works
+      } else {
+        const err = e as ApiError;
+        setOrderError(err.code === 'invalid_customer' ? t.cartTitle : err.message);
+        if (err.code.startsWith('promo_')) setAppliedPromo(null);
+      }
+    } finally {
+      setBusy(false);
+    }
   };
+
+  if (placed) {
+    const tx = { fr: ['Commande enregistrée', 'Votre numéro de commande', 'Si WhatsApp ne s\'est pas ouvert, envoyez-nous le message ici', 'Suivre ma commande'], ar: ['تم تسجيل الطلبية', 'رقم طلبيتك', 'إذا لم يفتح واتساب، أرسل لنا الرسالة من هنا', 'تتبع طلبيتي'], en: ['Order recorded', 'Your order number', 'If WhatsApp did not open, send us the message here', 'Track my order'] }[lang];
+    return (
+      <div className="py-12 px-4 max-w-xl mx-auto text-center space-y-4" role="status">
+        <Check className="w-12 h-12 mx-auto text-emerald-700 dark:text-emerald-400" />
+        <h1 className="font-title text-2xl font-black text-[#1F3D2B] dark:text-[#F4F1EA]">{tx[0]}</h1>
+        <p className="text-sm text-[#1F3D2B]/80 dark:text-[#F4F1EA]/80">{tx[1]}</p>
+        <p className="font-mono text-xl font-black tracking-wider text-[#1F3D2B] dark:text-[#E5B834]" dir="ltr">{placed.number}</p>
+        <a href={placed.url} target="_blank" rel="noopener noreferrer" className="inline-block bg-[#0F7A40] text-white px-5 py-3 rounded-xl font-bold text-sm">{tx[2]}</a>
+        <div><button onClick={() => onNavigate({ type: 'track' })} className="underline text-sm font-semibold text-[#1F3D2B] dark:text-[#E5B834] cursor-pointer">{tx[3]}</button></div>
+      </div>
+    );
+  }
 
   return (
     <div className="py-8 sm:py-12">
@@ -416,12 +455,17 @@ export const CartPage: React.FC<CartPageProps> = ({
                 </div>
 
                 {/* Dispatch Button */}
+                {orderError && (
+                  <p role="alert" className="text-sm font-semibold text-red-700 dark:text-red-300">{orderError}</p>
+                )}
                 <button
                   onClick={handleSendOrder}
-                  className="w-full flex items-center justify-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer pulse-whatsapp"
+                  disabled={busy}
+                  aria-busy={busy}
+                  className="disabled:opacity-60 w-full flex items-center justify-center gap-2 bg-[#0F7A40] hover:bg-[#0C6937] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer pulse-whatsapp"
                 >
                   <MessageCircle className="w-5 h-5 fill-current shrink-0" />
-                  <span>{t.sendOrderWhatsApp}</span>
+                  <span>{busy ? '…' : t.sendOrderWhatsApp}</span>
                 </button>
 
               </div>

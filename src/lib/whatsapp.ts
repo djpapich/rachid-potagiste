@@ -120,9 +120,11 @@ export function getCartWhatsAppUrl(
   discountPercentage = 0,
   promoCode = '',
   line: 'line1' | 'line2' = 'line1',
-  lang: Language = 'fr'
+  lang: Language = 'fr',
+  orderNumber = ''
 ): string {
   const phone = getPhoneNumber(line);
+  const safeNumber = /^RP-\d{6}-[A-Z0-9]{5}$/.test(orderNumber) ? orderNumber : '';
   items = items.map((item) => ({ ...item, quantity: clampQuantity(item.quantity) }));
   discountPercentage = Math.min(MAX_PROMO_PERCENT, Math.max(0, discountPercentage || 0));
   promoCode = cleanText(promoCode, 32);
@@ -218,6 +220,9 @@ export function getCartWhatsAppUrl(
     lines.push('Paiement à la livraison. Merci !');
   }
 
+  if (safeNumber) {
+    lines.splice(1, 0, lang === 'ar' ? `*رقم الطلبية : ${safeNumber}*` : lang === 'en' ? `*Order no. ${safeNumber}*` : `*Commande n° ${safeNumber}*`);
+  }
   return `https://wa.me/${phone}?text=${encodeURIComponent(lines.join('\n'))}`;
 }
 
